@@ -30,6 +30,10 @@ jobs:
     - name: Install OMV
       run: |
         pip install git+https://github.com/OpenSourceBrain/osb-model-validation
+
+    - name: Install other dependencies
+      run: |
+        pip install matplotlib
         
     - name: Run OMV tests on engine ${{ matrix.engine }}
       run: |
