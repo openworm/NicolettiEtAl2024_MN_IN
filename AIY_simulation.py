@@ -13,8 +13,8 @@ from AIY_simulation_iclamp import AIY_simulation_iclamp
 from AIY_simulation_vclamp import AIY_simulation_vc
 from g_to_Scm2 import gScm2
 
-
-os.mkdir('AIY_SIMULATION')
+if not os.path.isdir('AIY_SIMULATION'):
+    os.mkdir('AIY_SIMULATION')
 path='AIY_SIMULATION'
 
 v=numpy.linspace(start=-120, stop=50, num=18)
@@ -65,38 +65,39 @@ path9=os.path.join(path, fname9)
 numpy.savetxt(path8, best_voltage, delimiter="," , fmt="%s")
 numpy.savetxt(path9, best_time2, delimiter=", " , fmt="%s")
 
-# plot
 
-fig=pyplot.figure(figsize=(8,4))
-iv_plot=pyplot.plot(v,best_iv,color='red',marker='+',markersize=15,label='optimized-ss')
-iv_plot=pyplot.plot(v,best_iv_WT,color='red',marker='o',markersize=15,label='optimized-peaks')
-pyplot.xlabel('V [mV]')
-pyplot.ylabel('I [pA]')
-pyplot.xlim(-130,60)
-fig.legend(loc=5)
-pyplot.title('IV-CURVES')
-pyplot.show()
+import sys
+if not '-nogui' in sys.argv:
+    # plot
 
-
-
-fig3=pyplot.figure(figsize=(8,4))
-for i in range(0,18):
- curr_plot=pyplot.plot(best_time[i],best_current[i],color='red',linestyle='solid')
-pyplot.xlabel('Time [ms]')
-pyplot.ylabel('I [pA]')
-pyplot.title('Voltage clamp')
-pyplot.show()
+    fig=pyplot.figure(figsize=(8,4))
+    iv_plot=pyplot.plot(v,best_iv,color='red',marker='+',markersize=15,label='optimized-ss')
+    iv_plot=pyplot.plot(v,best_iv_WT,color='red',marker='o',markersize=15,label='optimized-peaks')
+    pyplot.xlabel('V [mV]')
+    pyplot.ylabel('I [pA]')
+    pyplot.xlim(-130,60)
+    fig.legend(loc=5)
+    pyplot.title('IV-CURVES')
+    pyplot.show()
 
 
 
+    fig3=pyplot.figure(figsize=(8,4))
+    for i in range(0,18):
+        curr_plot=pyplot.plot(best_time[i],best_current[i],color='red',linestyle='solid')
+    pyplot.xlabel('Time [ms]')
+    pyplot.ylabel('I [pA]')
+    pyplot.title('Voltage clamp')
+    pyplot.show()
 
-fig4=pyplot.figure(figsize=(8,4))
-for i in range(0,10):
- volt_plot=pyplot.plot(best_time2[i],best_voltage[i],color='red',linestyle='solid')
-pyplot.xlabel('Time [ms]')
-pyplot.ylabel('V [mV]')
-#pyplot.xlim(0,0.7)
-pyplot.title('Current_Clamp')
-pyplot.show()
-             
 
+
+
+    fig4=pyplot.figure(figsize=(8,4))
+    for i in range(0,10):
+        volt_plot=pyplot.plot(best_time2[i],best_voltage[i],color='red',linestyle='solid')
+    pyplot.xlabel('Time [ms]')
+    pyplot.ylabel('V [mV]')
+    #pyplot.xlim(0,0.7)
+    pyplot.title('Current_Clamp')
+    pyplot.show()
