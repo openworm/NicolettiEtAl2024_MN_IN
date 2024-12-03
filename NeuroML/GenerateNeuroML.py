@@ -122,7 +122,7 @@ def generate_nmllite(
             and not (c in not_on_rmd and cell == "RMD")
         ):
             sim.record_variables[
-                "biophys/membraneProperties/%s_chans/%s_%s/m/q" % (c, cell, c)
+                "biophys/membraneProperties/%s_chans/%s/m/q" % (c, c)
             ] = {"all": "*"}
         if (
             c != "leak"
@@ -130,15 +130,15 @@ def generate_nmllite(
             and not (c in not_on_rmd and cell == "RMD")
         ):
             sim.record_variables[
-                "biophys/membraneProperties/%s_chans/%s_%s/h/q" % (c, cell, c)
+                "biophys/membraneProperties/%s_chans/%s/h/q" % (c, c)
             ] = {"all": "*"}
 
         if cell == "AWCon" and c in ["kqt3"]:
             sim.record_variables[
-                "biophys/membraneProperties/%s_chans/%s_%s/s/q" % (c, cell, c)
+                "biophys/membraneProperties/%s_chans/%s/s/q" % (c, c)
             ] = {"all": "*"}
             sim.record_variables[
-                "biophys/membraneProperties/%s_chans/%s_%s/w/q" % (c, cell, c)
+                "biophys/membraneProperties/%s_chans/%s/w/q" % (c, c)
             ] = {"all": "*"}
 
     sim.to_json_file()
@@ -244,7 +244,7 @@ def create_cells(channels_to_include, duration=700, stim_delay=310, stim_duratio
 
 if __name__ == "__main__":
     create_cells(
-        channels_to_include=["leak"],
+        channels_to_include=["leak", "egl19"],
         duration=400,
         stim_delay=100,
         stim_duration=200,

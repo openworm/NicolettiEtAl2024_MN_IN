@@ -1,6 +1,7 @@
 <neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2.3.1.xsd" id="AIY">
     <notes>A cell from Nicoletti et al. 2019</notes>
     <include href="leak.channel.nml"/>
+    <include href="egl19.channel.nml"/>
     <cell id="AIY">
         <notes>AIY cell from Nicoletti et al. 2019</notes>
         <morphology id="morphology">
@@ -20,6 +21,7 @@
         <biophysicalProperties id="biophys">
             <membraneProperties>
                 <channelDensity id="leak_chans" ionChannel="leak" condDensity="0.14 S_per_m2" erev="-89.57mV" ion="non_specific"/>
+                <channelDensity id="egl19_chans" ionChannel="egl19" condDensity="0.1 S_per_m2" erev="-89.57mV" ion="non_specific"/>
                 <spikeThresh value="0mV"/>
                 <specificCapacitance value="1.6 F_per_m2"/>
                 <initMembPotential value="-70mV"/>
