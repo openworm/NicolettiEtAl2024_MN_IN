@@ -13,9 +13,12 @@ import math
 
 
 colors = {"AIY": "0.8 0 0"}
+cell_params = {}
 
-conductances = [
-    "leak",
+cell = "AIY"
+cell_params[cell] = {"surf": 65.89e-8}  # surface in cm^2 form neuromorpho AIYL
+
+conductances = [ "leak",
     "slo1iso",
     "kqt1",
     "egl19",
@@ -25,12 +28,10 @@ conductances = [
     "eleak",
     "cm",
 ]
+
 g0 = [0.14, 1, 0.2, 0.1, 0.92, 0.06, 0.5, -89.57, 1.6]
 
-cell_params = {}
 
-cell = "AIY"
-cell_params[cell] = {}
 for a in zip(conductances, g0):
     print(f"Setting {a[0]} = {a[1]} for {cell}")
     cell_params[cell][a[0]] = a[1]
@@ -38,11 +39,11 @@ for a in zip(conductances, g0):
 
 def generate_nmllite(
     cell,
-    duration=700,
+    duration=11000,
     config="IClamp",
     parameters=None,
-    stim_delay=310,
-    stim_duration=500,
+    stim_delay=1000,
+    stim_duration=5000,
     channels_to_include=[],
 ):
     from neuromllite import Cell, InputSource
@@ -61,7 +62,7 @@ def generate_nmllite(
     if "IClamp" in config:
         if not parameters:
             parameters = {}
-            parameters["stim_amp"] = "10pA"
+            parameters["stim_amp"] = "35pA"
             parameters["stim_delay"] = "%sms" % stim_delay
             parameters["stim_duration"] = "%sms" % stim_duration
 
@@ -165,14 +166,14 @@ def create_cells(channels_to_include, duration=700, stim_delay=310, stim_duratio
         length = volume_um3 / end_area
         surface_area_curved = length * math.pi * diam"""
 
-        surf = 65.89e-8  # surface in cm^2 form neuromorpho AIYL
-        vol = 7.42e-12  # total volume
+        surf = cell_params[cell_id]["surf"]
+        # vol = 7.42e-12  # total volume
         L = math.sqrt(surf / math.pi)
         rsoma = L * 1e4
 
         cell.add_segment(
-            prox=[0, 0, 0, rsoma * 2],
-            dist=[0, rsoma * 2, 0, rsoma * 2],
+            prox=[0, 0, 0, rsoma],
+            dist=[0, rsoma, 0, rsoma],
             name="soma",
             parent=None,
             fraction_along=1.0,
@@ -181,21 +182,23 @@ def create_cells(channels_to_include, duration=700, stim_delay=310, stim_duratio
 
         cell.add_membrane_property("SpikeThresh", value="0mV")
 
-        cell.set_specific_capacitance("%s F_per_m2" % (cell_params[cell_id]["cm"]))
+        cell.set_specific_capacitance("%s uF_per_cm2" % (cell_params[cell_id]["cm"]))
 
-        cell.set_init_memb_potential("-70mV")
+        cell.set_init_memb_potential("-65mV")
 
         # This value is not really used as it's a single comp cell model
         cell.set_resistivity("0.1 kohm_cm")
 
-        density_factor = 1
 
         for channel_id in channels_to_include:
+
+            density_scaled = (cell_params[cell_id][channel_id]*1e-9)/(surf)
+
             print(cell_params[cell_id])
             cell.add_channel_density(
                 cell_doc,
                 cd_id="%s_chans" % channel_id,
-                cond_density="%s S_per_m2" % cell_params[cell_id][channel_id],
+                cond_density="%s S_per_cm2" % density_scaled,
                 erev="%smV" % cell_params[cell_id]["eleak"],
                 ion="non_specific",
                 ion_channel="%s" % channel_id,
@@ -244,8 +247,8 @@ def create_cells(channels_to_include, duration=700, stim_delay=310, stim_duratio
 
 if __name__ == "__main__":
     create_cells(
-        channels_to_include=["leak", "egl19"],
-        duration=400,
-        stim_delay=100,
-        stim_duration=200,
+        channels_to_include=["leak"],
+        duration=11000,
+        stim_delay=1000,
+        stim_duration=5000,
     )
