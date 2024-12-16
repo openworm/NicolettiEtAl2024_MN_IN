@@ -3,11 +3,11 @@
     Generated network: IClamp_AIY
     Generation seed: 1234
     NeuroMLlite parameters: 
-        stim_amp = 35pA
+        stim_amp = 30pA
         stim_delay = 1000ms
         stim_duration = 5000ms</notes>
     <include href="AIY.cell.nml"/>
-    <pulseGenerator id="iclamp_0" delay="1000ms" duration="5000ms" amplitude="35pA"/>
+    <pulseGenerator id="iclamp_0" delay="1000ms" duration="5000ms" amplitude="30pA"/>
     <network id="IClamp_AIY" type="networkWithTemperature" temperature="34.0degC">
         <notes>A network model: IClamp_AIY</notes>
         <property tag="recommended_dt_ms" value="0.025"/>

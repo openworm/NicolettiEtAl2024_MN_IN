@@ -62,7 +62,7 @@ def generate_nmllite(
     if "IClamp" in config:
         if not parameters:
             parameters = {}
-            parameters["stim_amp"] = "35pA"
+            parameters["stim_amp"] = "30pA"
             parameters["stim_delay"] = "%sms" % stim_delay
             parameters["stim_duration"] = "%sms" % stim_duration
 
