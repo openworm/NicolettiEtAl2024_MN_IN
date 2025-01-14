@@ -17,3 +17,4 @@ def gScm2(g,surf,index):
 
     g_RESCALED=numpy.array(g_RESCALED)
     return g_RESCALED
+

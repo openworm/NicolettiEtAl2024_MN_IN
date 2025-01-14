@@ -23,6 +23,7 @@ surf=65.89e-8# surface in cm^2 form neuromorpho AIYL
 
 #conductances: leak, slo1iso,kqt1,egl19,slo1egl19,nca,irk,eleak,cm
 g0=[0.14,1,0.2,0.1,0.92,0.06,0.5,-89.57,1.6]
+g0=[0.14,0,0,0,0,0,0,-89.57,1.6]
 
 
 gbest=gScm2(g0,surf,6)
@@ -94,7 +95,7 @@ if not '-nogui' in sys.argv:
 
 
     fig4=pyplot.figure(figsize=(8,4))
-    for i in range(0,10):
+    for i in range(0,11):
         volt_plot=pyplot.plot(best_time2[i],best_voltage[i],color='red',linestyle='solid')
     pyplot.xlabel('Time [ms]')
     pyplot.ylabel('V [mV]')

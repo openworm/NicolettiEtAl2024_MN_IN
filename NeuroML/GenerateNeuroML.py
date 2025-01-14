@@ -28,7 +28,7 @@ conductances = [ "leak",
     "eleak",
     "cm",
 ]
-
+  
 g0 = [0.14, 1, 0.2, 0.1, 0.92, 0.06, 0.5, -89.57, 1.6]
 
 
@@ -151,7 +151,7 @@ def create_cells(channels_to_include, duration=700, stim_delay=310, stim_duratio
     for cell_id in cell_params.keys():
         # Create the nml file and add the ion channels
         cell_doc = NeuroMLDocument(
-            id=cell_id, notes="A cell from Nicoletti et al. 2019"
+            id=cell_id, notes="A cell from Nicoletti et al. 2024"
         )
         cell_fn = "%s.cell.nml" % cell_id
 
@@ -184,7 +184,7 @@ def create_cells(channels_to_include, duration=700, stim_delay=310, stim_duratio
 
         cell.set_specific_capacitance("%s uF_per_cm2" % (cell_params[cell_id]["cm"]))
 
-        cell.set_init_memb_potential("-65mV")
+        cell.set_init_memb_potential("-89.57mV")
 
         # This value is not really used as it's a single comp cell model
         cell.set_resistivity("0.1 kohm_cm")
@@ -194,6 +194,7 @@ def create_cells(channels_to_include, duration=700, stim_delay=310, stim_duratio
 
             density_scaled = (cell_params[cell_id][channel_id]*1e-9)/(surf)
 
+            
             print(cell_params[cell_id])
             cell.add_channel_density(
                 cell_doc,
@@ -202,7 +203,7 @@ def create_cells(channels_to_include, duration=700, stim_delay=310, stim_duratio
                 erev="%smV" % cell_params[cell_id]["eleak"],
                 ion="non_specific",
                 ion_channel="%s" % channel_id,
-                ion_chan_def_file="%s.channel.nml" % channel_id,
+                ion_chan_def_file="%s.channel.nml" %  channel_id,
             )
 
         """
@@ -247,8 +248,8 @@ def create_cells(channels_to_include, duration=700, stim_delay=310, stim_duratio
 
 if __name__ == "__main__":
     create_cells(
-        channels_to_include=["leak"],
+        channels_to_include=["leak", "nca"],
         duration=11000,
-        stim_delay=1000,
-        stim_duration=5000,
+        stim_delay=500,
+        stim_duration=2000,
     )

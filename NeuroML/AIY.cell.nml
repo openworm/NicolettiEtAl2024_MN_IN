@@ -1,8 +1,18 @@
 <neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2.3.1.xsd" id="AIY">
-    <notes>A cell from Nicoletti et al. 2019</notes>
+    <notes>A cell from Nicoletti et al. 2024</notes>
+
     <include href="leak.channel.nml"/>
+    <!-- <include href ="nca.channel.nml"/> -->
+    <include href ="shl1.channel.nml"/> 
+<!--   <include href = "kqt1.channel.nml"/>
+ <!--   <include href ="egl19.channel.nml"/>  -->
+  <!--   <include href = "slo1iso.channel.nml"/> -->
+  <!--   <include href = "slo1egl19.channel.nml"/>  --> 
+   <!--  <include href="CaDynamics.nml"/>  --> 
+   
+
     <cell id="AIY">
-        <notes>AIY cell from Nicoletti et al. 2019</notes>
+        <notes>AIY cell from Nicoletti et al. 2024</notes>
         <morphology id="morphology">
             <segment id="0" name="soma">
                 <proximal x="0.0" y="0.0" z="0.0" diameter="4.579676669880742"/>
@@ -19,12 +29,20 @@
         </morphology>
         <biophysicalProperties id="biophys">
             <membraneProperties>
-                <channelDensity id="leak_chans" ionChannel="leak" condDensity="0.00021247533768401888 S_per_cm2" erev="-89.57mV" ion="non_specific"/>
+                <channelDensity id="leak_chans" ionChannel="leak" condDensity="2.12475338 S_per_m2" erev="-89.57mV" ion="non_specific"/> 
+       <!--          <channelDensity id="nca_chans" ionChannel="nca" condDensity="0.91060859 S_per_m2" erev="30.0mV" ion="non_specific"/>  -->
+                <channelDensity id="shal_chans" ionChannel="shl1" condDensity="7.588404917 S_per_m2" erev="-80.0mV" ion="k"/>  
+     <!--           <channelDensity id="egl19_chans" ionChannel="egl19" condDensity="1.51768098 S_per_m2" erev="60.0mV" ion="ca"/> -->
+     <!--            <channelDensity id="kqt1_chans" ionChannel="kqt1" condDensity="3.03536197 S_per_m2" erev="-80.0mV" ion="k"/>   -->
+      <!--                <channelDensity id="slo1iso_chans" ionChannel="slo1iso" condDensity="15.1768098 S_per_m2" erev="-80.0mV" ion="k"/>   -->
+     <!--            <channelDensity id="slo1egl19_chans" ionChannel="slo1egl19" condDensity="13.962665 S_per_m2" erev="-80.0mV" ion="k"/>  -->
+          
                 <spikeThresh value="0mV"/>
                 <specificCapacitance value="1.6 uF_per_cm2"/>
-                <initMembPotential value="-65mV"/>
+                <initMembPotential value="-55mV"/>
             </membraneProperties>
             <intracellularProperties>
+             <!--    <species id="ca" concentrationModel="CaDynamics_AIY" ion="ca" initialConcentration="5e-5 mM" initialExtConcentration="2 mM"/>  -->
                 <resistivity value="0.1 kohm_cm"/>
             </intracellularProperties>
         </biophysicalProperties>
