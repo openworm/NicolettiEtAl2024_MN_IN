@@ -12,11 +12,11 @@ from sympy.parsing.sympy_parser import parse_expr
 import math
 
 
-colors = {"VA5": "0.5 1 1"}
+colors = {"AVAL5": "0.5 1 1"}
 cell_params = {}
 
-cell = "VA5"
-cell_params[cell] = {"surf": 389.3e-8 }  # surface in cm^2 form neuromorpho AIYL
+cell = "AVAL5"
+cell_params[cell] = {"surf": 1123.84e-8 }  # surface in cm^2 form neuromorpho AIYL
 
 conductances = [
     "slo2egl19",
@@ -31,11 +31,10 @@ conductances = [
     "cm"
 ]
 
-# conductances in S/cm^2: slo2egl19,slo2iso,EGL19,irk,shk1,nca,leak,eleak,c2,cm
-
-g0=[3,3,0.15,1,0.1,0.01,0.1,-70,1,1.5]
 
 
+# coductances: egl19, leak, irk, nca, eleak, cm
+g0=[0.104385,0.150164,0.1,0,-39,0.859551]
 
 
 for a in zip(conductances, g0):
@@ -251,7 +250,7 @@ def create_cells(channels_to_include, duration=700, stim_delay=310, stim_duratio
 
 if __name__ == "__main__":
     create_cells(
-        channels_to_include= ["slo2egl19","slo2iso","egl19","irk","shk1", "nca","leak" ],
+        channels_to_include= ["egl19","leak","irk","nca"],
         duration=11000,
         stim_delay=500,
         stim_duration=2000,
