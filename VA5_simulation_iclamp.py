@@ -62,9 +62,9 @@ def VA5_simulation_iclamp(gVA5_scaled,s1,s2,ns):
     stim=h.IClamp(soma(0.5))
     dir(stim)
     
-    stim.delay=5000
+    stim.delay=1000
     stim.amp=10
-    stim.dur=1000
+    stim.dur=5000
     
     v_vec = h.Vector()   
     t_vec = h.Vector()        # Time stamp vector

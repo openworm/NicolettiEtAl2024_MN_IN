@@ -26,7 +26,7 @@ conductances = [
     "shk1", 
     "nca",
     "leak", 
-    "eleak"
+    "eleak",
     "c2", 
     "cm"
 ]
