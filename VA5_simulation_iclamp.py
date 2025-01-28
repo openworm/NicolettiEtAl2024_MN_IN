@@ -132,8 +132,8 @@ def VA5_simulation_iclamp(gVA5_scaled,s1,s2,ns):
     #     else:
     #         peak=numpy.amax(v_normalized[j,ind2_min:ind2_max])
     #     iv_peak.append(peak)
-
-    return v_normalized, time 
+    # changed to non normalized values
+    return v, time1
     
         
 

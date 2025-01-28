@@ -12,27 +12,28 @@ from sympy.parsing.sympy_parser import parse_expr
 import math
 
 
-colors = {"RIM": "0.5 1 1"}
+colors = {"VA5": "0.5 1 1"}
 cell_params = {}
 
-cell = "RIM"
-cell_params[cell] = {"surf": 103.34e-8}  # surface in cm^2 form neuromorpho AIYL
+cell = "VA5"
+cell_params[cell] = {"surf": 389.3e-8 }  # surface in cm^2 form neuromorpho AIYL
 
 conductances = [
-    "shl1",
-    "egl2",
+    "slo2egl19",
+    "slo2iso",
+    "egl19",
     "irk",
-    "cca1",
-    "unc2",
-    "egl19", 
-    "leak",
-    "eleak", 
+    "shk1", 
+    "nca",
+    "leak", 
+    "eleak"
+    "c2", 
     "cm"
 ]
 
-# conductances in S/cm^2: SHL1, EGL2, IRK, CCA1, unc2, egl19, LEAK,eleak, cm
+# conductances in S/cm^2: slo2egl19,slo2iso,EGL19,irk,shk1,nca,leak,eleak,c2,cm
 
-g0=[0.0009048750067326097,0.0001411644285181245,0.0003272854640954744,0.0008451919806776876,9.676795045480941e-05,0.00032005818627638106,9.676795045480941e-05,-50,1.5]
+g0=[3,3,0.15,1,0.1,0.01,0.1,-70,1,1.5]
 
 
 
@@ -250,8 +251,7 @@ def create_cells(channels_to_include, duration=700, stim_delay=310, stim_duratio
 
 if __name__ == "__main__":
     create_cells(
-        channels_to_include=["shl1", "egl2", "irk", "cca1", "unc2", "egl19", "leak"],
-   
+        channels_to_include= ["slo2egl19","slo2iso","egl19","irk","shk1", "nca","leak" ],
         duration=11000,
         stim_delay=500,
         stim_duration=2000,
