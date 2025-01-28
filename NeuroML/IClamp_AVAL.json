@@ -1,10 +1,101 @@
 {
     "IClamp_AVAL": {
-        "version": "NeuroMLlite v0.6.0",
+        "version": "NeuroMLlite v0.6.1",
         "notes": "A network model: IClamp_AVAL",
+        "parameters": {},
         "cells": {
             "AVAL": {
                 "neuroml2_source_file": "AVAL.cell.nml"
+            }
+        },
+        "input_sources": {
+            "iclamp_stim_15": {
+                "parameters": {
+                    "amplitude": "15pA",
+                    "delay": "1000ms",
+                    "duration": "5000ms"
+                },
+                "neuroml2_input": "PulseGenerator"
+            },
+            "iclamp_stim_17": {
+                "parameters": {
+                    "amplitude": "17pA",
+                    "delay": "1000ms",
+                    "duration": "5000ms"
+                },
+                "neuroml2_input": "PulseGenerator"
+            },
+            "iclamp_stim_19": {
+                "parameters": {
+                    "amplitude": "19pA",
+                    "delay": "1000ms",
+                    "duration": "5000ms"
+                },
+                "neuroml2_input": "PulseGenerator"
+            },
+            "iclamp_stim_21": {
+                "parameters": {
+                    "amplitude": "21pA",
+                    "delay": "1000ms",
+                    "duration": "5000ms"
+                },
+                "neuroml2_input": "PulseGenerator"
+            },
+            "iclamp_stim_23": {
+                "parameters": {
+                    "amplitude": "23pA",
+                    "delay": "1000ms",
+                    "duration": "5000ms"
+                },
+                "neuroml2_input": "PulseGenerator"
+            },
+            "iclamp_stim_25": {
+                "parameters": {
+                    "amplitude": "25pA",
+                    "delay": "1000ms",
+                    "duration": "5000ms"
+                },
+                "neuroml2_input": "PulseGenerator"
+            },
+            "iclamp_stim_27": {
+                "parameters": {
+                    "amplitude": "27pA",
+                    "delay": "1000ms",
+                    "duration": "5000ms"
+                },
+                "neuroml2_input": "PulseGenerator"
+            },
+            "iclamp_stim_29": {
+                "parameters": {
+                    "amplitude": "29pA",
+                    "delay": "1000ms",
+                    "duration": "5000ms"
+                },
+                "neuroml2_input": "PulseGenerator"
+            },
+            "iclamp_stim_31": {
+                "parameters": {
+                    "amplitude": "31pA",
+                    "delay": "1000ms",
+                    "duration": "5000ms"
+                },
+                "neuroml2_input": "PulseGenerator"
+            },
+            "iclamp_stim_33": {
+                "parameters": {
+                    "amplitude": "33pA",
+                    "delay": "1000ms",
+                    "duration": "5000ms"
+                },
+                "neuroml2_input": "PulseGenerator"
+            },
+            "iclamp_stim_35": {
+                "parameters": {
+                    "amplitude": "35pA",
+                    "delay": "1000ms",
+                    "duration": "5000ms"
+                },
+                "neuroml2_input": "PulseGenerator"
             }
         },
         "regions": {
@@ -19,14 +110,93 @@
         },
         "populations": {
             "pop_AVAL": {
-                "size": 1,
+                "size": 11,
                 "component": "AVAL",
                 "properties": {
-                    "color": "0.5 1 0"
+                    "color": "0.5 1 1"
                 },
                 "random_layout": {
                     "region": "Worm"
                 }
+            }
+        },
+        "inputs": {
+            "input_iclamp_stim_15": {
+                "input_source": "iclamp_stim_15",
+                "population": "pop_AVAL",
+                "cell_ids": [
+                    0
+                ]
+            },
+            "input_iclamp_stim_17": {
+                "input_source": "iclamp_stim_17",
+                "population": "pop_AVAL",
+                "cell_ids": [
+                    1
+                ]
+            },
+            "input_iclamp_stim_19": {
+                "input_source": "iclamp_stim_19",
+                "population": "pop_AVAL",
+                "cell_ids": [
+                    2
+                ]
+            },
+            "input_iclamp_stim_21": {
+                "input_source": "iclamp_stim_21",
+                "population": "pop_AVAL",
+                "cell_ids": [
+                    3
+                ]
+            },
+            "input_iclamp_stim_23": {
+                "input_source": "iclamp_stim_23",
+                "population": "pop_AVAL",
+                "cell_ids": [
+                    4
+                ]
+            },
+            "input_iclamp_stim_25": {
+                "input_source": "iclamp_stim_25",
+                "population": "pop_AVAL",
+                "cell_ids": [
+                    5
+                ]
+            },
+            "input_iclamp_stim_27": {
+                "input_source": "iclamp_stim_27",
+                "population": "pop_AVAL",
+                "cell_ids": [
+                    6
+                ]
+            },
+            "input_iclamp_stim_29": {
+                "input_source": "iclamp_stim_29",
+                "population": "pop_AVAL",
+                "cell_ids": [
+                    7
+                ]
+            },
+            "input_iclamp_stim_31": {
+                "input_source": "iclamp_stim_31",
+                "population": "pop_AVAL",
+                "cell_ids": [
+                    8
+                ]
+            },
+            "input_iclamp_stim_33": {
+                "input_source": "iclamp_stim_33",
+                "population": "pop_AVAL",
+                "cell_ids": [
+                    9
+                ]
+            },
+            "input_iclamp_stim_35": {
+                "input_source": "iclamp_stim_35",
+                "population": "pop_AVAL",
+                "cell_ids": [
+                    10
+                ]
             }
         },
         "temperature": 34.0

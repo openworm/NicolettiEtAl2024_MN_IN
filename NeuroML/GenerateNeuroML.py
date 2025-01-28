@@ -16,21 +16,13 @@ colors = {"AVAL": "0.5 1 1"}
 cell_params = {}
 
 cell = "AVAL"
-cell_params[cell] = {"surf": 1123.84e-8 }  # surface in cm^2 form neuromorpho AIYL
+cell_params[cell] = {"surf": 1123.84e-8}  # surface in cm^2 form neuromorpho AIYL
 
-conductances = [
-    "egl19",
-    "leak",
-    "irk", 
-    "nca",
-    "eleak", 
-    "cm"
-]
-
+conductances = ["egl19", "leak", "irk", "nca", "eleak", "cm"]
 
 
 # coductances: egl19, leak, irk, nca, eleak, cm
-g0=[0.104385,0.150164,0.1,0,-39,0.859551]
+g0 = [0.104385, 0.150164, 0.1, 0, -39, 0.859551]
 
 
 for a in zip(conductances, g0):
@@ -104,7 +96,40 @@ def generate_nmllite(
         color_for_default_population=colors[cell],
         input_for_default_population=input_source,
     )
-    sim.record_variables = {"caConc": {"all": "*"}}
+
+    net.parameters = {}
+
+    amps = [15 + 2 * i for i in range(11)]
+    net.populations[0].size = len(amps)
+    net.input_sources = []
+    net.inputs = []
+
+    from neuromllite import InputSource, Input
+
+    for i in amps:
+        ins = InputSource(
+            id="iclamp_stim_%s" % str(i).replace("-", "min"),
+            neuroml2_input="PulseGenerator",
+            parameters={
+                "amplitude": "%spA" % i,
+                "delay": "1000ms",
+                "duration": "5000ms",
+            },
+        )
+        net.input_sources.append(ins)
+        net.inputs.append(
+            Input(
+                id="input_%s" % ins.id,
+                input_source=ins.id,
+                population=net.populations[0].id,
+                cell_ids=[amps.index(i)],
+            )
+        )
+
+    net.to_json_file()
+
+    sim.record_variables = {"caConc": {net.populations[0].id: "*"}}
+    """
     for c in channels_to_include:
         not_on_rmd = ["kvs1", "kqt3", "egl2"]
         if c == "ca":
@@ -128,7 +153,7 @@ def generate_nmllite(
             ] = {"all": "*"}
         if (
             c != "leak"
-            and c not in ["nca", "kir", "sk", "egl36", "kqt3", "egl2"]
+            and c not in ["nca", "kir", "sk", "egl36", "kqt3", "egl2", "irk"]
             and not (c in not_on_rmd and cell == "RMD")
         ):
             sim.record_variables[
@@ -141,7 +166,7 @@ def generate_nmllite(
             ] = {"all": "*"}
             sim.record_variables[
                 "biophys/membraneProperties/%s_chans/%s/w/q" % (c, c)
-            ] = {"all": "*"}
+            ] = {"all": "*"}"""
 
     sim.to_json_file()
 
@@ -185,21 +210,32 @@ def create_cells(channels_to_include, duration=700, stim_delay=310, stim_duratio
 
         cell.set_specific_capacitance("%s uF_per_cm2" % (cell_params[cell_id]["cm"]))
 
-        cell.set_init_memb_potential("-89.57mV")
+        cell.set_init_memb_potential("-40mV")
 
         # This value is not really used as it's a single comp cell model
         cell.set_resistivity("0.1 kohm_cm")
 
-        for channel_id in channels_to_include:
+        for channel_id in sorted(channels_to_include):
             density_scaled = (cell_params[cell_id][channel_id] * 1e-9) / (surf)
 
             print(cell_params[cell_id])
+            erev = cell_params[cell_id]["eleak"]
+            ion = "non_specific"
+
+            if channel_id in ["egl19_chans"]:
+                erev = 60
+                ion = "ca"
+            if channel_id in ["irk"]:
+                erev = -80
+                ion = "k"
+            if channel_id in ["nca"]:
+                erev = 30
             cell.add_channel_density(
                 cell_doc,
                 cd_id="%s_chans" % channel_id,
                 cond_density="%s S_per_cm2" % density_scaled,
-                erev="%smV" % cell_params[cell_id]["eleak"],
-                ion="non_specific",
+                erev="%smV" % erev,
+                ion=ion,
                 ion_channel="%s" % channel_id,
                 ion_chan_def_file="%s.channel.nml" % channel_id,
             )
@@ -246,10 +282,8 @@ def create_cells(channels_to_include, duration=700, stim_delay=310, stim_duratio
 
 if __name__ == "__main__":
     create_cells(
-        channels_to_include= ["egl19","leak","irk","nca"],
+        channels_to_include=["egl19", "leak", "irk", "nca"],
         duration=11000,
         stim_delay=500,
         stim_duration=2000,
     )
-
-

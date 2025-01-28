@@ -2,7 +2,7 @@
 set -ex
 
 # Format the code
-black *.py
+ruff format *.py
 
 python GenerateNeuroML.py -jnml
 
