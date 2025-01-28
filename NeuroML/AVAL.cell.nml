@@ -22,7 +22,7 @@
         </morphology>
         <biophysicalProperties id="biophys">
             <membraneProperties>
-                <channelDensity id="egl19_chans" ionChannel="egl19" condDensity="9.288243878132119e-06 S_per_cm2" erev="-39mV" ion="non_specific"/>
+                <channelDensity id="egl19_chans" ionChannel="egl19" condDensity="9.288243878132119e-06 S_per_cm2" erev="60mV" ion="ca"/>
                 <channelDensity id="irk_chans" ionChannel="irk" condDensity="8.898063781321186e-06 S_per_cm2" erev="-80mV" ion="k"/>
                 <channelDensity id="leak_chans" ionChannel="leak" condDensity="1.3361688496583143e-05 S_per_cm2" erev="-39mV" ion="non_specific"/>
                 <channelDensity id="nca_chans" ionChannel="nca" condDensity="0.0 S_per_cm2" erev="30mV" ion="non_specific"/>

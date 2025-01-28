@@ -12,24 +12,6 @@ from sympy.parsing.sympy_parser import parse_expr
 import math
 
 
-colors = {"AVAL": "0.5 1 1"}
-cell_params = {}
-
-cell = "AVAL"
-cell_params[cell] = {"surf": 1123.84e-8}  # surface in cm^2 form neuromorpho AIYL
-
-conductances = ["egl19", "leak", "irk", "nca", "eleak", "cm"]
-
-
-# coductances: egl19, leak, irk, nca, eleak, cm
-g0 = [0.104385, 0.150164, 0.1, 0, -39, 0.859551]
-
-
-for a in zip(conductances, g0):
-    print(f"Setting {a[0]} = {a[1]} for {cell}")
-    cell_params[cell][a[0]] = a[1]
-
-
 def generate_nmllite(
     cell,
     duration=11000,
@@ -173,7 +155,14 @@ def generate_nmllite(
     return sim, net
 
 
-def create_cells(channels_to_include, duration=700, stim_delay=310, stim_duration=500):
+def create_cells(
+    channels_to_include,
+    conductances,
+    cell_params,
+    duration=700,
+    stim_delay=310,
+    stim_duration=500,
+):
     for cell_id in cell_params.keys():
         # Create the nml file and add the ion channels
         cell_doc = NeuroMLDocument(
@@ -222,7 +211,7 @@ def create_cells(channels_to_include, duration=700, stim_delay=310, stim_duratio
             erev = cell_params[cell_id]["eleak"]
             ion = "non_specific"
 
-            if channel_id in ["egl19_chans"]:
+            if channel_id in ["egl19"]:
                 erev = 60
                 ion = "ca"
             if channel_id in ["irk"]:
@@ -281,9 +270,34 @@ def create_cells(channels_to_include, duration=700, stim_delay=310, stim_duratio
 
 
 if __name__ == "__main__":
+
+    colors = {"AVAL": "0.5 1 1"}
+    cell_params = {}
+
+    cell = "AVAL"
+    cell_params[cell] = {"surf": 1123.84e-8}  # surface in cm^2 form neuromorpho AIYL
+
+    conductances = ["egl19", "leak", "irk", "nca", "eleak", "cm"]
+
+    # coductances: egl19, leak, irk, nca, eleak, cm
+    g0 = [0.104385, 0.150164, 0.1, 0, -39, 0.859551]
+
+
+
+    for a in zip(conductances, g0):
+        print(f"Setting {a[0]} = {a[1]} for {cell}")
+        cell_params[cell][a[0]] = a[1]
+
+    chans = []
+    for c in conductances:
+        if "eleak" not in c and "cm" not in c:
+            chans.append(c)
+
     create_cells(
-        channels_to_include=["egl19", "leak", "irk", "nca"],
+        channels_to_include=chans,
         duration=11000,
         stim_delay=500,
         stim_duration=2000,
+        conductances=conductances,
+        cell_params=cell_params,
     )
