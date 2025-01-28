@@ -1,0 +1,34 @@
+{
+    "IClamp_AVAL": {
+        "version": "NeuroMLlite v0.6.0",
+        "notes": "A network model: IClamp_AVAL",
+        "cells": {
+            "AVAL": {
+                "neuroml2_source_file": "AVAL.cell.nml"
+            }
+        },
+        "regions": {
+            "Worm": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "width": 1000.0,
+                "height": 100.0,
+                "depth": 1000.0
+            }
+        },
+        "populations": {
+            "pop_AVAL": {
+                "size": 1,
+                "component": "AVAL",
+                "properties": {
+                    "color": "0.5 1 0"
+                },
+                "random_layout": {
+                    "region": "Worm"
+                }
+            }
+        },
+        "temperature": 34.0
+    }
+}

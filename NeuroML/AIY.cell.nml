@@ -2,10 +2,10 @@
     <notes>A cell from Nicoletti et al. 2024</notes>
 
     <include href="leak.channel.nml"/>
-    <!-- <include href ="nca.channel.nml"/> 
-    <include href ="shl1.channel.nml"/> -->
+    <!-- <include href ="nca.channel.nml"/>  --> 
+ <!--   <include href ="shl1.channel.nml"/> -->
 <!--   <include href = "kqt1.channel.nml"/> -->
-<include href ="egl19.channel.nml"/> 
+    <include href ="egl19.channel.nml"/> 
   <!--   <include href = "slo1iso.channel.nml"/> -->
   <!--   <include href = "slo1egl19.channel.nml"/>  --> 
    <!--  <include href="CaDynamics.nml"/>  --> 
@@ -29,10 +29,10 @@
         </morphology>
         <biophysicalProperties id="biophys">
             <membraneProperties>
-                <channelDensity id="leak_chans" ionChannel="leak" condDensity="2.12475338 S_per_m2" erev="-89.57mV" ion="non_specific"/> 
-       <!--          <channelDensity id="nca_chans" ionChannel="nca" condDensity="0.91060859 S_per_m2" erev="30.0mV" ion="non_specific"/>  -->
+                <channelDensity id="leak_chans" ionChannel="leak" condDensity="2.12475338e-04 S_per_cm2" erev="-89.57mV" ion="non_specific"/> 
+       <!--          <channelDensity id="nca_chans" ionChannel="nca" condDensity="0.91060859 S_per_m2" erev="30mV" ion="non_specific"/>  -->
           <!--      <channelDensity id="shal_chans" ionChannel="shl1" condDensity="7.588404917 S_per_m2" erev="-80.0mV" ion="k"/>  -->
-                <channelDensity id="egl19_chans" ionChannel="egl19" condDensity="1.51768098 S_per_m2" erev="60.0mV" ion="ca"/> 
+                <channelDensity id="egl19_chans" ionChannel="egl19" condDensity=" 1.51768098e-04 S_per_cm2" erev="60.0mV" ion="ca"/> 
      <!--            <channelDensity id="kqt1_chans" ionChannel="kqt1" condDensity="3.03536197 S_per_m2" erev="-80.0mV" ion="k"/>   -->
       <!--                <channelDensity id="slo1iso_chans" ionChannel="slo1iso" condDensity="15.1768098 S_per_m2" erev="-80.0mV" ion="k"/>   -->
      <!--            <channelDensity id="slo1egl19_chans" ionChannel="slo1egl19" condDensity="13.962665 S_per_m2" erev="-80.0mV" ion="k"/>  -->

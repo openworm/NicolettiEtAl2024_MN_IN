@@ -1,15 +1,15 @@
 {
-    "IClamp_AIY": {
+    "IClamp_AVAR": {
         "version": "NeuroMLlite v0.6.0",
-        "notes": "A network model: IClamp_AIY",
+        "notes": "A network model: IClamp_AVAR",
         "parameters": {
             "stim_amp": "30pA",
-            "stim_delay": "1000ms",
-            "stim_duration": "5000ms"
+            "stim_delay": "500ms",
+            "stim_duration": "2000ms"
         },
         "cells": {
-            "AIY": {
-                "neuroml2_source_file": "AIY.cell.nml"
+            "AVAR": {
+                "neuroml2_source_file": "AVAR.cell.nml"
             }
         },
         "input_sources": {
@@ -33,11 +33,11 @@
             }
         },
         "populations": {
-            "pop_AIY": {
+            "pop_AVAR": {
                 "size": 1,
-                "component": "AIY",
+                "component": "AVAR",
                 "properties": {
-                    "color": "0.8 0 0"
+                    "color": "0.5 1 1"
                 },
                 "random_layout": {
                     "region": "Worm"
@@ -47,7 +47,7 @@
         "inputs": {
             "Stim_iclamp_0": {
                 "input_source": "iclamp_0",
-                "population": "pop_AIY",
+                "population": "pop_AVAR",
                 "percentage": 100
             }
         },
