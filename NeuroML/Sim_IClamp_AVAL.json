@@ -1,12 +1,17 @@
 {
     "Sim_IClamp_AVAL": {
-        "version": "NeuroMLlite v0.6.0",
+        "version": "NeuroMLlite v0.6.1",
         "network": "IClamp_AVAL.json",
         "duration": 11000.0,
         "dt": 0.025,
         "seed": 12345,
         "record_traces": {
             "all": "*"
+        },
+        "record_variables": {
+            "caConc": {
+                "pop_AVAL": "*"
+            }
         }
     }
 }

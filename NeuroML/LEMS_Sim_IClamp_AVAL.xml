@@ -2,7 +2,7 @@
 
     <!-- 
 
-        This LEMS file has been automatically generated using PyNeuroML v1.3.12 (libNeuroML v0.6.5)
+        This LEMS file has been automatically generated using PyNeuroML v1.3.14 (libNeuroML v0.6.5)
 
      -->
 
@@ -13,61 +13,126 @@
     <Include file="Cells.xml"/>
     <Include file="Networks.xml"/>
     <Include file="Simulation.xml"/>
+
     <Include file="PyNN.xml"/>
     <Include file="IClamp_AVAL.net.nml"/>
     <Include file="AVAL.cell.nml"/>
 
-    <Simulation id="Sim_IClamp_AVAL" length="8000.0ms" step="0.025ms" target="IClamp_AVAL" seed="12345">  <!-- Note seed: ensures same random numbers used every run -->
-        <Display id="pop_AVAL_0_biophys/membraneProperties/leak_chans/gDensity" title="Plots of pop_AVAL_0_biophys/membraneProperties/leak_chans/gDensity" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
-            <Line id="pop_AVAL_0_AVAL_biophys_membraneProperties_leak_chans_gDensity" quantity="pop_AVAL/0/AVAL/biophys/membraneProperties/leak_chans/gDensity" scale="1" color="#d54f33" timeScale="1ms"/>
-        </Display>
-
-        <Display id="pop_AVAL_0_biophys/membraneProperties/leak_chans/iDensity" title="Plots of pop_AVAL_0_biophys/membraneProperties/leak_chans/iDensity" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
-            <Line id="pop_AVAL_0_AVAL_biophys_membraneProperties_leak_chans_iDensity" quantity="pop_AVAL/0/AVAL/biophys/membraneProperties/leak_chans/iDensity" scale="1" color="#0534e4" timeScale="1ms"/>
-        </Display>
-
+    <Simulation id="Sim_IClamp_AVAL" length="11000.0ms" step="0.025ms" target="IClamp_AVAL" seed="12345">  <!-- Note seed: ensures same random numbers used every run -->
         <Display id="pop_AVAL_0_caConc" title="Plots of pop_AVAL_0_caConc" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
-            <Line id="pop_AVAL_0_AVAL_caConc" quantity="pop_AVAL/0/AVAL/caConc" scale="1" color="#98e752" timeScale="1ms"/>
+            <Line id="pop_AVAL_0_AVAL_caConc" quantity="pop_AVAL/0/AVAL/caConc" scale="1" color="#d54f33" timeScale="1ms"/>
+        </Display>
+
+        <Display id="pop_AVAL_10_caConc" title="Plots of pop_AVAL_10_caConc" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
+            <Line id="pop_AVAL_10_AVAL_caConc" quantity="pop_AVAL/10/AVAL/caConc" scale="1" color="#0534e4" timeScale="1ms"/>
+        </Display>
+
+        <Display id="pop_AVAL_1_caConc" title="Plots of pop_AVAL_1_caConc" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
+            <Line id="pop_AVAL_1_AVAL_caConc" quantity="pop_AVAL/1/AVAL/caConc" scale="1" color="#98e752" timeScale="1ms"/>
+        </Display>
+
+        <Display id="pop_AVAL_2_caConc" title="Plots of pop_AVAL_2_caConc" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
+            <Line id="pop_AVAL_2_AVAL_caConc" quantity="pop_AVAL/2/AVAL/caConc" scale="1" color="#bca074" timeScale="1ms"/>
+        </Display>
+
+        <Display id="pop_AVAL_3_caConc" title="Plots of pop_AVAL_3_caConc" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
+            <Line id="pop_AVAL_3_AVAL_caConc" quantity="pop_AVAL/3/AVAL/caConc" scale="1" color="#632794" timeScale="1ms"/>
+        </Display>
+
+        <Display id="pop_AVAL_4_caConc" title="Plots of pop_AVAL_4_caConc" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
+            <Line id="pop_AVAL_4_AVAL_caConc" quantity="pop_AVAL/4/AVAL/caConc" scale="1" color="#8a5d88" timeScale="1ms"/>
+        </Display>
+
+        <Display id="pop_AVAL_5_caConc" title="Plots of pop_AVAL_5_caConc" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
+            <Line id="pop_AVAL_5_AVAL_caConc" quantity="pop_AVAL/5/AVAL/caConc" scale="1" color="#df5954" timeScale="1ms"/>
+        </Display>
+
+        <Display id="pop_AVAL_6_caConc" title="Plots of pop_AVAL_6_caConc" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
+            <Line id="pop_AVAL_6_AVAL_caConc" quantity="pop_AVAL/6/AVAL/caConc" scale="1" color="#52c8bf" timeScale="1ms"/>
+        </Display>
+
+        <Display id="pop_AVAL_7_caConc" title="Plots of pop_AVAL_7_caConc" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
+            <Line id="pop_AVAL_7_AVAL_caConc" quantity="pop_AVAL/7/AVAL/caConc" scale="1" color="#bf0239" timeScale="1ms"/>
+        </Display>
+
+        <Display id="pop_AVAL_8_caConc" title="Plots of pop_AVAL_8_caConc" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
+            <Line id="pop_AVAL_8_AVAL_caConc" quantity="pop_AVAL/8/AVAL/caConc" scale="1" color="#3f9fe8" timeScale="1ms"/>
+        </Display>
+
+        <Display id="pop_AVAL_9_caConc" title="Plots of pop_AVAL_9_caConc" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
+            <Line id="pop_AVAL_9_AVAL_caConc" quantity="pop_AVAL/9/AVAL/caConc" scale="1" color="#dda9d2" timeScale="1ms"/>
         </Display>
 
         <Display id="pop_AVAL_v" title="Plots of pop_AVAL_v" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-80" ymax="40">
-            <Line id="pop_AVAL_0_AVAL_v" quantity="pop_AVAL/0/AVAL/v" scale="1mV" color="#bca074" timeScale="1ms"/>
-            <Line id="voltage_1" quantity="pop_AVAL/1/AVAL/v" scale="1mV" color="0 1 0" timeScale="1ms"/>
-            <Line id="voltage_2" quantity="pop_AVAL/2/AVAL/v" scale="1mV" color="0 0 1" timeScale="1ms"/>
-            <Line id="voltage_3" quantity="pop_AVAL/3/AVAL/v" scale="1mV" color="1 1 0" timeScale="1ms"/>
-            <Line id="voltage_4" quantity="pop_AVAL/4/AVAL/v" scale="1mV" color="0 1 1" timeScale="1ms"/>
-            <Line id="voltage_5" quantity="pop_AVAL/5/AVAL/v" scale="1mV" color="1 0 1" timeScale="1ms"/>
-            <Line id="voltage_6" quantity="pop_AVAL/6/AVAL/v" scale="1mV" color="0.5 0.5 0.5" timeScale="1ms"/>
-            <Line id="voltage_7" quantity="pop_AVAL/7/AVAL/v" scale="1mV" color="0.5 0 0.5" timeScale="1ms"/>
-            <Line id="voltage_8" quantity="pop_AVAL/8/AVAL/v" scale="1mV" color="0.5 0.5 0" timeScale="1ms"/>
-            <Line id="voltage_9" quantity="pop_AVAL/9/AVAL/v" scale="1mV" color="0 0.5 0.5" timeScale="1ms"/>
-            <Line id="voltage_10" quantity="pop_AVAL/10/AVAL/v" scale="1mV" color="0.3 0.3 0.3" timeScale="1ms"/>
+            <Line id="pop_AVAL_0_AVAL_v" quantity="pop_AVAL/0/AVAL/v" scale="1mV" color="#85ad96" timeScale="1ms"/>
+            <Line id="pop_AVAL_1_AVAL_v" quantity="pop_AVAL/1/AVAL/v" scale="1mV" color="#59438f" timeScale="1ms"/>
+            <Line id="pop_AVAL_2_AVAL_v" quantity="pop_AVAL/2/AVAL/v" scale="1mV" color="#5fa56f" timeScale="1ms"/>
+            <Line id="pop_AVAL_3_AVAL_v" quantity="pop_AVAL/3/AVAL/v" scale="1mV" color="#b5b5a2" timeScale="1ms"/>
+            <Line id="pop_AVAL_4_AVAL_v" quantity="pop_AVAL/4/AVAL/v" scale="1mV" color="#2ebe19" timeScale="1ms"/>
+            <Line id="pop_AVAL_5_AVAL_v" quantity="pop_AVAL/5/AVAL/v" scale="1mV" color="#d30150" timeScale="1ms"/>
+            <Line id="pop_AVAL_6_AVAL_v" quantity="pop_AVAL/6/AVAL/v" scale="1mV" color="#55490a" timeScale="1ms"/>
+            <Line id="pop_AVAL_7_AVAL_v" quantity="pop_AVAL/7/AVAL/v" scale="1mV" color="#4bd9d0" timeScale="1ms"/>
+            <Line id="pop_AVAL_8_AVAL_v" quantity="pop_AVAL/8/AVAL/v" scale="1mV" color="#69535e" timeScale="1ms"/>
+            <Line id="pop_AVAL_9_AVAL_v" quantity="pop_AVAL/9/AVAL/v" scale="1mV" color="#27dae9" timeScale="1ms"/>
+            <Line id="pop_AVAL_10_AVAL_v" quantity="pop_AVAL/10/AVAL/v" scale="1mV" color="#6143ed" timeScale="1ms"/>
         </Display>
 
         <OutputFile id="Sim_IClamp_AVAL_pop_AVAL_v_dat" fileName="Sim_IClamp_AVAL.pop_AVAL.v.dat">
             <OutputColumn id="pop_AVAL_0_AVAL_v" quantity="pop_AVAL/0/AVAL/v"/>
-            <OutputColumn id="voltage_1" quantity="pop_AVAL/1/AVAL/v"/>
-            <OutputColumn id="voltage_2" quantity="pop_AVAL/2/AVAL/v"/>
-            <OutputColumn id="voltage_3" quantity="pop_AVAL/3/AVAL/v"/>
-            <OutputColumn id="voltage_4" quantity="pop_AVAL/4/AVAL/v"/>
-            <OutputColumn id="voltage_5" quantity="pop_AVAL/5/AVAL/v"/>
-            <OutputColumn id="voltage_6" quantity="pop_AVAL/6/AVAL/v"/>
-            <OutputColumn id="voltage_7" quantity="pop_AVAL/7/AVAL/v"/>
-            <OutputColumn id="voltage_8" quantity="pop_AVAL/8/AVAL/v"/>
-            <OutputColumn id="voltage_9" quantity="pop_AVAL/9/AVAL/v"/>
-            <OutputColumn id="voltage_10" quantity="pop_AVAL/10/AVAL/v"/>
-        </OutputFile>
-
-        <OutputFile id="pop_AVAL_0_biophys_membraneProperties_leak_chans_gDensity_dat" fileName="pop_AVAL_0.biophys_membraneProperties_leak_chans_gDensity.dat">
-            <OutputColumn id="pop_AVAL_0_AVAL_biophys_membraneProperties_leak_chans_gDensity" quantity="pop_AVAL/0/AVAL/biophys/membraneProperties/leak_chans/gDensity"/>
-        </OutputFile>
-
-        <OutputFile id="pop_AVAL_0_biophys_membraneProperties_leak_chans_iDensity_dat" fileName="pop_AVAL_0.biophys_membraneProperties_leak_chans_iDensity.dat">
-            <OutputColumn id="pop_AVAL_0_AVAL_biophys_membraneProperties_leak_chans_iDensity" quantity="pop_AVAL/0/AVAL/biophys/membraneProperties/leak_chans/iDensity"/>
+            <OutputColumn id="pop_AVAL_1_AVAL_v" quantity="pop_AVAL/1/AVAL/v"/>
+            <OutputColumn id="pop_AVAL_2_AVAL_v" quantity="pop_AVAL/2/AVAL/v"/>
+            <OutputColumn id="pop_AVAL_3_AVAL_v" quantity="pop_AVAL/3/AVAL/v"/>
+            <OutputColumn id="pop_AVAL_4_AVAL_v" quantity="pop_AVAL/4/AVAL/v"/>
+            <OutputColumn id="pop_AVAL_5_AVAL_v" quantity="pop_AVAL/5/AVAL/v"/>
+            <OutputColumn id="pop_AVAL_6_AVAL_v" quantity="pop_AVAL/6/AVAL/v"/>
+            <OutputColumn id="pop_AVAL_7_AVAL_v" quantity="pop_AVAL/7/AVAL/v"/>
+            <OutputColumn id="pop_AVAL_8_AVAL_v" quantity="pop_AVAL/8/AVAL/v"/>
+            <OutputColumn id="pop_AVAL_9_AVAL_v" quantity="pop_AVAL/9/AVAL/v"/>
+            <OutputColumn id="pop_AVAL_10_AVAL_v" quantity="pop_AVAL/10/AVAL/v"/>
         </OutputFile>
 
         <OutputFile id="pop_AVAL_0_caConc_dat" fileName="pop_AVAL_0.caConc.dat">
             <OutputColumn id="pop_AVAL_0_AVAL_caConc" quantity="pop_AVAL/0/AVAL/caConc"/>
+        </OutputFile>
+
+        <OutputFile id="pop_AVAL_1_caConc_dat" fileName="pop_AVAL_1.caConc.dat">
+            <OutputColumn id="pop_AVAL_1_AVAL_caConc" quantity="pop_AVAL/1/AVAL/caConc"/>
+        </OutputFile>
+
+        <OutputFile id="pop_AVAL_10_caConc_dat" fileName="pop_AVAL_10.caConc.dat">
+            <OutputColumn id="pop_AVAL_10_AVAL_caConc" quantity="pop_AVAL/10/AVAL/caConc"/>
+        </OutputFile>
+
+        <OutputFile id="pop_AVAL_2_caConc_dat" fileName="pop_AVAL_2.caConc.dat">
+            <OutputColumn id="pop_AVAL_2_AVAL_caConc" quantity="pop_AVAL/2/AVAL/caConc"/>
+        </OutputFile>
+
+        <OutputFile id="pop_AVAL_3_caConc_dat" fileName="pop_AVAL_3.caConc.dat">
+            <OutputColumn id="pop_AVAL_3_AVAL_caConc" quantity="pop_AVAL/3/AVAL/caConc"/>
+        </OutputFile>
+
+        <OutputFile id="pop_AVAL_4_caConc_dat" fileName="pop_AVAL_4.caConc.dat">
+            <OutputColumn id="pop_AVAL_4_AVAL_caConc" quantity="pop_AVAL/4/AVAL/caConc"/>
+        </OutputFile>
+
+        <OutputFile id="pop_AVAL_5_caConc_dat" fileName="pop_AVAL_5.caConc.dat">
+            <OutputColumn id="pop_AVAL_5_AVAL_caConc" quantity="pop_AVAL/5/AVAL/caConc"/>
+        </OutputFile>
+
+        <OutputFile id="pop_AVAL_6_caConc_dat" fileName="pop_AVAL_6.caConc.dat">
+            <OutputColumn id="pop_AVAL_6_AVAL_caConc" quantity="pop_AVAL/6/AVAL/caConc"/>
+        </OutputFile>
+
+        <OutputFile id="pop_AVAL_7_caConc_dat" fileName="pop_AVAL_7.caConc.dat">
+            <OutputColumn id="pop_AVAL_7_AVAL_caConc" quantity="pop_AVAL/7/AVAL/caConc"/>
+        </OutputFile>
+
+        <OutputFile id="pop_AVAL_8_caConc_dat" fileName="pop_AVAL_8.caConc.dat">
+            <OutputColumn id="pop_AVAL_8_AVAL_caConc" quantity="pop_AVAL/8/AVAL/caConc"/>
+        </OutputFile>
+
+        <OutputFile id="pop_AVAL_9_caConc_dat" fileName="pop_AVAL_9.caConc.dat">
+            <OutputColumn id="pop_AVAL_9_AVAL_caConc" quantity="pop_AVAL/9/AVAL/caConc"/>
         </OutputFile>
 
     </Simulation>

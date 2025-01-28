@@ -4,7 +4,7 @@
 <!--    <include href="slo2iso.channel.nml"/> -->
     <include href="egl19.channel.nml"/>
 <!--    <include href="irk.channel.nml"/> -->
-<!--    <include href="shk1.channel.nml"/> 
+<!--    <include href="shk1.channel.nml"/> -->
 <!--    <include href="nca.channel.nml"/> -->
     <include href="leak.channel.nml"/>
     <include href="CaDynamics.nml"/>

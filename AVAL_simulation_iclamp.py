@@ -64,7 +64,7 @@ def AVA_simulation_iclamp(gAVA_scaled,s1,s2,ns):
     ref_v=[]
     ref_t=[]
 
-    
+    h.psection(sec=soma)
     
     for i in numpy.linspace(start=s1, stop=s2, num=ns):
         

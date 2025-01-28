@@ -17,3 +17,4 @@ x86_64
 /NeuroML/*.mod
 /*.dat
 /report.*.txt
+/NeuroML/.ipynb_checkpoints 
