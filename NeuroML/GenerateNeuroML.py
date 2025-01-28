@@ -32,7 +32,7 @@ conductances = [
 
 # conductances in S/cm^2: SHL1, EGL2, IRK, CCA1, unc2, egl19, LEAK,eleak, cm
 
-g=[0.0009048750067326097,0.0001411644285181245,0.0003272854640954744,0.0008451919806776876,9.676795045480941e-05,0.00032005818627638106,9.676795045480941e-05,-50,1.5]
+g0=[0.0009048750067326097,0.0001411644285181245,0.0003272854640954744,0.0008451919806776876,9.676795045480941e-05,0.00032005818627638106,9.676795045480941e-05,-50,1.5]
 
 
 
@@ -250,7 +250,7 @@ def create_cells(channels_to_include, duration=700, stim_delay=310, stim_duratio
 
 if __name__ == "__main__":
     create_cells(
-        channels_to_include=["leak", "unc103", "irk", "egl19", "nca"],
+        channels_to_include=["shl1", "egl2", "irk", "cca1", "unc2", "egl19", "leak"],
    
         duration=11000,
         stim_delay=500,
@@ -258,4 +258,3 @@ if __name__ == "__main__":
     )
 
 
-103.34e-8
