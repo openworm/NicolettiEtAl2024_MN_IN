@@ -17,9 +17,8 @@ def generate_nmllite(
     duration=11000,
     config="IClamp",
     parameters=None,
-    stim_delay=1000,
-    stim_duration=5000,
     channels_to_include=[],
+    color=None,
 ):
     from neuromllite import Cell, InputSource
 
@@ -37,10 +36,8 @@ def generate_nmllite(
     if "IClamp" in config:
         if not parameters:
             parameters = {}
-            parameters["stim_amp"] = "30pA"
-            parameters["stim_delay"] = "%sms" % stim_delay
-            parameters["stim_duration"] = "%sms" % stim_duration
 
+        """
         input_source = InputSource(
             id="iclamp_0",
             neuroml2_input="PulseGenerator",
@@ -49,7 +46,7 @@ def generate_nmllite(
                 "delay": "stim_delay",
                 "duration": "stim_duration",
             },
-        )
+        )"""
 
     else:
         if not parameters:
@@ -75,8 +72,8 @@ def generate_nmllite(
         default_region="Worm",
         parameters=parameters,
         cell_for_default_population=cell_nmll,
-        color_for_default_population=colors[cell],
-        input_for_default_population=input_source,
+        color_for_default_population=color,
+        input_for_default_population=None,
     )
 
     net.parameters = {}
@@ -155,81 +152,73 @@ def generate_nmllite(
     return sim, net
 
 
-def create_cells(
-    channels_to_include,
-    conductances,
-    cell_params,
-    duration=700,
-    stim_delay=310,
-    stim_duration=500,
+def create_cell(
+    cell_id, duration, channels_to_include, conductances, cell_params, color
 ):
-    for cell_id in cell_params.keys():
-        # Create the nml file and add the ion channels
-        cell_doc = NeuroMLDocument(
-            id=cell_id, notes="A cell from Nicoletti et al. 2024"
-        )
-        cell_fn = "%s.cell.nml" % cell_id
+    # Create the nml file and add the ion channels
+    cell_doc = NeuroMLDocument(id=cell_id, notes="A cell from Nicoletti et al. 2024")
+    cell_fn = "%s.cell.nml" % cell_id
 
-        # Define a cell
-        cell = cell_doc.add(
-            "Cell", id=cell_id, notes="%s cell from Nicoletti et al. 2019" % cell_id
-        )
-        """
+    # Define a cell
+    cell = cell_doc.add(
+        "Cell", id=cell_id, notes="%s cell from Nicoletti et al. 2019" % cell_id
+    )
+    """
         volume_um3 = xpps[cell_id]["parameters"]["vol"]
         diam = 1.7841242
         end_area = math.pi * diam * diam / 4
         length = volume_um3 / end_area
         surface_area_curved = length * math.pi * diam"""
 
-        surf = cell_params[cell_id]["surf"]
-        # vol = 7.42e-12  # total volume
-        L = math.sqrt(surf / math.pi)
-        rsoma = L * 1e4
+    surf = cell_params["surf"]
+    # vol = 7.42e-12  # total volume
+    L = math.sqrt(surf / math.pi)
+    rsoma = L * 1e4
 
-        cell.add_segment(
-            prox=[0, 0, 0, rsoma],
-            dist=[0, rsoma, 0, rsoma],
-            name="soma",
-            parent=None,
-            fraction_along=1.0,
-            seg_type="soma",
+    cell.add_segment(
+        prox=[0, 0, 0, rsoma],
+        dist=[0, rsoma, 0, rsoma],
+        name="soma",
+        parent=None,
+        fraction_along=1.0,
+        seg_type="soma",
+    )
+
+    cell.add_membrane_property("SpikeThresh", value="0mV")
+
+    cell.set_specific_capacitance("%s uF_per_cm2" % (cell_params["cm"]))
+
+    cell.set_init_memb_potential("-40mV")
+
+    # This value is not really used as it's a single comp cell model
+    cell.set_resistivity("0.1 kohm_cm")
+
+    for channel_id in sorted(channels_to_include):
+        density_scaled = (cell_params[channel_id] * 1e-9) / (surf)
+
+        print(cell_params)
+        erev = cell_params["eleak"]
+        ion = "non_specific"
+
+        if channel_id in ["egl19"]:
+            erev = 60
+            ion = "ca"
+        if channel_id in ["irk"]:
+            erev = -80
+            ion = "k"
+        if channel_id in ["nca"]:
+            erev = 30
+        cell.add_channel_density(
+            cell_doc,
+            cd_id="%s_chans" % channel_id,
+            cond_density="%s S_per_cm2" % density_scaled,
+            erev="%smV" % erev,
+            ion=ion,
+            ion_channel="%s" % channel_id,
+            ion_chan_def_file="%s.channel.nml" % channel_id,
         )
 
-        cell.add_membrane_property("SpikeThresh", value="0mV")
-
-        cell.set_specific_capacitance("%s uF_per_cm2" % (cell_params[cell_id]["cm"]))
-
-        cell.set_init_memb_potential("-40mV")
-
-        # This value is not really used as it's a single comp cell model
-        cell.set_resistivity("0.1 kohm_cm")
-
-        for channel_id in sorted(channels_to_include):
-            density_scaled = (cell_params[cell_id][channel_id] * 1e-9) / (surf)
-
-            print(cell_params[cell_id])
-            erev = cell_params[cell_id]["eleak"]
-            ion = "non_specific"
-
-            if channel_id in ["egl19"]:
-                erev = 60
-                ion = "ca"
-            if channel_id in ["irk"]:
-                erev = -80
-                ion = "k"
-            if channel_id in ["nca"]:
-                erev = 30
-            cell.add_channel_density(
-                cell_doc,
-                cd_id="%s_chans" % channel_id,
-                cond_density="%s S_per_cm2" % density_scaled,
-                erev="%smV" % erev,
-                ion=ion,
-                ion_channel="%s" % channel_id,
-                ion_chan_def_file="%s.channel.nml" % channel_id,
-            )
-
-        """
+    """
         cell_doc.includes.append(IncludeType(href="CaDynamics.nml"))
         # <species id="ca" ion="ca" concentrationModel="CaDynamics" initialConcentration="1e-4 mM" initialExtConcentration="2 mM"/>
         species = component_factory(
@@ -243,61 +232,58 @@ def create_cells(
 
         cell.biophysical_properties.intracellular_properties.add(species)"""
 
-        cell.info(show_contents=True)
+    cell.info(show_contents=True)
 
-        cell_doc.validate(recursive=True)
-        pynml.write_neuroml2_file(
-            nml2_doc=cell_doc, nml2_file_name=cell_fn, validate=True
-        )
+    cell_doc.validate(recursive=True)
+    pynml.write_neuroml2_file(nml2_doc=cell_doc, nml2_file_name=cell_fn, validate=True)
 
-        sim, net = generate_nmllite(
-            cell_id,
-            duration=duration,
-            config="IClamp",
-            parameters=None,
-            stim_delay=stim_delay,
-            stim_duration=stim_duration,
-            channels_to_include=channels_to_include,
-        )
+    sim, net = generate_nmllite(
+        cell_id,
+        duration=duration,
+        config="IClamp",
+        parameters=None,
+        channels_to_include=channels_to_include,
+        color=color,
+    )
 
-        ################################################################################
-        ###   Run in some simulators
+    ################################################################################
+    ###   Run in some simulators
 
-        from neuromllite.NetworkGenerator import check_to_generate_or_run
-        import sys
+    from neuromllite.NetworkGenerator import check_to_generate_or_run
+    import sys
 
-        check_to_generate_or_run(sys.argv, sim)
+    check_to_generate_or_run(sys.argv, sim)
 
 
 if __name__ == "__main__":
+    all = {}
 
-    colors = {"AVAL": "0.5 1 1"}
-    cell_params = {}
+    all["AVAL"] = {"color": "0.5 1 1"}
+    all["AVAL"]["cell_params"] = {
+        "surf": 1123.84e-8
+    }  # surface in cm^2 form neuromorpho AIYL
+    all["AVAL"]["conductances"] = ["egl19", "leak", "irk", "nca", "eleak", "cm"]
+    all["AVAL"]["g0"] = [0.104385, 0.150164, 0.1, 0, -39, 0.859551]
 
-    cell = "AVAL"
-    cell_params[cell] = {"surf": 1123.84e-8}  # surface in cm^2 form neuromorpho AIYL
+    for cell in all:
+        cell_params = all[cell]["cell_params"]
+        conductances = all[cell]["conductances"]
+        g0 = all[cell]["g0"]
 
-    conductances = ["egl19", "leak", "irk", "nca", "eleak", "cm"]
+        for a in zip(conductances, g0):
+            print(f"Setting {a[0]} = {a[1]} for {cell}")
+            cell_params[a[0]] = a[1]
 
-    # coductances: egl19, leak, irk, nca, eleak, cm
-    g0 = [0.104385, 0.150164, 0.1, 0, -39, 0.859551]
+        chans = []
+        for c in conductances:
+            if "eleak" not in c and "cm" not in c:
+                chans.append(c)
 
-
-
-    for a in zip(conductances, g0):
-        print(f"Setting {a[0]} = {a[1]} for {cell}")
-        cell_params[cell][a[0]] = a[1]
-
-    chans = []
-    for c in conductances:
-        if "eleak" not in c and "cm" not in c:
-            chans.append(c)
-
-    create_cells(
-        channels_to_include=chans,
-        duration=11000,
-        stim_delay=500,
-        stim_duration=2000,
-        conductances=conductances,
-        cell_params=cell_params,
-    )
+        create_cell(
+            cell_id=cell,
+            duration=11000,
+            channels_to_include=chans,
+            conductances=conductances,
+            cell_params=cell_params,
+            color=all[cell]["color"],
+        )
