@@ -12,22 +12,18 @@ from sympy.parsing.sympy_parser import parse_expr
 import math
 
 
-colors = {"AVAL5": "0.5 1 1"}
+colors = {"AVAL": "0.5 1 1"}
 cell_params = {}
 
-cell = "AVAL5"
+cell = "AVAL"
 cell_params[cell] = {"surf": 1123.84e-8 }  # surface in cm^2 form neuromorpho AIYL
 
 conductances = [
-    "slo2egl19",
-    "slo2iso",
     "egl19",
-    "irk",
-    "shk1", 
+    "leak",
+    "irk", 
     "nca",
-    "leak", 
-    "eleak",
-    "c2", 
+    "eleak", 
     "cm"
 ]
 
