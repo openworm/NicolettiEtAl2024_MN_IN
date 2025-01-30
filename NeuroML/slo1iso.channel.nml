@@ -1,0 +1,77 @@
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2.3.1.xsd" id="kqt1">
+    <notes>An ion channel from cell AIY from Nicoletti et al. 2024</notes>
+
+
+ <ionChannelHH id="slo1iso" species="k" conductance="10 pS">
+        <gate id="m" instances="1" type="gateHHtauInf">
+            <timeCourse type="slo1iso_m_tau"/>
+            <steadyState type="slo1iso_m_inf"/> 
+        </gate>
+    </ionChannelHH>
+
+
+    <ComponentType name="slo1iso_m_inf" extends="baseVoltageDepVariable">
+        <Constant name="VOLT_SCALE" dimension="voltage" value="1 mV"/>
+        <Constant name="wom" dimension="none" value="3.152961"/>
+        <Constant name="wop" dimension="none" value="0.156217"/>
+        <Constant name="wyx" dimension="none" value="0.012643"/>
+        <Constant name="wxy" dimension="none" value="-0.027527"/>
+        <Constant name="kyx" dimension="none" value="34.338784"/>
+        <Constant name="nyx" dimension="none" value="0.0001"/>
+        <Constant name="kxy" dimension="none" value="55.726816"/>
+        <Constant name="nxy" dimension="none" value="1.299198"/>
+        <Constant name="backgr" dimension="none" value="0.05"/>
+        <Constant name="eca" dimension="none" value="60"/>
+        <Constant name="d" dimension="none" value="2.5e-10"/>
+        <Constant name="pi" dimension="none" value="3.14159265359"/>
+        <Constant name="F" dimension="none" value="96485.0"/>
+        <Constant name="kb" dimension="none" value="500000000.0"/>
+        <Constant name="gsc" dimension="none" value="4e-11"/>
+
+        <Dynamics>
+            <DerivedVariable name="V" dimension="none" value="(v) / VOLT_SCALE"/>
+            <DerivedVariable name="cac_nano" dimension="none" value="backgr"/>
+            <DerivedVariable name="cao_nano" dimension="none" 
+                value="backgr + (1 / (8 * pi * F * d)) * exp(-1 / sqrt(d / (kb))) * abs(gsc * (V - eca))"/>
+            <DerivedVariable name="kcm2" dimension="none" 
+                value="wom * exp(-V * wyx) / ((cac_nano / kyx)^nyx + 1)"/>
+            <DerivedVariable name="kop" dimension="none" 
+                value="wop * exp(-V * wxy) / ((kxy / cao_nano)^nxy + 1)"/>
+            <DerivedVariable name="v0" dimension="none" 
+                value="1 / (wyx - wxy) * (log(wom / wop) + log(1 + (kxy / cac_nano)^nxy) - log(1 + (cac_nano / kyx)^nyx))"/>
+            <DerivedVariable name="x" dimension="none" exposure="x" 
+                value="1 / (1 + exp(-(V - v0) / (1 / (wyx - wxy))))"/>
+        </Dynamics>
+    </ComponentType>
+
+   
+    <ComponentType name="slo1iso_m_tau" extends="baseVoltageDepTime">
+        <Constant name="VOLT_SCALE" dimension="voltage" value="1 mV"/>
+        <Constant name="TIME_SCALE" dimension="time" value="1 ms"/>
+        <Constant name="wxy" dimension="none" value="-0.027527"/>
+        <Constant name="wop" dimension="none" value="0.156217"/>
+        <Constant name="kyx" dimension="none" value="34.338784"/>
+        <Constant name="nyx" dimension="none" value="0.0001"/>
+        <Constant name="wom" dimension="none" value="3.152961"/>
+        <Constant name="kxy" dimension="none" value="55.726816"/>
+        <Constant name="nxy" dimension="none" value="1.299198"/>
+        <Constant name="wyx" dimension="none" value="0.012643"/>
+        <Constant name="eca" dimension="none" value="60"/>
+        <Constant name="d" dimension="none" value="2.5e-10"/>
+        <Constant name="pi" dimension="none" value="3.14159265359"/>
+        <Constant name="F" dimension="none" value="96485.0"/>
+        <Constant name="kb" dimension="none" value="500000000.0"/>
+        <Constant name="gsc" dimension="none" value="4e-11"/>
+        <Constant name="backgr" dimension="none" value="0.05"/>
+        <Dynamics>
+            <DerivedVariable name="V" dimension="none" value="(v) / VOLT_SCALE"/>
+            <DerivedVariable name="cac_nano" dimension="none" value="backgr"/>
+            <DerivedVariable name="cao_nano" dimension="none" 
+                value="backgr + (1 / (8 * pi * F * d)) * exp(-1 / sqrt(d / (kb))) * abs(gsc * (V - eca))"/>
+            <DerivedVariable name="v0" dimension="none" 
+                value="1 / (wyx - wxy) * (log(wom / wop) + log(1 + (kxy / cac_nano)^nxy) - log(1 + (cac_nano / kyx)^nyx))"/>
+            <DerivedVariable name="t" dimension="time" exposure="t" 
+                value="(exp(wxy * V) / wop) * (1 + (kxy / cao_nano)^nxy) * (1 / (1 + exp(-(V - v0) / (1 / (wyx - wxy)))))"/>
+        </Dynamics>
+    </ComponentType>
+</neuroml>

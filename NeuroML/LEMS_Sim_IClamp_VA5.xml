@@ -1,0 +1,75 @@
+<Lems>
+
+    <!-- 
+
+        This LEMS file has been automatically generated using PyNeuroML v1.3.12 (libNeuroML v0.6.5)
+
+     -->
+
+    <!-- Specify which component to run -->
+    <Target component="Sim_IClamp_VA5" reportFile="report.Sim_IClamp_VA5.txt"/>
+
+    <!-- Include core NeuroML2 ComponentType definitions -->
+    <Include file="Cells.xml"/>
+    <Include file="Networks.xml"/>
+    <Include file="Simulation.xml"/>
+    <Include file="PyNN.xml"/>
+    <Include file="IClamp_VA5.net.nml"/>
+    <Include file="VA5.cell.nml"/>
+
+    <Simulation id="Sim_IClamp_VA5" length="8000.0ms" step="0.025ms" target="IClamp_VA5" seed="12345">  <!-- Note seed: ensures same random numbers used every run -->
+        <Display id="pop_VA5_0_biophys/membraneProperties/leak_chans/gDensity" title="Plots of pop_VA5_0_biophys/membraneProperties/leak_chans/gDensity" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
+            <Line id="pop_VA5_0_VA5_biophys_membraneProperties_leak_chans_gDensity" quantity="pop_VA5/0/VA5/biophys/membraneProperties/leak_chans/gDensity" scale="1" color="#d54f33" timeScale="1ms"/>
+        </Display>
+
+        <Display id="pop_VA5_0_biophys/membraneProperties/leak_chans/iDensity" title="Plots of pop_VA5_0_biophys/membraneProperties/leak_chans/iDensity" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
+            <Line id="pop_VA5_0_VA5_biophys_membraneProperties_leak_chans_iDensity" quantity="pop_VA5/0/VA5/biophys/membraneProperties/leak_chans/iDensity" scale="1" color="#0534e4" timeScale="1ms"/>
+        </Display>
+
+        <Display id="pop_VA5_0_caConc" title="Plots of pop_VA5_0_caConc" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
+            <Line id="pop_VA5_0_VA5_caConc" quantity="pop_VA5/0/VA5/caConc" scale="1" color="#98e752" timeScale="1ms"/>
+        </Display>
+
+        <Display id="pop_VA5_v" title="Plots of pop_VA5_v" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-80" ymax="40">
+            <Line id="pop_VA5_0_VA5_v" quantity="pop_VA5/0/VA5/v" scale="1mV" color="#bca074" timeScale="1ms"/>
+            <Line id="voltage_1" quantity="pop_VA5/1/VA5/v" scale="1mV" color="0 1 0" timeScale="1ms"/>
+            <Line id="voltage_2" quantity="pop_VA5/2/VA5/v" scale="1mV" color="0 0 1" timeScale="1ms"/>
+            <Line id="voltage_3" quantity="pop_VA5/3/VA5/v" scale="1mV" color="1 1 0" timeScale="1ms"/>
+            <Line id="voltage_4" quantity="pop_VA5/4/VA5/v" scale="1mV" color="0 1 1" timeScale="1ms"/>
+            <Line id="voltage_5" quantity="pop_VA5/5/VA5/v" scale="1mV" color="1 0 1" timeScale="1ms"/>
+            <Line id="voltage_6" quantity="pop_VA5/6/VA5/v" scale="1mV" color="0.5 0.5 0.5" timeScale="1ms"/>
+            <Line id="voltage_7" quantity="pop_VA5/7/VA5/v" scale="1mV" color="0.5 0 0.5" timeScale="1ms"/>
+            <Line id="voltage_8" quantity="pop_VA5/8/VA5/v" scale="1mV" color="0.5 0.5 0" timeScale="1ms"/>
+            <Line id="voltage_9" quantity="pop_VA5/9/VA5/v" scale="1mV" color="0 0.5 0.5" timeScale="1ms"/>
+            <Line id="voltage_10" quantity="pop_VA5/10/VA5/v" scale="1mV" color="0.3 0.3 0.3" timeScale="1ms"/>
+        </Display>
+
+        <OutputFile id="Sim_IClamp_VA5_pop_VA5_v_dat" fileName="Sim_IClamp_VA5.pop_VA5.v.dat">
+            <OutputColumn id="pop_VA5_0_VA5_v" quantity="pop_VA5/0/VA5/v"/>
+            <OutputColumn id="voltage_1" quantity="pop_VA5/1/VA5/v"/>
+            <OutputColumn id="voltage_2" quantity="pop_VA5/2/VA5/v"/>
+            <OutputColumn id="voltage_3" quantity="pop_VA5/3/VA5/v"/>
+            <OutputColumn id="voltage_4" quantity="pop_VA5/4/VA5/v"/>
+            <OutputColumn id="voltage_5" quantity="pop_VA5/5/VA5/v"/>
+            <OutputColumn id="voltage_6" quantity="pop_VA5/6/VA5/v"/>
+            <OutputColumn id="voltage_7" quantity="pop_VA5/7/VA5/v"/>
+            <OutputColumn id="voltage_8" quantity="pop_VA5/8/VA5/v"/>
+            <OutputColumn id="voltage_9" quantity="pop_VA5/9/VA5/v"/>
+            <OutputColumn id="voltage_10" quantity="pop_VA5/10/VA5/v"/>
+        </OutputFile>
+
+        <OutputFile id="pop_VA5_0_biophys_membraneProperties_leak_chans_gDensity_dat" fileName="pop_VA5_0.biophys_membraneProperties_leak_chans_gDensity.dat">
+            <OutputColumn id="pop_VA5_0_VA5_biophys_membraneProperties_leak_chans_gDensity" quantity="pop_VA5/0/VA5/biophys/membraneProperties/leak_chans/gDensity"/>
+        </OutputFile>
+
+        <OutputFile id="pop_VA5_0_biophys_membraneProperties_leak_chans_iDensity_dat" fileName="pop_VA5_0.biophys_membraneProperties_leak_chans_iDensity.dat">
+            <OutputColumn id="pop_VA5_0_VA5_biophys_membraneProperties_leak_chans_iDensity" quantity="pop_VA5/0/VA5/biophys/membraneProperties/leak_chans/iDensity"/>
+        </OutputFile>
+
+        <OutputFile id="pop_VA5_0_caConc_dat" fileName="pop_VA5_0.caConc.dat">
+            <OutputColumn id="pop_VA5_0_VA5_caConc" quantity="pop_VA5/0/VA5/caConc"/>
+        </OutputFile>
+
+    </Simulation>
+
+</Lems>

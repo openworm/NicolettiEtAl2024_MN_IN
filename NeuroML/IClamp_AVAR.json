@@ -1,0 +1,56 @@
+{
+    "IClamp_AVAR": {
+        "version": "NeuroMLlite v0.6.0",
+        "notes": "A network model: IClamp_AVAR",
+        "parameters": {
+            "stim_amp": "30pA",
+            "stim_delay": "500ms",
+            "stim_duration": "2000ms"
+        },
+        "cells": {
+            "AVAR": {
+                "neuroml2_source_file": "AVAR.cell.nml"
+            }
+        },
+        "input_sources": {
+            "iclamp_0": {
+                "parameters": {
+                    "amplitude": "stim_amp",
+                    "delay": "stim_delay",
+                    "duration": "stim_duration"
+                },
+                "neuroml2_input": "PulseGenerator"
+            }
+        },
+        "regions": {
+            "Worm": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "width": 1000.0,
+                "height": 100.0,
+                "depth": 1000.0
+            }
+        },
+        "populations": {
+            "pop_AVAR": {
+                "size": 1,
+                "component": "AVAR",
+                "properties": {
+                    "color": "0.5 1 1"
+                },
+                "random_layout": {
+                    "region": "Worm"
+                }
+            }
+        },
+        "inputs": {
+            "Stim_iclamp_0": {
+                "input_source": "iclamp_0",
+                "population": "pop_AVAR",
+                "percentage": 100
+            }
+        },
+        "temperature": 34.0
+    }
+}
