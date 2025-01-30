@@ -65,6 +65,14 @@ path9=os.path.join(path, fname9)
 numpy.savetxt(path8, best_voltage, delimiter="," , fmt="%s")
 numpy.savetxt(path9, best_time2, delimiter=", " , fmt="%s")
 
+# Save current clamp traces in a format to allow tests and comparison to NeuroML data
+with open(os.path.join(path, 'CurrentClamp.dat'),'w') as f:
+    t = best_time2[0]
+    for i in range(len(t)):
+        f.write(f'{t[i]}')
+        for j in range(11):
+            f.write(f' \t{best_voltage[j][i]}')
+        f.write('\n')
 
 import sys
 if not '-nogui' in sys.argv:

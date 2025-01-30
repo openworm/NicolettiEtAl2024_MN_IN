@@ -3,3 +3,16 @@
 target: ../AIY_simulation.py
 engine: PyNEURON
 
+mep: .test.aiy.mep
+experiments:
+  ex0:
+    observables:
+      spike times:
+        file: 
+          path: ../AIY_SIMULATION/CurrentClamp.dat
+          columns: [0,11]
+          scaling: [1, 1]
+        spike detection: 
+          method: threshold
+          threshold: 30
+        tolerance: 0.00
