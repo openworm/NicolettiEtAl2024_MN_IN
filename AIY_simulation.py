@@ -78,7 +78,7 @@ if not '-nogui' in sys.argv:
     pyplot.xlim(-130,60)
     fig.legend(loc=5)
     pyplot.title('IV-CURVES')
-    pyplot.show()
+    #pyplot.show()
 
 
 
@@ -88,13 +88,13 @@ if not '-nogui' in sys.argv:
     pyplot.xlabel('Time [ms]')
     pyplot.ylabel('I [pA]')
     pyplot.title('Voltage clamp')
-    pyplot.show()
+    #pyplot.show()
 
 
 
 
     fig4=pyplot.figure(figsize=(8,4))
-    for i in range(0,10):
+    for i in range(0,11):
         volt_plot=pyplot.plot(best_time2[i],best_voltage[i],color='red',linestyle='solid')
     pyplot.xlabel('Time [ms]')
     pyplot.ylabel('V [mV]')

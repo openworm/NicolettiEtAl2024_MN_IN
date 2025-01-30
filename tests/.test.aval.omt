@@ -1,0 +1,5 @@
+# Script for running automated tests on OSB, see https://github.com/OpenSourceBrain/osb-model-validation 
+
+target: ../AVAL_simulations.py
+engine: PyNEURON
+
