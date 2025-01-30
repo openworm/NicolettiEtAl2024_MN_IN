@@ -3,3 +3,17 @@
 target: ../AVAL_simulations.py
 engine: PyNEURON
 
+mep: .test.aval.mep
+experiments:
+  ex0:
+    observables:
+      spike times:
+        file: 
+          path: ../AVAL_SIMULATION/CurrentClamp.dat
+          columns: [0,7]
+          scaling: [1, 1]
+        spike detection: 
+          method: threshold
+          threshold: 110
+        tolerance: 0.00
+

@@ -80,6 +80,15 @@ numpy.savetxt(path6, best_iv, delimiter=", " , fmt="%s")
 numpy.savetxt(path7, best_iv_peak, delimiter=", " , fmt="%s")
 
 
+# Save current clamp traces in a format to allow tests and comparison to NeuroML data
+with open(os.path.join(path, 'CurrentClamp.dat'),'w') as f:
+    t = best_time2[0]
+    for i in range(len(t)):
+        f.write(f'{t[i]}')
+        for j in range(len(best_voltage)):
+            f.write(f' \t{best_voltage[j][i]}')
+        f.write('\n')
+
 import sys
 if not '-nogui' in sys.argv:
     fig4=pyplot.figure(figsize=(8,4))
