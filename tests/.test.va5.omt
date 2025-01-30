@@ -1,0 +1,18 @@
+# Script for running automated tests on OSB, see https://github.com/OpenSourceBrain/osb-model-validation 
+
+target: ../VA5_simulation.py
+engine: PyNEURON
+
+mep: .test.va5.mep
+experiments:
+  ex0:
+    observables:
+      spike times:
+        file: 
+          path: ../VA5_SIMULATION/CurrentClamp.dat
+          columns: [0,7]
+          scaling: [1, 1]
+        spike detection: 
+          method: threshold
+          threshold: 20
+        tolerance: 0.00
