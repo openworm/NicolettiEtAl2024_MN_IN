@@ -7,4 +7,12 @@
 arm64
 x86_64
 /__pycache__
+.DS_Store
+/NeuroML/*.dat
+/NeuroML/report.*.txt
+/NeuroML/IClamp_AIY.json
+/NeuroML/Sim_IClamp_AIY.json
+/NeuroML/*.hoc
+/NeuroML/*_nrn.py
+/NeuroML/*.mod
 /AVAR_SIMULATION
