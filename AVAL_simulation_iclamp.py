@@ -2,7 +2,7 @@
 # M. Nicoletti et al. PloS ONE, 19(3): e0298105.
 # https://doi.org/10.1371/journal.pone.0298105
 
-def AVA_simulation_iclamp(gAVA_scaled,s1,s2,ns):
+def AVA_simulation_iclamp(gAVA_scaled,s1,s2,ns, delay=1023, duration=1000, simdur =2500):
     
     from neuron import h,gui
     import numpy
@@ -22,6 +22,7 @@ def AVA_simulation_iclamp(gAVA_scaled,s1,s2,ns):
     soma=h.Section(name="soma")
     soma.L=rsoma
     soma.diam=rsoma
+
     soma.Ra=100
     soma.cm=cm_uFcm2
     h.psection(sec=soma)
@@ -50,28 +51,29 @@ def AVA_simulation_iclamp(gAVA_scaled,s1,s2,ns):
     stim=h.IClamp(soma(0.5))
     dir(stim)
     
-    stim.delay=1000
+    stim.delay=delay
     stim.amp=10
-    stim.dur=5000
+    stim.dur=duration
     
     v_vec = h.Vector()   
     t_vec = h.Vector()       
     v_vec.record(soma(0.5)._ref_v)
     t_vec.record(h._ref_t)
 
-    simdur =8000
 
     ref_v=[]
     ref_t=[]
 
+    print("All parameters used in current clamp:")
     h.psection(sec=soma)
+    
     
     for i in numpy.linspace(start=s1, stop=s2, num=ns):
         
          stim.amp=i
          h.tstop=simdur
          h.dt=0.025
-         h.finitialize(-40.01)
+         h.finitialize(-60)
          h.run()
             
          ref_t_vec=numpy.zeros_like(t_vec)
@@ -95,7 +97,7 @@ def AVA_simulation_iclamp(gAVA_scaled,s1,s2,ns):
     resc_min=numpy.amin(resc_ind)
     resc_max=numpy.amax(resc_ind)
     v_normalized=v[:,resc_min:resc_max]
-    time=time1[:,resc_min:resc_max] - 1000 
+    time=time1[:,resc_min:resc_max]-1000
     
     
     ## SS V-I curve
@@ -119,9 +121,10 @@ def AVA_simulation_iclamp(gAVA_scaled,s1,s2,ns):
         else:
             peak=numpy.amax(v_normalized[j,ind2_min:ind2_max])
         iv_peak.append(peak)
-  # changed to v and time1 instead of normalized v and time
-    return v, time1, iv_peak, iv    
 
+    return v_normalized, time, iv_peak, iv    
+    
+    
 
 
     

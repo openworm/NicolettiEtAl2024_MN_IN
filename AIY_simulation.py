@@ -23,7 +23,6 @@ surf=65.89e-8# surface in cm^2 form neuromorpho AIYL
 
 #conductances: leak, slo1iso,kqt1,egl19,slo1egl19,nca,irk,eleak,cm
 g0=[0.14,1,0.2,0.1,0.92,0.06,0.5,-89.57,1.6]
-g0=[0.14,0,0,0,0,0,0,-89.57,1.6]
 
 
 gbest=gScm2(g0,surf,6)
@@ -66,6 +65,14 @@ path9=os.path.join(path, fname9)
 numpy.savetxt(path8, best_voltage, delimiter="," , fmt="%s")
 numpy.savetxt(path9, best_time2, delimiter=", " , fmt="%s")
 
+# Save current clamp traces in a format to allow tests and comparison to NeuroML data
+with open(os.path.join(path, 'CurrentClamp.dat'),'w') as f:
+    t = best_time2[0]
+    for i in range(len(t)):
+        f.write(f'{t[i]}')
+        for j in range(11):
+            f.write(f' \t{best_voltage[j][i]}')
+        f.write('\n')
 
 import sys
 if not '-nogui' in sys.argv:
@@ -79,7 +86,7 @@ if not '-nogui' in sys.argv:
     pyplot.xlim(-130,60)
     fig.legend(loc=5)
     pyplot.title('IV-CURVES')
-    pyplot.show()
+    #pyplot.show()
 
 
 
@@ -89,7 +96,7 @@ if not '-nogui' in sys.argv:
     pyplot.xlabel('Time [ms]')
     pyplot.ylabel('I [pA]')
     pyplot.title('Voltage clamp')
-    pyplot.show()
+    #pyplot.show()
 
 
 

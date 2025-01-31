@@ -1,18 +1,19 @@
 # Script for running automated tests on OSB, see https://github.com/OpenSourceBrain/osb-model-validation 
 
-target: ../AIY_simulation.py
+target: ../RIM_simulation.py
 engine: PyNEURON
 
-mep: .test.aiy.mep
+mep: .test.rim.mep
 experiments:
   ex0:
     observables:
       spike times:
         file: 
-          path: ../AIY_SIMULATION/CurrentClamp.dat
-          columns: [0,11]
+          path: ../RIM_SIMULATION/CurrentClamp.dat
+          columns: [0,10]
           scaling: [1, 1]
         spike detection: 
           method: threshold
-          threshold: 30
+          threshold: 55
         tolerance: 0.00
+

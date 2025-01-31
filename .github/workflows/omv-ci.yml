@@ -12,11 +12,12 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.runs-on }}
     strategy:
       fail-fast: false
       matrix:
         python-version: [ 3.9, "3.11" ]
+        runs-on: [ubuntu-latest, macos-latest ]
         engine: [ PyNEURON, jNeuroML_validate ]
 
     steps:
