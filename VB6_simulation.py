@@ -14,8 +14,9 @@ from VB6_simulation_vclamp  import VB6_simulation_vc
 from g_to_Scm2 import gScm2
 
 
-os.mkdir('VB6_SIMULATION')
 path='VB6_SIMULATION'
+if not os.path.isdir(path):
+    os.mkdir(path)
 
 v=numpy.linspace(start=-60, stop=70, num=14)
 ic=numpy.linspace(start=-0.01,stop=0.01,num=9)
@@ -71,34 +72,45 @@ path9=os.path.join(path, fname9)
 numpy.savetxt(path8, best_voltage, delimiter="," , fmt="%s")
 numpy.savetxt(path9, best_time2, delimiter=", " , fmt="%s")
 
+# Save current clamp traces in a format to allow tests and comparison to NeuroML data
+with open(os.path.join(path, 'CurrentClamp.dat'),'w') as f:
+    t = best_time2[0]
+    for i in range(len(t)):
+        f.write(f'{t[i]}')
+        for j in range(len(best_voltage)):
+            f.write(f' \t{best_voltage[j][i]}')
+        f.write('\n')
 
 
-fig3=pyplot.figure(figsize=(8,4))
-for i in range(0,14):
- curr_plot=pyplot.plot(best_time[i],best_current[i],color='red')
-pyplot.xlabel('Time [ms]')
-pyplot.ylabel('I [pA]')
-pyplot.title('Voltage clamp')
-pyplot.show()
+import sys
+if not '-nogui' in sys.argv:
+
+      fig3=pyplot.figure(figsize=(8,4))
+      for i in range(0,14):
+            curr_plot=pyplot.plot(best_time[i],best_current[i],color='red')
+      pyplot.xlabel('Time [ms]')
+      pyplot.ylabel('I [pA]')
+      pyplot.title('Voltage clamp')
+      #pyplot.show()
 
 
-fig4=pyplot.figure(figsize=(8,4))
-for i in range(0,7):
-      volt_plot=pyplot.plot(best_time2[i],best_voltage[i],color='red') 
-   
-pyplot.xlabel('Time [ms]')
-pyplot.ylabel('V [mV]')
-pyplot.title('Current clamp')
-pyplot.show()
+      fig4=pyplot.figure(figsize=(8,4))
+      for i in range(0,7):
+            volt_plot=pyplot.plot(best_time2[i],best_voltage[i],color='red') 
+      
+      pyplot.xlabel('Time [ms]')
+      pyplot.ylabel('V [mV]')
+      pyplot.title('Current clamp')
+      #pyplot.show()
 
 
-fig=pyplot.figure(figsize=(8,4))
-iv_plot=pyplot.plot(v,best_iv,color='red',marker='+',markersize=15)
-pyplot.xlabel('V [mV]')
-pyplot.ylabel('I [pA]')
-pyplot.xlim(-130,80)
-pyplot.title('IV STEADY STATE')
-pyplot.show()
+      fig=pyplot.figure(figsize=(8,4))
+      iv_plot=pyplot.plot(v,best_iv,color='red',marker='+',markersize=15)
+      pyplot.xlabel('V [mV]')
+      pyplot.ylabel('I [pA]')
+      pyplot.xlim(-130,80)
+      pyplot.title('IV STEADY STATE')
+      pyplot.show()
 
 
  

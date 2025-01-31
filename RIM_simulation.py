@@ -13,8 +13,9 @@ from RIM_simulation_iclamp import RIM_simulation_iclamp
 from RIM_simulation_vclamp import RIM_simulation_vc
 
 
-os.mkdir('RIM_SIMULATION')
 path='RIM_SIMULATION'
+if not os.path.isdir(path):
+    os.mkdir(path)
 
 v=numpy.linspace(start=-100, stop=50, num=16)
 ic=numpy.linspace(start=-15,stop=35,num=11)
@@ -66,50 +67,61 @@ path7=os.path.join(path, fname7)
 numpy.savetxt(path4, best_current, delimiter="," , fmt="%s")
 numpy.savetxt(path5, best_time, delimiter=", " , fmt="%s")
 
+# Save current clamp traces in a format to allow tests and comparison to NeuroML data
+with open(os.path.join(path, 'CurrentClamp.dat'),'w') as f:
+    t = best_time2[0]
+    for i in range(len(t)):
+        f.write(f'{t[i]}')
+        for j in range(len(best_voltage)):
+            f.write(f' \t{best_voltage[j][i]}')
+        f.write('\n')
 
 # ================== FIGURES ===================================
 
 
-fig=pyplot.figure(figsize=(8,4))
-iv_plot=pyplot.plot(v,best_iv,color='red',marker='+',markersize=15,label='Model-SS')
-iv3_plot=pyplot.plot(v,best_iv_peak,color='red',marker='+',markersize=15,label='Model-Peaks')
-pyplot.xlabel('V [mV]')
-pyplot.ylabel('I [pA]')
-pyplot.xlim(-130,60)
-fig.legend(loc=5)
-pyplot.title('RIM IV-CURVES')
-pyplot.show()
+import sys
+if not '-nogui' in sys.argv:
+
+    fig=pyplot.figure(figsize=(8,4))
+    iv_plot=pyplot.plot(v,best_iv,color='red',marker='+',markersize=15,label='Model-SS')
+    iv3_plot=pyplot.plot(v,best_iv_peak,color='red',marker='+',markersize=15,label='Model-Peaks')
+    pyplot.xlabel('V [mV]')
+    pyplot.ylabel('I [pA]')
+    pyplot.xlim(-130,60)
+    fig.legend(loc=5)
+    pyplot.title('RIM IV-CURVES')
+    #pyplot.show()
 
 
 
-fig2=pyplot.figure(figsize=(8,4))
-iv3_plot=pyplot.plot(ic,best_vipeaks,color='red',marker='+',markersize=15,label='Model-Peaks')
-iv3_plot=pyplot.plot(ic,best_viss,color='red',marker='+',markersize=15,label='Model-SS')
-pyplot.ylabel('V [mv]')
-pyplot.xlabel('I [pA]')
-pyplot.xlim(-130,60)
-fig2.legend(loc=5)
-pyplot.title('RIM VI-CURVES')
+    fig2=pyplot.figure(figsize=(8,4))
+    iv3_plot=pyplot.plot(ic,best_vipeaks,color='red',marker='+',markersize=15,label='Model-Peaks')
+    iv3_plot=pyplot.plot(ic,best_viss,color='red',marker='+',markersize=15,label='Model-SS')
+    pyplot.ylabel('V [mv]')
+    pyplot.xlabel('I [pA]')
+    pyplot.xlim(-130,60)
+    fig2.legend(loc=5)
+    pyplot.title('RIM VI-CURVES')
 
 
 
-fig4=pyplot.figure(figsize=(8,4))
-for i in range(0,10):
- volt_plot=pyplot.plot(best_time2[i],best_voltage[i],color='red',label='Model')
-pyplot.xlabel('Time [ms]')
-pyplot.ylabel('V [mV]')
-pyplot.title('RIM current-clamp')
-pyplot.show()
+    fig4=pyplot.figure(figsize=(8,4))
+    for i in range(0,10):
+        volt_plot=pyplot.plot(best_time2[i],best_voltage[i],color='red',label='Model')
+    pyplot.xlabel('Time [ms]')
+    pyplot.ylabel('V [mV]')
+    pyplot.title('RIM current-clamp')
+    #pyplot.show()
 
 
 
-fig3=pyplot.figure(figsize=(8,4))
-for i in range(0,15):
- curr_plot=pyplot.plot(best_time[i],best_current[i],color='red',label='Model')
-pyplot.xlabel('Time [ms]')
-pyplot.ylabel('I [pA]')
-pyplot.title('RIM voltage-clamp')
-pyplot.show()
+    fig3=pyplot.figure(figsize=(8,4))
+    for i in range(0,15):
+        curr_plot=pyplot.plot(best_time[i],best_current[i],color='red',label='Model')
+    pyplot.xlabel('Time [ms]')
+    pyplot.ylabel('I [pA]')
+    pyplot.title('RIM voltage-clamp')
+    pyplot.show()
 
 
 

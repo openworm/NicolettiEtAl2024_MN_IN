@@ -6,4 +6,5 @@
 /VB6_SIMULATION
 arm64
 x86_64
-/__pycache__ 
+/__pycache__
+/AVAR_SIMULATION

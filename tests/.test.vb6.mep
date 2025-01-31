@@ -1,0 +1,6 @@
+system: Test
+
+experiments:
+    ex0:
+        expected:
+            spike times: [122.1249999619804, 237.5999999603]
