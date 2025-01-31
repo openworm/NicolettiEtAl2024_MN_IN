@@ -2,14 +2,13 @@
 # M. Nicoletti et al. PloS ONE, 19(3): e0298105.
 # https://doi.org/10.1371/journal.pone.0298105
 
-def AIY_simulation_iclamp(gAIY_scaled,s1,s2,ns,):
+def AIY_simulation_iclamp(gAIY_scaled,s1,s2,ns):
     
  
     from neuron import h,gui
     import numpy
     import math
     from operator import add
-   
 
     surf=65.89e-8 # surface in cm^2 form neuromorpho AIYL
     vol=7.42e-12 # total volume
@@ -38,18 +37,18 @@ def AIY_simulation_iclamp(gAIY_scaled,s1,s2,ns,):
     soma.insert('kqt1')
     soma.insert('shl1')
 
-
+    
     
     
     for seg in soma:
         
-        seg.leak.gbar =  gAIY_scaled[0] 
-        seg.slo1iso.gbar =  gAIY_scaled[1] 
-        seg.kqt1.gbar=gAIY_scaled[2]           
-        seg.egl19.gbar=gAIY_scaled[3] 
+        seg.leak.gbar =  gAIY_scaled[0]
+        seg.slo1iso.gbar =  gAIY_scaled[1]
+        seg.kqt1.gbar=gAIY_scaled[2]                
+        seg.egl19.gbar=gAIY_scaled[3]
         seg.slo1egl19.gbar = gAIY_scaled[4]        
-        seg.nca.gbar =  gAIY_scaled[5] 
-        seg.shl1.gbar =  gAIY_scaled[6]       
+        seg.nca.gbar =  gAIY_scaled[5]
+        seg.shl1.gbar =  gAIY_scaled[6]        
         seg.leak.e=gAIY_scaled[7]
         
     
@@ -69,12 +68,10 @@ def AIY_simulation_iclamp(gAIY_scaled,s1,s2,ns,):
     v_vec.record(soma(0.5)._ref_v)
     t_vec.record(h._ref_t)
 
-    simdur =8000
+    simdur =11000
 
     ref_v=[]
     ref_t=[]
-
-    h.psection()
 
   
     
@@ -82,8 +79,8 @@ def AIY_simulation_iclamp(gAIY_scaled,s1,s2,ns,):
         
          stim.amp=i
          h.tstop=simdur
-         h.dt=0.025
-         h.finitialize(-55)
+         h.dt=0.4
+         h.finitialize(-60)
          h.run()
             
          ref_t_vec=numpy.zeros_like(t_vec)
@@ -125,8 +122,6 @@ def AIY_simulation_iclamp(gAIY_scaled,s1,s2,ns,):
         vi_peak.append(peak)
 
     return v, time1, vi_peak, vi    
-
-   
     
     
     
