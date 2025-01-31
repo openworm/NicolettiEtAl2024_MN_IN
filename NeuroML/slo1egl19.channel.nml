@@ -1,0 +1,77 @@
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2.3.1.xsd" id="kqt1">
+    <notes>An ion channel from cell AIY from Nicoletti et al. 2024</notes>
+
+    <ionChannelHH id="slo1egl19" species="k" conductance="10 pS">
+        <gate id="m" instances="1" type="gateHHtauInf">
+            <timeCourse type="slo1egl19_m_tau"/>
+            <steadyState type="slo1egl19_m_inf"/>
+        </gate>
+    </ionChannelHH>
+
+
+
+   
+    <ComponentType name="slo1egl19_m_inf" extends="baseVoltageDepVariable">
+        <Constant name="VOLT_SCALE" dimension="voltage" value="1 mV"/>
+        <Constant name="TIME_SCALE" dimension="time" value="1 ms"/>
+        <Constant name="pdg1" dimension="none" value="2.3359"/>
+        <Constant name="pdg2" dimension="none" value="2.9324"/>
+        <Constant name="pdg3" dimension="none" value="5.2357"/>
+        <Constant name="pdg4" dimension="none" value="6.0"/>
+        <Constant name="pdg5" dimension="none" value="1.8739"/>
+        <Constant name="pdg6" dimension="none" value="1.393"/>
+        <Constant name="pdg7" dimension="none" value="30.0"/>
+        <Constant name="stau19" dimension="none" value="10"/>
+        <Constant name="va_egl19" dimension="none" value="5.6"/>
+        <Constant name="ka_egl19" dimension="none" value="7.5"/>
+        <Constant name="stm19" dimension="none" value="10"/>
+        <Constant name="wom" dimension="none" value="3.152961"/>
+        <Constant name="wop" dimension="none" value="0.156217"/>
+        <Constant name="wyx" dimension="none" value="0.012643"/>
+        <Constant name="wxy" dimension="none" value="-0.027527"/>
+        <Constant name="kyx" dimension="none" value="34.338784"/>
+        <Constant name="nxy" dimension="none" value="0.0001"/>
+        <Constant name="kxy" dimension="none" value="55.726816"/>
+        <Constant name="gsc" dimension="none" value="40"/>
+        <Constant name="d" dimension="none" value="250"/>
+        <Constant name="pi" dimension="none" value="3.14159265359"/>
+        <Constant name="F" dimension="none" value="96485"/>
+        <Constant name="eca" dimension="none" value="60"/>
+        <Constant name="backgr" dimension="none" value="0.05"/>
+
+
+        <StateVariable name="megl19_egl19" dimension="none"/>
+
+        <Dynamics>
+            <DerivedVariable name="megl19" dimension="none" value="m_egl19" />
+            <DerivedVariable name="V" dimension="none" value="v / VOLT_SCALE"/>
+            <DerivedVariable name="cac_nano" dimension="none" value="backgr"/>
+            <DerivedVariable name="cao_nano" dimension="none" 
+                value="backgr + (1 / (8 * pi * F * d)) * exp(-1 / sqrt(d / (1 / (500e6)))) * abs(gsc * (V - eca))"/>
+            <DerivedVariable name="kcm" dimension="none" value="wom * exp(-wyx * V) / (1 + (cac_nano / kyx)^nxy)"/>
+            <DerivedVariable name="kom" dimension="none" value="wom * exp(-wyx * V) / (1 + (cao_nano / kyx)^nxy)"/>
+            <DerivedVariable name="kop" dimension="none" value="wop * exp(-wxy * V) / (1 + (kxy / cao_nano)^nxy)"/>
+            <DerivedVariable name = "actegl19" dimension = "none" value = "1 / (1 + exp(-(V - va_egl19 + stm19) / ka_egl19))" />
+            <DerivedVariable name = "tactegl19" dimension = "none" value="(pdg1 + (pdg2 * exp(-((V - (pdg3 - stau19))^2) / (pdg4^2))) + (pdg5 * exp(-((V - (pdg6 - stau19))^2) / (pdg7^2))))"/>
+            <DerivedVariable name="alpha1" dimension="none" value="actegl19 / tactegl19"/>
+            <DerivedVariable name="beta1" dimension="none" value="1 / tactegl19 - alpha1"/>
+            <DerivedVariable name="x" dimension="none" exposure="x"
+                value="megl19_egl19 * kop * (alpha1 + beta1 + kcm) / ((kop + kom) * (kcm + alpha1) + beta1 * kcm)"/>
+        </Dynamics>
+    </ComponentType>
+
+    <!-- Activation Time Constant (m_tau) -->
+    <ComponentType name="slo1egl19_m_tau" extends="baseVoltageDepTime">
+        <Constant name="VOLT_SCALE" dimension="voltage" value="1 mV"/>
+        <Constant name="TIME_SCALE" dimension="time" value="1 ms"/>
+
+        <Dynamics>
+            <DerivedVariable name="V" dimension="none" value="v / VOLT_SCALE"/>
+            <DerivedVariable name="cao_nano" dimension="none" 
+                value="backgr + (1 / (8 * pi * F * d)) * exp(-1 / sqrt(d / (1 / (500e6)))) * abs(gsc * (V - eca))"/>
+            <DerivedVariable name="t" dimension="time" exposure="t"
+                value="(alpha1 + beta1 + kcm) / ((kop + kom) * (kcm + alpha1) + beta1 * kcm) * TIME_SCALE"/>
+        </Dynamics>
+    </ComponentType>
+
+</neuroml>

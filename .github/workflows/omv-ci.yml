@@ -17,8 +17,8 @@ jobs:
       fail-fast: false
       matrix:
         python-version: [ 3.9, "3.11" ]
-        engine: [ PyNEURON ]
         runs-on: [ubuntu-latest, macos-latest ]
+        engine: [ PyNEURON, jNeuroML_validate ]
 
     steps:
     - uses: actions/checkout@v4
