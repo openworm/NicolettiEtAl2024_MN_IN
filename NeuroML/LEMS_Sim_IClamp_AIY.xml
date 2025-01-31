@@ -2,7 +2,7 @@
 
     <!-- 
 
-        This LEMS file has been automatically generated using PyNeuroML v1.3.12 (libNeuroML v0.6.5)
+        This LEMS file has been automatically generated using PyNeuroML v1.3.14 (libNeuroML v0.6.5)
 
      -->
 
@@ -13,61 +13,126 @@
     <Include file="Cells.xml"/>
     <Include file="Networks.xml"/>
     <Include file="Simulation.xml"/>
+
     <Include file="PyNN.xml"/>
     <Include file="IClamp_AIY.net.nml"/>
     <Include file="AIY.cell.nml"/>
 
-    <Simulation id="Sim_IClamp_AIY" length="8000.0ms" step="0.025ms" target="IClamp_AIY" seed="12345">  <!-- Note seed: ensures same random numbers used every run -->
-        <Display id="pop_AIY_0_biophys/membraneProperties/leak_chans/gDensity" title="Plots of pop_AIY_0_biophys/membraneProperties/leak_chans/gDensity" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
-            <Line id="pop_AIY_0_AIY_biophys_membraneProperties_leak_chans_gDensity" quantity="pop_AIY/0/AIY/biophys/membraneProperties/leak_chans/gDensity" scale="1" color="#d54f33" timeScale="1ms"/>
-        </Display>
-
-        <Display id="pop_AIY_0_biophys/membraneProperties/leak_chans/iDensity" title="Plots of pop_AIY_0_biophys/membraneProperties/leak_chans/iDensity" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
-            <Line id="pop_AIY_0_AIY_biophys_membraneProperties_leak_chans_iDensity" quantity="pop_AIY/0/AIY/biophys/membraneProperties/leak_chans/iDensity" scale="1" color="#0534e4" timeScale="1ms"/>
-        </Display>
-
+    <Simulation id="Sim_IClamp_AIY" length="11000.0ms" step="0.025ms" target="IClamp_AIY" seed="12345">  <!-- Note seed: ensures same random numbers used every run -->
         <Display id="pop_AIY_0_caConc" title="Plots of pop_AIY_0_caConc" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
-            <Line id="pop_AIY_0_AIY_caConc" quantity="pop_AIY/0/AIY/caConc" scale="1" color="#98e752" timeScale="1ms"/>
+            <Line id="pop_AIY_0_AIY_caConc" quantity="pop_AIY/0/AIY/caConc" scale="1" color="#d54f33" timeScale="1ms"/>
+        </Display>
+
+        <Display id="pop_AIY_10_caConc" title="Plots of pop_AIY_10_caConc" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
+            <Line id="pop_AIY_10_AIY_caConc" quantity="pop_AIY/10/AIY/caConc" scale="1" color="#0534e4" timeScale="1ms"/>
+        </Display>
+
+        <Display id="pop_AIY_1_caConc" title="Plots of pop_AIY_1_caConc" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
+            <Line id="pop_AIY_1_AIY_caConc" quantity="pop_AIY/1/AIY/caConc" scale="1" color="#98e752" timeScale="1ms"/>
+        </Display>
+
+        <Display id="pop_AIY_2_caConc" title="Plots of pop_AIY_2_caConc" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
+            <Line id="pop_AIY_2_AIY_caConc" quantity="pop_AIY/2/AIY/caConc" scale="1" color="#bca074" timeScale="1ms"/>
+        </Display>
+
+        <Display id="pop_AIY_3_caConc" title="Plots of pop_AIY_3_caConc" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
+            <Line id="pop_AIY_3_AIY_caConc" quantity="pop_AIY/3/AIY/caConc" scale="1" color="#632794" timeScale="1ms"/>
+        </Display>
+
+        <Display id="pop_AIY_4_caConc" title="Plots of pop_AIY_4_caConc" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
+            <Line id="pop_AIY_4_AIY_caConc" quantity="pop_AIY/4/AIY/caConc" scale="1" color="#8a5d88" timeScale="1ms"/>
+        </Display>
+
+        <Display id="pop_AIY_5_caConc" title="Plots of pop_AIY_5_caConc" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
+            <Line id="pop_AIY_5_AIY_caConc" quantity="pop_AIY/5/AIY/caConc" scale="1" color="#df5954" timeScale="1ms"/>
+        </Display>
+
+        <Display id="pop_AIY_6_caConc" title="Plots of pop_AIY_6_caConc" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
+            <Line id="pop_AIY_6_AIY_caConc" quantity="pop_AIY/6/AIY/caConc" scale="1" color="#52c8bf" timeScale="1ms"/>
+        </Display>
+
+        <Display id="pop_AIY_7_caConc" title="Plots of pop_AIY_7_caConc" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
+            <Line id="pop_AIY_7_AIY_caConc" quantity="pop_AIY/7/AIY/caConc" scale="1" color="#bf0239" timeScale="1ms"/>
+        </Display>
+
+        <Display id="pop_AIY_8_caConc" title="Plots of pop_AIY_8_caConc" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
+            <Line id="pop_AIY_8_AIY_caConc" quantity="pop_AIY/8/AIY/caConc" scale="1" color="#3f9fe8" timeScale="1ms"/>
+        </Display>
+
+        <Display id="pop_AIY_9_caConc" title="Plots of pop_AIY_9_caConc" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
+            <Line id="pop_AIY_9_AIY_caConc" quantity="pop_AIY/9/AIY/caConc" scale="1" color="#dda9d2" timeScale="1ms"/>
         </Display>
 
         <Display id="pop_AIY_v" title="Plots of pop_AIY_v" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-80" ymax="40">
-            <Line id="pop_AIY_0_AIY_v" quantity="pop_AIY/0/AIY/v" scale="1mV" color="#bca074" timeScale="1ms"/>
-            <Line id="voltage_1" quantity="pop_AIY/1/AIY/v" scale="1mV" color="0 1 0" timeScale="1ms"/>
-            <Line id="voltage_2" quantity="pop_AIY/2/AIY/v" scale="1mV" color="0 0 1" timeScale="1ms"/>
-            <Line id="voltage_3" quantity="pop_AIY/3/AIY/v" scale="1mV" color="1 1 0" timeScale="1ms"/>
-            <Line id="voltage_4" quantity="pop_AIY/4/AIY/v" scale="1mV" color="0 1 1" timeScale="1ms"/>
-            <Line id="voltage_5" quantity="pop_AIY/5/AIY/v" scale="1mV" color="1 0 1" timeScale="1ms"/>
-            <Line id="voltage_6" quantity="pop_AIY/6/AIY/v" scale="1mV" color="0.5 0.5 0.5" timeScale="1ms"/>
-            <Line id="voltage_7" quantity="pop_AIY/7/AIY/v" scale="1mV" color="0.5 0 0.5" timeScale="1ms"/>
-            <Line id="voltage_8" quantity="pop_AIY/8/AIY/v" scale="1mV" color="0.5 0.5 0" timeScale="1ms"/>
-            <Line id="voltage_9" quantity="pop_AIY/9/AIY/v" scale="1mV" color="0 0.5 0.5" timeScale="1ms"/>
-            <Line id="voltage_10" quantity="pop_AIY/10/AIY/v" scale="1mV" color="0.3 0.3 0.3" timeScale="1ms"/>
+            <Line id="pop_AIY_0_AIY_v" quantity="pop_AIY/0/AIY/v" scale="1mV" color="#85ad96" timeScale="1ms"/>
+            <Line id="pop_AIY_1_AIY_v" quantity="pop_AIY/1/AIY/v" scale="1mV" color="#59438f" timeScale="1ms"/>
+            <Line id="pop_AIY_2_AIY_v" quantity="pop_AIY/2/AIY/v" scale="1mV" color="#5fa56f" timeScale="1ms"/>
+            <Line id="pop_AIY_3_AIY_v" quantity="pop_AIY/3/AIY/v" scale="1mV" color="#b5b5a2" timeScale="1ms"/>
+            <Line id="pop_AIY_4_AIY_v" quantity="pop_AIY/4/AIY/v" scale="1mV" color="#2ebe19" timeScale="1ms"/>
+            <Line id="pop_AIY_5_AIY_v" quantity="pop_AIY/5/AIY/v" scale="1mV" color="#d30150" timeScale="1ms"/>
+            <Line id="pop_AIY_6_AIY_v" quantity="pop_AIY/6/AIY/v" scale="1mV" color="#55490a" timeScale="1ms"/>
+            <Line id="pop_AIY_7_AIY_v" quantity="pop_AIY/7/AIY/v" scale="1mV" color="#4bd9d0" timeScale="1ms"/>
+            <Line id="pop_AIY_8_AIY_v" quantity="pop_AIY/8/AIY/v" scale="1mV" color="#69535e" timeScale="1ms"/>
+            <Line id="pop_AIY_9_AIY_v" quantity="pop_AIY/9/AIY/v" scale="1mV" color="#27dae9" timeScale="1ms"/>
+            <Line id="pop_AIY_10_AIY_v" quantity="pop_AIY/10/AIY/v" scale="1mV" color="#6143ed" timeScale="1ms"/>
         </Display>
 
         <OutputFile id="Sim_IClamp_AIY_pop_AIY_v_dat" fileName="Sim_IClamp_AIY.pop_AIY.v.dat">
             <OutputColumn id="pop_AIY_0_AIY_v" quantity="pop_AIY/0/AIY/v"/>
-            <OutputColumn id="voltage_1" quantity="pop_AIY/1/AIY/v"/>
-            <OutputColumn id="voltage_2" quantity="pop_AIY/2/AIY/v"/>
-            <OutputColumn id="voltage_3" quantity="pop_AIY/3/AIY/v"/>
-            <OutputColumn id="voltage_4" quantity="pop_AIY/4/AIY/v"/>
-            <OutputColumn id="voltage_5" quantity="pop_AIY/5/AIY/v"/>
-            <OutputColumn id="voltage_6" quantity="pop_AIY/6/AIY/v"/>
-            <OutputColumn id="voltage_7" quantity="pop_AIY/7/AIY/v"/>
-            <OutputColumn id="voltage_8" quantity="pop_AIY/8/AIY/v"/>
-            <OutputColumn id="voltage_9" quantity="pop_AIY/9/AIY/v"/>
-            <OutputColumn id="voltage_10" quantity="pop_AIY/10/AIY/v"/>
-        </OutputFile>
-
-        <OutputFile id="pop_AIY_0_biophys_membraneProperties_leak_chans_gDensity_dat" fileName="pop_AIY_0.biophys_membraneProperties_leak_chans_gDensity.dat">
-            <OutputColumn id="pop_AIY_0_AIY_biophys_membraneProperties_leak_chans_gDensity" quantity="pop_AIY/0/AIY/biophys/membraneProperties/leak_chans/gDensity"/>
-        </OutputFile>
-
-        <OutputFile id="pop_AIY_0_biophys_membraneProperties_leak_chans_iDensity_dat" fileName="pop_AIY_0.biophys_membraneProperties_leak_chans_iDensity.dat">
-            <OutputColumn id="pop_AIY_0_AIY_biophys_membraneProperties_leak_chans_iDensity" quantity="pop_AIY/0/AIY/biophys/membraneProperties/leak_chans/iDensity"/>
+            <OutputColumn id="pop_AIY_1_AIY_v" quantity="pop_AIY/1/AIY/v"/>
+            <OutputColumn id="pop_AIY_2_AIY_v" quantity="pop_AIY/2/AIY/v"/>
+            <OutputColumn id="pop_AIY_3_AIY_v" quantity="pop_AIY/3/AIY/v"/>
+            <OutputColumn id="pop_AIY_4_AIY_v" quantity="pop_AIY/4/AIY/v"/>
+            <OutputColumn id="pop_AIY_5_AIY_v" quantity="pop_AIY/5/AIY/v"/>
+            <OutputColumn id="pop_AIY_6_AIY_v" quantity="pop_AIY/6/AIY/v"/>
+            <OutputColumn id="pop_AIY_7_AIY_v" quantity="pop_AIY/7/AIY/v"/>
+            <OutputColumn id="pop_AIY_8_AIY_v" quantity="pop_AIY/8/AIY/v"/>
+            <OutputColumn id="pop_AIY_9_AIY_v" quantity="pop_AIY/9/AIY/v"/>
+            <OutputColumn id="pop_AIY_10_AIY_v" quantity="pop_AIY/10/AIY/v"/>
         </OutputFile>
 
         <OutputFile id="pop_AIY_0_caConc_dat" fileName="pop_AIY_0.caConc.dat">
             <OutputColumn id="pop_AIY_0_AIY_caConc" quantity="pop_AIY/0/AIY/caConc"/>
+        </OutputFile>
+
+        <OutputFile id="pop_AIY_1_caConc_dat" fileName="pop_AIY_1.caConc.dat">
+            <OutputColumn id="pop_AIY_1_AIY_caConc" quantity="pop_AIY/1/AIY/caConc"/>
+        </OutputFile>
+
+        <OutputFile id="pop_AIY_10_caConc_dat" fileName="pop_AIY_10.caConc.dat">
+            <OutputColumn id="pop_AIY_10_AIY_caConc" quantity="pop_AIY/10/AIY/caConc"/>
+        </OutputFile>
+
+        <OutputFile id="pop_AIY_2_caConc_dat" fileName="pop_AIY_2.caConc.dat">
+            <OutputColumn id="pop_AIY_2_AIY_caConc" quantity="pop_AIY/2/AIY/caConc"/>
+        </OutputFile>
+
+        <OutputFile id="pop_AIY_3_caConc_dat" fileName="pop_AIY_3.caConc.dat">
+            <OutputColumn id="pop_AIY_3_AIY_caConc" quantity="pop_AIY/3/AIY/caConc"/>
+        </OutputFile>
+
+        <OutputFile id="pop_AIY_4_caConc_dat" fileName="pop_AIY_4.caConc.dat">
+            <OutputColumn id="pop_AIY_4_AIY_caConc" quantity="pop_AIY/4/AIY/caConc"/>
+        </OutputFile>
+
+        <OutputFile id="pop_AIY_5_caConc_dat" fileName="pop_AIY_5.caConc.dat">
+            <OutputColumn id="pop_AIY_5_AIY_caConc" quantity="pop_AIY/5/AIY/caConc"/>
+        </OutputFile>
+
+        <OutputFile id="pop_AIY_6_caConc_dat" fileName="pop_AIY_6.caConc.dat">
+            <OutputColumn id="pop_AIY_6_AIY_caConc" quantity="pop_AIY/6/AIY/caConc"/>
+        </OutputFile>
+
+        <OutputFile id="pop_AIY_7_caConc_dat" fileName="pop_AIY_7.caConc.dat">
+            <OutputColumn id="pop_AIY_7_AIY_caConc" quantity="pop_AIY/7/AIY/caConc"/>
+        </OutputFile>
+
+        <OutputFile id="pop_AIY_8_caConc_dat" fileName="pop_AIY_8.caConc.dat">
+            <OutputColumn id="pop_AIY_8_AIY_caConc" quantity="pop_AIY/8/AIY/caConc"/>
+        </OutputFile>
+
+        <OutputFile id="pop_AIY_9_caConc_dat" fileName="pop_AIY_9.caConc.dat">
+            <OutputColumn id="pop_AIY_9_AIY_caConc" quantity="pop_AIY/9/AIY/caConc"/>
         </OutputFile>
 
     </Simulation>

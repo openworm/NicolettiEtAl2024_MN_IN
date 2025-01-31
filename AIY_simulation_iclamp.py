@@ -75,6 +75,7 @@ def AIY_simulation_iclamp(gAIY_scaled,s1,s2,ns):
 
     print("All parameters used in current clamp:")
     h.psection(sec=soma)
+    h("eca")
     
     for i in numpy.linspace(start=s1, stop=s2, num=ns):
         

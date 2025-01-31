@@ -161,7 +161,7 @@ def create_cell(
 
     # Define a cell
     cell = cell_doc.add(
-        "Cell", id=cell_id, notes="%s cell from Nicoletti et al. 2019" % cell_id
+        "Cell", id=cell_id, notes="%s cell from Nicoletti et al. 2024" % cell_id
     )
     """
         volume_um3 = xpps[cell_id]["parameters"]["vol"]
@@ -196,27 +196,28 @@ def create_cell(
     for channel_id in sorted(channels_to_include):
         density_scaled = (cell_params[channel_id] * 1e-9) / (surf)
 
-        print(cell_params)
-        erev = cell_params["eleak"]
-        ion = "non_specific"
+        if density_scaled > 0:
+            print(cell_params)
+            erev = cell_params["eleak"]
+            ion = "non_specific"
 
-        if channel_id in ["egl19"]:
-            erev = 60
-            ion = "ca"
-        if channel_id in ["irk"]:
-            erev = -80
-            ion = "k"
-        if channel_id in ["nca"]:
-            erev = 30
-        cell.add_channel_density(
-            cell_doc,
-            cd_id="%s_chans" % channel_id,
-            cond_density="%s S_per_cm2" % density_scaled,
-            erev="%smV" % erev,
-            ion=ion,
-            ion_channel="%s" % channel_id,
-            ion_chan_def_file="%s.channel.nml" % channel_id,
-        )
+            if channel_id in ["egl19"]:
+                erev = 60
+                ion = "ca"
+            if channel_id in ["irk"]:
+                erev = -80
+                ion = "k"
+            if channel_id in ["nca"]:
+                erev = 30
+            cell.add_channel_density(
+                cell_doc,
+                cd_id="%s_chans" % channel_id,
+                cond_density="%s S_per_cm2" % density_scaled,
+                erev="%smV" % erev,
+                ion=ion,
+                ion_channel="%s" % channel_id,
+                ion_chan_def_file="%s.channel.nml" % channel_id,
+            )
 
     """
         cell_doc.includes.append(IncludeType(href="CaDynamics.nml"))
@@ -258,10 +259,32 @@ def create_cell(
 if __name__ == "__main__":
     all = {}
 
+    all["AIY"] = {"color": "1 0.5 0"}
+    # surface in cm^2 form neuromorpho AIYL
+    all["AIY"]["cell_params"] = {"surf": 65.89e-8}
+    all["AIY"]["conductances"] = [
+        "leak",
+        "slo1iso",
+        "kqt1",
+        "egl19",
+        "slo1egl19",
+        "nca",
+        "shl1",
+        "eleak",
+        "cm",
+    ]
+    all["AIY"]["g0"] = [0.14, 0, 0, 0.1, 0, 0, 0, -89.57, 1.6]
+    all["AIY"]["g0"] = [0.14, 0, 0, 0, 0, 0, 0, -89.57, 1.6]
+
+    all["VA5"] = {"color": "0 0.5 1"}
+    # surface in cm^2 form neuromorpho VA5L
+    all["VA5"]["cell_params"] = {"surf": 389.3e-8}
+    all["VA5"]["conductances"] = ["egl19", "leak", "irk", "nca", "eleak", "cm"]
+    all["VA5"]["g0"] = [0.104385, 0, 0, 0, -39, 0.859551]
+
     all["AVAL"] = {"color": "0.5 1 1"}
-    all["AVAL"]["cell_params"] = {
-        "surf": 1123.84e-8
-    }  # surface in cm^2 form neuromorpho AIYL
+    # surface in cm^2 form neuromorpho AVAL
+    all["AVAL"]["cell_params"] = {"surf": 1123.84e-8}
     all["AVAL"]["conductances"] = ["egl19", "leak", "irk", "nca", "eleak", "cm"]
     all["AVAL"]["g0"] = [0.104385, 0.150164, 0.1, 0, -39, 0.859551]
 
