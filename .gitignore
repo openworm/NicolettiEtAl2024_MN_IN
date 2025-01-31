@@ -15,3 +15,4 @@ x86_64
 /NeuroML/*.hoc
 /NeuroML/*_nrn.py
 /NeuroML/*.mod
+/AVAR_SIMULATION
