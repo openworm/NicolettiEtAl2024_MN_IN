@@ -7,7 +7,6 @@
 arm64
 x86_64
 /__pycache__
-/AVAR_SIMULATION
 .DS_Store
 /NeuroML/*.dat
 /NeuroML/report.*.txt
@@ -19,3 +18,4 @@ x86_64
 /*.dat
 /report.*.txt
 /NeuroML/.ipynb_checkpoints 
+/AVAR_SIMULATION
