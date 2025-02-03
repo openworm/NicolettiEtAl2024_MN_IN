@@ -153,7 +153,7 @@ def generate_nmllite(
 
 
 def create_cell(
-    cell_id, duration, channels_to_include, conductances, cell_params, color
+    cell_id, duration, channels_to_include, conductances, cell_params, color, vinit=-40
 ):
     # Create the nml file and add the ion channels
     cell_doc = NeuroMLDocument(id=cell_id, notes="A cell from Nicoletti et al. 2024")
@@ -188,7 +188,8 @@ def create_cell(
 
     cell.set_specific_capacitance("%s uF_per_cm2" % (cell_params["cm"]))
 
-    cell.set_init_memb_potential("-40mV")
+    cell.set_init_memb_potential("%smV"%vinit)
+
 
     # This value is not really used as it's a single comp cell model
     cell.set_resistivity("0.1 kohm_cm")
@@ -275,18 +276,21 @@ if __name__ == "__main__":
     ]
     all["AIY"]["g0"] = [0.14, 0, 0, 0.1, 0, 0, 0, -89.57, 1.6]
     all["AIY"]["g0"] = [0.14, 0, 0, 0, 0, 0, 0, -89.57, 1.6]
+    all["AIY"]['vinit'] = -55.2
 
     all["VA5"] = {"color": "0 0.5 1"}
     # surface in cm^2 form neuromorpho VA5L
     all["VA5"]["cell_params"] = {"surf": 389.3e-8}
-    all["VA5"]["conductances"] = ["egl19", "leak", "irk", "nca", "eleak", "cm"]
-    all["VA5"]["g0"] = [0.104385, 0, 0, 0, -39, 0.859551]
+    all["VA5"]["conductances"] = ["slo2egl19", "slo2iso", "egl19", "irk", "shk1", "nca", "leak", "eleak", "cm" ]
+    all["VA5"]["g0"] = [0,0,0,0, 0 ,0,0.1,-70,1.5]
+    all["VA5"]['vinit'] = -75.72
 
     all["AVAL"] = {"color": "0.5 1 1"}
     # surface in cm^2 form neuromorpho AVAL
     all["AVAL"]["cell_params"] = {"surf": 1123.84e-8}
     all["AVAL"]["conductances"] = ["egl19", "leak", "irk", "nca", "eleak", "cm"]
     all["AVAL"]["g0"] = [0.104385, 0.150164, 0.1, 0, -39, 0.859551]
+    all["AVAL"]['vinit'] = -39.37
 
     for cell in all:
         cell_params = all[cell]["cell_params"]
@@ -309,4 +313,5 @@ if __name__ == "__main__":
             conductances=conductances,
             cell_params=cell_params,
             color=all[cell]["color"],
+            vinit=all[cell]["vinit"],
         )
