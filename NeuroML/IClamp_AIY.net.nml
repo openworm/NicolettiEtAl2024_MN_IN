@@ -14,7 +14,7 @@
     <pulseGenerator id="iclamp_stim_31" delay="1000ms" duration="5000ms" amplitude="31pA"/>
     <pulseGenerator id="iclamp_stim_33" delay="1000ms" duration="5000ms" amplitude="33pA"/>
     <pulseGenerator id="iclamp_stim_35" delay="1000ms" duration="5000ms" amplitude="35pA"/>
-    <network id="IClamp_AIY" type="networkWithTemperature" temperature="34.0degC">
+    <network id="IClamp_AIY" type="networkWithTemperature" temperature="6.3degC">
         <notes>A network model: IClamp_AIY</notes>
         <property tag="recommended_dt_ms" value="0.025"/>
         <property tag="recommended_duration_ms" value="11000.0"/>

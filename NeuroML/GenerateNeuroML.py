@@ -71,7 +71,7 @@ def generate_nmllite(
         reference,
         duration,
         dt=0.025,  # ms
-        temperature=34,  # degC
+        temperature=6.3,  # degC
         default_region="Worm",
         parameters=parameters,
         cell_for_default_population=cell_nmll,
