@@ -67,13 +67,16 @@ def VA5_simulation_iclamp(gVA5_scaled,s1,s2,ns, delay=5000, duration=1000, simdu
     stim.dur=duration
     
     v_vec = h.Vector()   
+    ca_vec = h.Vector()   
     t_vec = h.Vector()        # Time stamp vector
     v_vec.record(soma(0.5)._ref_v)
+    ca_vec.record(soma(0.5)._ref_cai)
     t_vec.record(h._ref_t)
 
     simdur =simdur
 
     ref_v=[]
+    ref_ca=[]
     ref_t=[]
 
     print("All parameters used in current clamp:")
@@ -96,12 +99,17 @@ def VA5_simulation_iclamp(gVA5_scaled,s1,s2,ns, delay=5000, duration=1000, simdu
          ref_v_vec=numpy.zeros_like(v_vec)
          v_vec.to_python(ref_v_vec)
          ref_v.append(ref_v_vec)
+
+         ref_ca_vec=numpy.zeros_like(ca_vec)
+         ca_vec.to_python(ref_ca_vec)
+         ref_ca.append(ref_ca_vec)
             
             # total current calculation
             
             
     v=[]
     v=numpy.array(list(ref_v))
+    ca1=numpy.array(list(ref_ca))
     time1=numpy.array(ref_t)
     
 
@@ -110,6 +118,7 @@ def VA5_simulation_iclamp(gVA5_scaled,s1,s2,ns, delay=5000, duration=1000, simdu
     resc_max=numpy.amax(resc_ind)
     v_normalized=v[:,resc_min:resc_max]
     time=time1[:,resc_min:resc_max]-4900
+    ca=ca1[:,resc_min:resc_max]-4900
     
     
     ## CALCULATION OF STEADY-STATE CURRENT-VOLATGE RELATION
@@ -135,7 +144,7 @@ def VA5_simulation_iclamp(gVA5_scaled,s1,s2,ns, delay=5000, duration=1000, simdu
     #         peak=numpy.amax(v_normalized[j,ind2_min:ind2_max])
     #     iv_peak.append(peak)
 
-    return v_normalized, time 
+    return v_normalized, time, ca
     
         
 

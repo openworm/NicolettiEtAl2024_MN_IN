@@ -11,6 +11,9 @@ import sympy
 from sympy.parsing.sympy_parser import parse_expr
 import math
 
+CELLS_WITH_CA_DYNAMICS = ["VA5"]
+CA_MECHANISMS = ["cadiff"]
+
 
 def generate_nmllite(
     cell,
@@ -107,7 +110,9 @@ def generate_nmllite(
 
     net.to_json_file()
 
-    sim.record_variables = {"caConc": {net.populations[0].id: "*"}}
+    if cell_id in CELLS_WITH_CA_DYNAMICS:
+        sim.record_variables = {"caConc": {net.populations[0].id: "*"}}
+
     """
     for c in channels_to_include:
         not_on_rmd = ["kvs1", "kqt3", "egl2"]
@@ -188,8 +193,7 @@ def create_cell(
 
     cell.set_specific_capacitance("%s uF_per_cm2" % (cell_params["cm"]))
 
-    cell.set_init_memb_potential("%smV"%vinit)
-
+    cell.set_init_memb_potential("%smV" % vinit)
 
     # This value is not really used as it's a single comp cell model
     cell.set_resistivity("0.1 kohm_cm")
@@ -220,7 +224,7 @@ def create_cell(
                 ion_chan_def_file="%s.channel.nml" % channel_id,
             )
 
-    """
+    if cell_id in CELLS_WITH_CA_DYNAMICS:
         cell_doc.includes.append(IncludeType(href="CaDynamics.nml"))
         # <species id="ca" ion="ca" concentrationModel="CaDynamics" initialConcentration="1e-4 mM" initialExtConcentration="2 mM"/>
         species = component_factory(
@@ -228,11 +232,11 @@ def create_cell(
             id="ca",
             ion="ca",
             concentration_model="CaDynamics_%s" % cell_id,
-            initial_concentration="5e-5 mM",
+            initial_concentration=".0001 mM",
             initial_ext_concentration="2 mM",
         )
 
-        cell.biophysical_properties.intracellular_properties.add(species)"""
+        cell.biophysical_properties.intracellular_properties.add(species)
 
     cell.info(show_contents=True)
 
@@ -276,21 +280,31 @@ if __name__ == "__main__":
     ]
     all["AIY"]["g0"] = [0.14, 0, 0, 0.1, 0, 0, 0, -89.57, 1.6]
     all["AIY"]["g0"] = [0.14, 0, 0, 0, 0, 0, 0, -89.57, 1.6]
-    all["AIY"]['vinit'] = -55.2
+    all["AIY"]["vinit"] = -55.2
 
     all["VA5"] = {"color": "0 0.5 1"}
     # surface in cm^2 form neuromorpho VA5L
     all["VA5"]["cell_params"] = {"surf": 389.3e-8}
-    all["VA5"]["conductances"] = ["slo2egl19", "slo2iso", "egl19", "irk", "shk1", "nca", "leak", "eleak", "cm" ]
-    all["VA5"]["g0"] = [0,0,0,0, 0 ,0,0.1,-70,1.5]
-    all["VA5"]['vinit'] = -75.72
+    all["VA5"]["conductances"] = [
+        "slo2egl19",
+        "slo2iso",
+        "egl19",
+        "irk",
+        "shk1",
+        "nca",
+        "leak",
+        "eleak",
+        "cm",
+    ]
+    all["VA5"]["g0"] = [0, 0, 0.15, 0, 0, 0, 0.1, -70, 1.5]
+    all["VA5"]["vinit"] = -75.72
 
     all["AVAL"] = {"color": "0.5 1 1"}
     # surface in cm^2 form neuromorpho AVAL
     all["AVAL"]["cell_params"] = {"surf": 1123.84e-8}
     all["AVAL"]["conductances"] = ["egl19", "leak", "irk", "nca", "eleak", "cm"]
     all["AVAL"]["g0"] = [0.104385, 0.150164, 0.1, 0, -39, 0.859551]
-    all["AVAL"]['vinit'] = -39.37
+    all["AVAL"]["vinit"] = -39.37
 
     for cell in all:
         cell_params = all[cell]["cell_params"]
