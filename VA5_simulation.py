@@ -46,15 +46,15 @@ best_ca=best_cc[2]
 with open(os.path.join(path, 'CurrentClamp.dat'),'w') as f:
     t = best_time2[0]
     for i in range(len(t)):
-        f.write(f'{t[i]}')
+        f.write(f'{t[i]/1000}')  # in seconds
         for j in range(len(best_voltage)):
-            f.write(f' \t{best_voltage[j][i]}')
+            f.write(f' \t{best_voltage[j][i]/1000}') # in volts
         f.write('\n')
 # Save [Ca2+] traces in a format to allow tests and comparison to NeuroML data
 with open(os.path.join(path, 'CaConc.dat'),'w') as f:
     t = best_time2[0]
     for i in range(len(t)):
-        f.write(f'{t[i]}')
+        f.write(f'{t[i]/1000}')
         for j in range(len(best_ca)):
             f.write(f' \t{best_ca[j][i]}')
         f.write('\n')

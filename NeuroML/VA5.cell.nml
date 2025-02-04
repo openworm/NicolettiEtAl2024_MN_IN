@@ -21,8 +21,8 @@
         </morphology>
         <biophysicalProperties id="biophys">
             <membraneProperties>
-                <channelDensity id="egl19_chans" ionChannel="egl19" condDensity="3.8530696121243255e-05 S_per_cm2" erev="60mV" ion="ca"/>
                 <channelDensity id="leak_chans" ionChannel="leak" condDensity="2.568713074749551e-05 S_per_cm2" erev="-70mV" ion="non_specific"/>
+                <channelDensityNernst id="egl19_chans" ionChannel="egl19" condDensity="3.8530696121243255e-05 S_per_cm2" ion="ca"/>
                 <spikeThresh value="0mV"/>
                 <specificCapacitance value="1.5 uF_per_cm2"/>
                 <initMembPotential value="-75.72mV"/>

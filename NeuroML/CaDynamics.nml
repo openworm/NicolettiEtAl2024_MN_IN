@@ -6,15 +6,18 @@
 
     <notes>NeuroML 2 implementation of the Ca Pool mechanism</notes>
     
-    <concentrationModel id="CaDynamics_VA5" type="cadiff" minCai="0.0001 mM" t_ca="1 ms" ion="ca" vol="0.1 um3"/>
+    <concentrationModel id="CaDynamics_VA5" type="cadiff" minCai="0.0001 mM" beta="1 per_ms" depth=".1 um" ion="ca"/>
 
     <ComponentType name="cadiff" extends="concentrationModel" description="Model of internal [Ca2+] specific to Nicoletti Et Al 2024">
 
-        <Parameter name="t_ca" dimension="time"/>
-        <Parameter name="vol" dimension="volume"/>
+        <Parameter name="beta" dimension="per_time"/>
+        <Parameter name="depth" dimension="length"/>
         <Parameter name="minCai" dimension="concentration"/>
        
         <Constant name="Faraday" dimension="charge_per_mole" value="96485.3C_per_mol"/>
+        
+        <Constant name="AREA_SCALE" dimension="area" value="1m2"/>
+        <Constant name="LENGTH_SCALE" dimension="length" value="1m"/>
 
         <Requirement name="iCa" dimension="current"/>
 
@@ -25,8 +28,9 @@
             <StateVariable name="concentration" exposure="concentration" dimension="concentration"/>
             <StateVariable name="extConcentration" exposure="extConcentration" dimension="concentration"/>
 
+            <DerivedVariable name="currDensCa" dimension="currentDensity" value="iCa / surfaceArea"/>
 
-            <TimeDerivative variable="concentration" value="(iCa/(2*Faraday*vol)) - ((concentration - minCai) / t_ca)"/>
+            <TimeDerivative variable="concentration" value="(currDensCa/(2*Faraday*depth)) - ((concentration - minCai) * beta)"/>
 
             <OnCondition test="concentration .lt. minCai">
                 <StateAssignment variable="concentration" value="minCai"/>

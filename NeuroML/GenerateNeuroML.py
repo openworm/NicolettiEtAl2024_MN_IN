@@ -62,8 +62,8 @@ def generate_nmllite(
             neuroml2_input="PoissonFiringSynapse",
             parameters={
                 "average_rate": "average_rate",
-                "synapse": syn_exc.id,
-                "spike_target": "./%s" % syn_exc.id,
+                "synapse": "???",  # syn_exc.id,
+                "spike_target": "./%s" % "???",  # syn_exc.id,
             },
         )
 
@@ -214,15 +214,35 @@ def create_cell(
                 ion = "k"
             if channel_id in ["nca"]:
                 erev = 30
-            cell.add_channel_density(
-                cell_doc,
-                cd_id="%s_chans" % channel_id,
-                cond_density="%s S_per_cm2" % density_scaled,
-                erev="%smV" % erev,
-                ion=ion,
-                ion_channel="%s" % channel_id,
-                ion_chan_def_file="%s.channel.nml" % channel_id,
-            )
+
+            if cell_id in CELLS_WITH_CA_DYNAMICS and ion == "ca":
+
+                from neuroml import ChannelDensityNernst
+                from neuroml.utils import component_factory
+
+                cd_nernst = component_factory(
+                    ChannelDensityNernst,
+                    id="%s_chans" % channel_id,
+                    ion_channel="%s" % channel_id,
+                    cond_density="%s S_per_cm2" % density_scaled,
+                    ion=ion,
+                )
+                mp = cell.biophysical_properties.membrane_properties
+                print(dir(mp))
+                mp.channel_density_nernsts.append(cd_nernst)
+
+                cell_doc.includes.append(IncludeType(href="%s.channel.nml" % channel_id))
+
+            else:
+                cell.add_channel_density(
+                    cell_doc,
+                    cd_id="%s_chans" % channel_id,
+                    cond_density="%s S_per_cm2" % density_scaled,
+                    erev="%smV" % erev,
+                    ion=ion,
+                    ion_channel="%s" % channel_id,
+                    ion_chan_def_file="%s.channel.nml" % channel_id,
+                )
 
     if cell_id in CELLS_WITH_CA_DYNAMICS:
         cell_doc.includes.append(IncludeType(href="CaDynamics.nml"))

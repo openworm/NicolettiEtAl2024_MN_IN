@@ -2,7 +2,7 @@
 # M. Nicoletti et al. PloS ONE, 19(3): e0298105.
 # https://doi.org/10.1371/journal.pone.0298105
 
-def VA5_simulation_iclamp(gVA5_scaled,s1,s2,ns, delay=5000, duration=1000, simdur =7000):
+def VA5_simulation_iclamp(gVA5_scaled,s1,s2,ns, delay=5000, duration=1000, simdur =7000, transient=4900):
     
  
     from neuron import h,gui
@@ -67,16 +67,16 @@ def VA5_simulation_iclamp(gVA5_scaled,s1,s2,ns, delay=5000, duration=1000, simdu
     stim.dur=duration
     
     v_vec = h.Vector()   
-    ca_vec = h.Vector()   
+    cai_vec = h.Vector()   
     t_vec = h.Vector()        # Time stamp vector
     v_vec.record(soma(0.5)._ref_v)
-    ca_vec.record(soma(0.5)._ref_cai)
+    cai_vec.record(soma(0.5)._ref_cai)
     t_vec.record(h._ref_t)
 
     simdur =simdur
 
     ref_v=[]
-    ref_ca=[]
+    ref_cai=[]
     ref_t=[]
 
     print("All parameters used in current clamp:")
@@ -100,25 +100,25 @@ def VA5_simulation_iclamp(gVA5_scaled,s1,s2,ns, delay=5000, duration=1000, simdu
          v_vec.to_python(ref_v_vec)
          ref_v.append(ref_v_vec)
 
-         ref_ca_vec=numpy.zeros_like(ca_vec)
-         ca_vec.to_python(ref_ca_vec)
-         ref_ca.append(ref_ca_vec)
+         ref_cai_vec=numpy.zeros_like(cai_vec)
+         cai_vec.to_python(ref_cai_vec)
+         ref_cai.append(ref_cai_vec)
             
             # total current calculation
             
             
     v=[]
     v=numpy.array(list(ref_v))
-    ca1=numpy.array(list(ref_ca))
+    ca1=numpy.array(list(ref_cai))
     time1=numpy.array(ref_t)
     
 
-    resc_ind=numpy.where(time1[1,:]>=4900)
+    resc_ind=numpy.where(time1[1,:]>=transient)
     resc_min=numpy.amin(resc_ind)
     resc_max=numpy.amax(resc_ind)
     v_normalized=v[:,resc_min:resc_max]
-    time=time1[:,resc_min:resc_max]-4900
-    ca=ca1[:,resc_min:resc_max]-4900
+    time=time1[:,resc_min:resc_max]-transient
+    ca=ca1[:,resc_min:resc_max]
     
     
     ## CALCULATION OF STEADY-STATE CURRENT-VOLATGE RELATION
@@ -144,7 +144,7 @@ def VA5_simulation_iclamp(gVA5_scaled,s1,s2,ns, delay=5000, duration=1000, simdu
     #         peak=numpy.amax(v_normalized[j,ind2_min:ind2_max])
     #     iv_peak.append(peak)
 
-    return v_normalized, time, ca
+    return v_normalized, time, ca, soma, stim
     
         
 
