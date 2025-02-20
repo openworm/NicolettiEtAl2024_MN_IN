@@ -216,7 +216,6 @@ def create_cell(
                 erev = 30
 
             if cell_id in CELLS_WITH_CA_DYNAMICS and ion == "ca":
-
                 from neuroml import ChannelDensityNernst
                 from neuroml.utils import component_factory
 
@@ -231,7 +230,9 @@ def create_cell(
                 print(dir(mp))
                 mp.channel_density_nernsts.append(cd_nernst)
 
-                cell_doc.includes.append(IncludeType(href="%s.channel.nml" % channel_id))
+                cell_doc.includes.append(
+                    IncludeType(href="%s.channel.nml" % channel_id)
+                )
 
             else:
                 cell.add_channel_density(

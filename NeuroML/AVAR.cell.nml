@@ -25,7 +25,7 @@
             <membraneProperties>
                 <channelDensity id="leak_chans" ionChannel="leak" condDensity="2.00772872e-05 S_per_cm2" erev="-37mV" ion="non_specific"/>
                 <channelDensity id="unc103_chans" ionChannel="unc103" condDensity="4.29375373e-06 S_per_cm2" erev="-80mV" ion="k"/>
-                <channelDensity id="irk_chans" ionChannel="irk" condDensity="3.75105858e-06 S_per_cm2" erev="-80mV" ion="k"/> --> 
+                <channelDensity id="irk_chans" ionChannel="irk" condDensity="3.75105858e-06 S_per_cm2" erev="-80mV" ion="k"/>
                 <channelDensity id="egl19_chans" ionChannel="egl19" condDensity="5.73522674e-06 S_per_cm2" erev="60mV" ion="ca"/>  
                <channelDensity id="nca_chans" ionChannel="nca" condDensity="4.39793544e-06 S_per_cm2" erev="30mV" ion="non_specific"/>  
                 <spikeThresh value="0mV"/>
