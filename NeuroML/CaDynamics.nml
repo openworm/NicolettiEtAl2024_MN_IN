@@ -6,7 +6,7 @@
 
     <notes>NeuroML 2 implementation of the Ca Pool mechanism</notes>
     
-    <concentrationModel id="CaDynamics_VA5" type="cadiff" minCai="0.0001 mM" beta="1 per_ms" depth=".1 um" ion="ca"/>
+    <concentrationModel id="CaDynamics_VA5" type="cadiff" minCai="0.0001 mM" beta="1 per_ms" depth=".10 um" ion="ca"/>
 
     <ComponentType name="cadiff" extends="concentrationModel" description="Model of internal [Ca2+] specific to Nicoletti Et Al 2024">
 
@@ -14,8 +14,8 @@
         <Parameter name="depth" dimension="length"/>
         <Parameter name="minCai" dimension="concentration"/>
        
-        <Constant name="Faraday" dimension="charge_per_mole" value="96485.3C_per_mol"/>
-        
+        <Constant name="Faraday" dimension="charge_per_mole" value="96485 C_per_mol"/>
+
         <Constant name="AREA_SCALE" dimension="area" value="1m2"/>
         <Constant name="LENGTH_SCALE" dimension="length" value="1m"/>
 
@@ -26,19 +26,23 @@
         <Dynamics>
 
             <StateVariable name="concentration" exposure="concentration" dimension="concentration"/>
-            <StateVariable name="extConcentration" exposure="extConcentration" dimension="concentration"/>
+            <StateVariable name="extConcentration" exposure="extConcentration" dimension="concentration"/> 
 
             <DerivedVariable name="currDensCa" dimension="currentDensity" value="iCa / surfaceArea"/>
 
-            <TimeDerivative variable="concentration" value="(currDensCa/(2*Faraday*depth)) - ((concentration - minCai) * beta)"/>
+              <TimeDerivative variable="concentration" value="(currDensCa/(2*Faraday*depth)) - (concentration * beta)"/> 
+              
 
             <OnCondition test="concentration .lt. minCai">
                 <StateAssignment variable="concentration" value="minCai"/>
+        
+
             </OnCondition>
 
             <OnStart>
                 <StateAssignment variable="concentration" value="initialConcentration"/>
                 <StateAssignment variable="extConcentration" value="initialExtConcentration"/>
+           
             </OnStart>
 
         </Dynamics>
