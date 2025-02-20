@@ -1,14 +1,8 @@
 from neuroml import NeuroMLDocument
-from neuroml.utils import component_factory
 
 from pyneuroml import pynml
-from pyneuroml.xppaut import parse_script
-from pprint import pprint
 
-from neuroml import GateHHRates
 from neuroml import IncludeType
-import sympy
-from sympy.parsing.sympy_parser import parse_expr
 import math
 
 CELLS_WITH_CA_DYNAMICS = ["VA5"]
