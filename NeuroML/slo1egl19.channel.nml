@@ -2,12 +2,16 @@
     <notes>An ion channel from cell AIY from Nicoletti et al. 2024</notes>
 
     <ionChannelHH id="slo1egl19" species="k" conductance="10 pS">
-        
+    
+    
+
         <gate id="m" instances="1" type="gateHHtauInf">
             <timeCourse type="slo1_m_tau"/>
             <steadyState type="slo1_m_inf"/>
         </gate>
         
+      
+    
         <gate id="h" instances="1" type="gateHHtauInf">
             <timeCourse type="slo1_h_tau"/>
             <steadyState type="slo1_h_inf"/>
