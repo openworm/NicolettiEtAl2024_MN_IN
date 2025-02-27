@@ -14,8 +14,9 @@ from VD5_simulation_vclamp import VD5_simulation_vc
 from g_to_Scm2 import gScm2
 
 
-os.mkdir('VD5_SIMULATION')
 path='VD5_SIMULATION'
+if not os.path.isdir(path):
+    os.mkdir(path)
 
 
 v=numpy.linspace(start=-60, stop=70, num=14)
@@ -74,34 +75,47 @@ numpy.savetxt(path8, best_voltage, delimiter="," , fmt="%s")
 numpy.savetxt(path9, best_time2, delimiter=", " , fmt="%s")
 
 
-fig3=pyplot.figure(figsize=(8,4))
-for i in range(0,14):
- curr_plot=pyplot.plot(best_time[i],best_current[i],color='red',label='optimized')
-pyplot.xlabel('Time [ms]')
-pyplot.ylabel('I [pA]')
-pyplot.title('Voltage Clamp')
-pyplot.show()
+# Save current clamp traces in a format to allow tests and comparison to NeuroML data
+with open(os.path.join(path, 'CurrentClamp.dat'),'w') as f:
+    t = best_time2[0]
+    for i in range(len(t)):
+        f.write(f'{t[i]}')
+        for j in range(len(best_voltage)):
+            f.write(f' \t{best_voltage[j][i]}')
+        f.write('\n')
+
+
+import sys
+if not '-nogui' in sys.argv:
+            
+      fig3=pyplot.figure(figsize=(8,4))
+      for i in range(0,14):
+            curr_plot=pyplot.plot(best_time[i],best_current[i],color='red',label='optimized')
+      pyplot.xlabel('Time [ms]')
+      pyplot.ylabel('I [pA]')
+      pyplot.title('Voltage Clamp')
+      pyplot.show()
 
 
 
 
-fig4=pyplot.figure(figsize=(8,4))
-for i in range(0,7):
-      volt_plot=pyplot.plot(best_time2[i],best_voltage[i],color='red',label='optimized')     
-pyplot.xlabel('Time [ms]')
-pyplot.ylabel('V [mV]')
-pyplot.title('Current Clamp')
-pyplot.show()
+      fig4=pyplot.figure(figsize=(8,4))
+      for i in range(0,7):
+            volt_plot=pyplot.plot(best_time2[i],best_voltage[i],color='red',label='optimized')     
+      pyplot.xlabel('Time [ms]')
+      pyplot.ylabel('V [mV]')
+      pyplot.title('Current Clamp')
+      pyplot.show()
 
 
-fig=pyplot.figure(figsize=(8,4))
-iv_plot=pyplot.plot(v,best_iv,color='red',marker='+',markersize=15,label='OPT-SS')
-pyplot.xlabel('V [mV]')
-pyplot.ylabel('I [pA]')
-pyplot.xlim(-130,120)
-fig.legend(loc=5)
-pyplot.title('IV steady state')
-pyplot.show()
+      fig=pyplot.figure(figsize=(8,4))
+      iv_plot=pyplot.plot(v,best_iv,color='red',marker='+',markersize=15,label='OPT-SS')
+      pyplot.xlabel('V [mV]')
+      pyplot.ylabel('I [pA]')
+      pyplot.xlim(-130,120)
+      fig.legend(loc=5)
+      pyplot.title('IV steady state')
+      pyplot.show()
 
 
 

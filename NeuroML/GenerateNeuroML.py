@@ -1,15 +1,12 @@
 from neuroml import NeuroMLDocument
-from neuroml.utils import component_factory
 
 from pyneuroml import pynml
-from pyneuroml.xppaut import parse_script
-from pprint import pprint
 
-from neuroml import GateHHRates
 from neuroml import IncludeType
-import sympy
-from sympy.parsing.sympy_parser import parse_expr
 import math
+
+CELLS_WITH_CA_DYNAMICS = ["VA5"]
+CA_MECHANISMS = ["cadiff"]
 
 
 def generate_nmllite(
@@ -59,8 +56,8 @@ def generate_nmllite(
             neuroml2_input="PoissonFiringSynapse",
             parameters={
                 "average_rate": "average_rate",
-                "synapse": syn_exc.id,
-                "spike_target": "./%s" % syn_exc.id,
+                "synapse": "???",  # syn_exc.id,
+                "spike_target": "./%s" % "???",  # syn_exc.id,
             },
         )
 
@@ -68,7 +65,7 @@ def generate_nmllite(
         reference,
         duration,
         dt=0.025,  # ms
-        temperature=34,  # degC
+        temperature=6.3,  # degC
         default_region="Worm",
         parameters=parameters,
         cell_for_default_population=cell_nmll,
@@ -107,7 +104,9 @@ def generate_nmllite(
 
     net.to_json_file()
 
-    sim.record_variables = {"caConc": {net.populations[0].id: "*"}}
+    if cell_id in CELLS_WITH_CA_DYNAMICS:
+        sim.record_variables = {"caConc": {net.populations[0].id: "*"}}
+
     """
     for c in channels_to_include:
         not_on_rmd = ["kvs1", "kqt3", "egl2"]
@@ -153,7 +152,7 @@ def generate_nmllite(
 
 
 def create_cell(
-    cell_id, duration, channels_to_include, conductances, cell_params, color
+    cell_id, duration, channels_to_include, conductances, cell_params, color, vinit=-40
 ):
     # Create the nml file and add the ion channels
     cell_doc = NeuroMLDocument(id=cell_id, notes="A cell from Nicoletti et al. 2024")
@@ -161,7 +160,7 @@ def create_cell(
 
     # Define a cell
     cell = cell_doc.add(
-        "Cell", id=cell_id, notes="%s cell from Nicoletti et al. 2019" % cell_id
+        "Cell", id=cell_id, notes="%s cell from Nicoletti et al. 2024" % cell_id
     )
     """
         volume_um3 = xpps[cell_id]["parameters"]["vol"]
@@ -188,7 +187,7 @@ def create_cell(
 
     cell.set_specific_capacitance("%s uF_per_cm2" % (cell_params["cm"]))
 
-    cell.set_init_memb_potential("-40mV")
+    cell.set_init_memb_potential("%smV" % vinit)
 
     # This value is not really used as it's a single comp cell model
     cell.set_resistivity("0.1 kohm_cm")
@@ -196,29 +195,51 @@ def create_cell(
     for channel_id in sorted(channels_to_include):
         density_scaled = (cell_params[channel_id] * 1e-9) / (surf)
 
-        print(cell_params)
-        erev = cell_params["eleak"]
-        ion = "non_specific"
+        if density_scaled > 0:
+            print(cell_params)
+            erev = cell_params["eleak"]
+            ion = "non_specific"
 
-        if channel_id in ["egl19"]:
-            erev = 60
-            ion = "ca"
-        if channel_id in ["irk"]:
-            erev = -80
-            ion = "k"
-        if channel_id in ["nca"]:
-            erev = 30
-        cell.add_channel_density(
-            cell_doc,
-            cd_id="%s_chans" % channel_id,
-            cond_density="%s S_per_cm2" % density_scaled,
-            erev="%smV" % erev,
-            ion=ion,
-            ion_channel="%s" % channel_id,
-            ion_chan_def_file="%s.channel.nml" % channel_id,
-        )
+            if channel_id in ["egl19"]:
+                erev = 60
+                ion = "ca"
+            if channel_id in ["irk"]:
+                erev = -80
+                ion = "k"
+            if channel_id in ["nca"]:
+                erev = 30
 
-    """
+            if cell_id in CELLS_WITH_CA_DYNAMICS and ion == "ca":
+                from neuroml import ChannelDensityNernst
+                from neuroml.utils import component_factory
+
+                cd_nernst = component_factory(
+                    ChannelDensityNernst,
+                    id="%s_chans" % channel_id,
+                    ion_channel="%s" % channel_id,
+                    cond_density="%s S_per_cm2" % density_scaled,
+                    ion=ion,
+                )
+                mp = cell.biophysical_properties.membrane_properties
+                print(dir(mp))
+                mp.channel_density_nernsts.append(cd_nernst)
+
+                cell_doc.includes.append(
+                    IncludeType(href="%s.channel.nml" % channel_id)
+                )
+
+            else:
+                cell.add_channel_density(
+                    cell_doc,
+                    cd_id="%s_chans" % channel_id,
+                    cond_density="%s S_per_cm2" % density_scaled,
+                    erev="%smV" % erev,
+                    ion=ion,
+                    ion_channel="%s" % channel_id,
+                    ion_chan_def_file="%s.channel.nml" % channel_id,
+                )
+
+    if cell_id in CELLS_WITH_CA_DYNAMICS:
         cell_doc.includes.append(IncludeType(href="CaDynamics.nml"))
         # <species id="ca" ion="ca" concentrationModel="CaDynamics" initialConcentration="1e-4 mM" initialExtConcentration="2 mM"/>
         species = component_factory(
@@ -226,11 +247,11 @@ def create_cell(
             id="ca",
             ion="ca",
             concentration_model="CaDynamics_%s" % cell_id,
-            initial_concentration="5e-5 mM",
+            initial_concentration=".0001 mM",
             initial_ext_concentration="2 mM",
         )
 
-        cell.biophysical_properties.intracellular_properties.add(species)"""
+        cell.biophysical_properties.intracellular_properties.add(species)
 
     cell.info(show_contents=True)
 
@@ -258,12 +279,47 @@ def create_cell(
 if __name__ == "__main__":
     all = {}
 
+    all["AIY"] = {"color": "1 0.5 0"}
+    # surface in cm^2 form neuromorpho AIYL
+    all["AIY"]["cell_params"] = {"surf": 65.89e-8}
+    all["AIY"]["conductances"] = [
+        "leak",
+        "slo1iso",
+        "kqt1",
+        "egl19",
+        "slo1egl19",
+        "nca",
+        "shl1",
+        "eleak",
+        "cm",
+    ]
+    all["AIY"]["g0"] = [0.14, 0, 0, 0.1, 0, 0, 0, -89.57, 1.6]
+    all["AIY"]["g0"] = [0.14, 0, 0, 0, 0, 0, 0, -89.57, 1.6]
+    all["AIY"]["vinit"] = -55.2
+
+    all["VA5"] = {"color": "0 0.5 1"}
+    # surface in cm^2 form neuromorpho VA5L
+    all["VA5"]["cell_params"] = {"surf": 389.3e-8}
+    all["VA5"]["conductances"] = [
+        "slo2egl19",
+        "slo2iso",
+        "egl19",
+        "irk",
+        "shk1",
+        "nca",
+        "leak",
+        "eleak",
+        "cm",
+    ]
+    all["VA5"]["g0"] = [0, 0, 0.15, 0, 0, 0, 0.1, -70, 1.5]
+    all["VA5"]["vinit"] = -75.72
+
     all["AVAL"] = {"color": "0.5 1 1"}
-    all["AVAL"]["cell_params"] = {
-        "surf": 1123.84e-8
-    }  # surface in cm^2 form neuromorpho AIYL
+    # surface in cm^2 form neuromorpho AVAL
+    all["AVAL"]["cell_params"] = {"surf": 1123.84e-8}
     all["AVAL"]["conductances"] = ["egl19", "leak", "irk", "nca", "eleak", "cm"]
     all["AVAL"]["g0"] = [0.104385, 0.150164, 0.1, 0, -39, 0.859551]
+    all["AVAL"]["vinit"] = -39.37
 
     for cell in all:
         cell_params = all[cell]["cell_params"]
@@ -286,4 +342,5 @@ if __name__ == "__main__":
             conductances=conductances,
             cell_params=cell_params,
             color=all[cell]["color"],
+            vinit=all[cell]["vinit"],
         )

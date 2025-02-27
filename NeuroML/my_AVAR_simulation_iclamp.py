@@ -4,7 +4,7 @@
 
 
 def AVAR_simulation_iclamp(gAVA_scaled, s1, s2, ns):
-    from neuron import h, gui
+    from neuron import h
     import numpy
     import math
 

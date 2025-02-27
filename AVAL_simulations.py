@@ -14,8 +14,9 @@ from AVAL_simulation_iclamp import AVA_simulation_iclamp
 from AVAL_simulation_vclamp import AVA_simulation_vc
 from g_to_Scm2 import gScm2
 
-os.mkdir('AVAL_SIMULATION')
 path='AVAL_SIMULATION'
+if not os.path.isdir(path):
+    os.mkdir(path)
 
 
 v=numpy.linspace(start=-110, stop=50, num=17)
@@ -79,45 +80,56 @@ numpy.savetxt(path6, best_iv, delimiter=", " , fmt="%s")
 numpy.savetxt(path7, best_iv_peak, delimiter=", " , fmt="%s")
 
 
-fig4=pyplot.figure(figsize=(8,4))
-for i in range(0,7):
- volt_plot=pyplot.plot(best_time2[i],best_voltage[i],color='red',linestyle='solid')
-pyplot.xlabel('Time [ms]')
-pyplot.ylabel('V [mV]')
-pyplot.title('Current_Clamp')
-pyplot.show()
+# Save current clamp traces in a format to allow tests and comparison to NeuroML data
+with open(os.path.join(path, 'CurrentClamp.dat'),'w') as f:
+    t = best_time2[0]
+    for i in range(len(t)):
+        f.write(f'{t[i]}')
+        for j in range(len(best_voltage)):
+            f.write(f' \t{best_voltage[j][i]}')
+        f.write('\n')
+
+import sys
+if not '-nogui' in sys.argv:
+    fig4=pyplot.figure(figsize=(8,4))
+    for i in range(0,7):
+        volt_plot=pyplot.plot(best_time2[i],best_voltage[i],color='red',linestyle='solid')
+    pyplot.xlabel('Time [ms]')
+    pyplot.ylabel('V [mV]')
+    pyplot.title('Current_Clamp')
+    #pyplot.show()
 
 
 
 
-fig3=pyplot.figure(figsize=(8,4))
-for i in range(0,17):
- curr_plot=pyplot.plot(best_time[i],best_current[i],color='red',linestyle='solid')
-pyplot.xlabel('Time [ms]')
-pyplot.ylabel('I [pA]')
-pyplot.title('Voltage clamp')
-pyplot.show()
+    fig3=pyplot.figure(figsize=(8,4))
+    for i in range(0,17):
+        curr_plot=pyplot.plot(best_time[i],best_current[i],color='red',linestyle='solid')
+    pyplot.xlabel('Time [ms]')
+    pyplot.ylabel('I [pA]')
+    pyplot.title('Voltage clamp')
+    #pyplot.show()
 
 
 
 
-# plot
+    # plot
 
-fig=pyplot.figure(figsize=(8,4))
-iv_plot=pyplot.plot(v,best_iv,color='red',marker='+',markersize=15)
-pyplot.xlabel('V [mV]')
-pyplot.ylabel('I [pA]')
-pyplot.xlim(-130,60)
-pyplot.title('IV steady-state')
-pyplot.show()
+    fig=pyplot.figure(figsize=(8,4))
+    iv_plot=pyplot.plot(v,best_iv,color='red',marker='+',markersize=15)
+    pyplot.xlabel('V [mV]')
+    pyplot.ylabel('I [pA]')
+    pyplot.xlim(-130,60)
+    pyplot.title('IV steady-state')
+    #pyplot.show()
 
-  
+    
 
 
-fig2=pyplot.figure(figsize=(8,4))
-iv2_plot=pyplot.plot(v,best_iv_peak,color='red',marker='+',markersize=15)
-pyplot.xlabel('V [mV]')
-pyplot.ylabel('I [pA]')
-pyplot.xlim(-130,60)
-pyplot.title('IV PEAKS')
-pyplot.show()
+    fig2=pyplot.figure(figsize=(8,4))
+    iv2_plot=pyplot.plot(v,best_iv_peak,color='red',marker='+',markersize=15)
+    pyplot.xlabel('V [mV]')
+    pyplot.ylabel('I [pA]')
+    pyplot.xlim(-130,60)
+    pyplot.title('IV PEAKS')
+    pyplot.show()

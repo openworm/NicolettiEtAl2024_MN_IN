@@ -18,3 +18,5 @@ x86_64
 /*.dat
 /report.*.txt
 /NeuroML/.ipynb_checkpoints 
+/AVAR_SIMULATION
+/NeuroML/.ipynb_checkpoints

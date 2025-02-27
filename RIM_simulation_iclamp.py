@@ -57,7 +57,7 @@ def RIM_simulation_iclamp(gRIM_scaled,s1,s2,ns):
     stim=h.IClamp(soma(0.5))
     dir(stim)
     
-    stim.delay=1000
+    stim.delay=5000
     stim.amp=10
     stim.dur=5000
     
@@ -66,7 +66,7 @@ def RIM_simulation_iclamp(gRIM_scaled,s1,s2,ns):
     v_vec.record(soma(0.5)._ref_v)
     t_vec.record(h._ref_t)
 
-    simdur =8000
+    simdur =14000
 
     ref_v=[]
     ref_t=[]
@@ -102,40 +102,38 @@ def RIM_simulation_iclamp(gRIM_scaled,s1,s2,ns):
     
     # cut the initial transient 
     
-    # dd=numpy.amax(numpy.where(time1[1,:]<4000))
+    dd=numpy.amax(numpy.where(time1[1,:]<4000))
     
-    # time=time1[:,dd:length[1]]-4000
+    time=time1[:,dd:length[1]]-4000
 
-    # volt=v[:, dd:length[1]]
+    volt=v[:, dd:length[1]]
     
         
     
     
-    # ## CALCULATION OF STEADY-STATE CURRENT-VOLATGE RELATION
-    # ind=numpy.where(numpy.logical_and(time[0]>=5990, time[0]<=6010))
-    # ind_max=numpy.amax(ind)
-    # ind_min=numpy.amin(ind)
-    # iv=numpy.mean(volt[:,ind_min:ind_max],axis=1)
+    ## CALCULATION OF STEADY-STATE CURRENT-VOLATGE RELATION
+    ind=numpy.where(numpy.logical_and(time[0]>=5990, time[0]<=6010))
+    ind_max=numpy.amax(ind)
+    ind_min=numpy.amin(ind)
+    iv=numpy.mean(volt[:,ind_min:ind_max],axis=1)
 	
-	#  # CALCULATION OF PEAK CURRENT-VOLTAGE RELATION (as in Ramot et al 2008)
-    # ind2=numpy.where(numpy.logical_and(time[0]>=1000, time[0]<=1100))
-    # ind2_max=numpy.amax(ind2)
-    # ind2_min=numpy.amin(ind2)
-    # iv_peak=numpy.amax(volt[:,ind2_min:ind2_max])
-    # iv_peak=[]
+	 # CALCULATION OF PEAK CURRENT-VOLTAGE RELATION (as in Ramot et al 2008)
+    ind2=numpy.where(numpy.logical_and(time[0]>=1000, time[0]<=1100))
+    ind2_max=numpy.amax(ind2)
+    ind2_min=numpy.amin(ind2)
+    iv_peak=numpy.amax(volt[:,ind2_min:ind2_max])
+    iv_peak=[]
     
 
         
-    # for j in range(ns):
-    #     if j<=3:
-    #         peak=numpy.amin(volt[j,ind2_min:ind2_max])
-    #     else:
-    #         peak=numpy.amax(volt[j,ind2_min:ind2_max])
-    #     iv_peak.append(peak)
+    for j in range(ns):
+        if j<=3:
+            peak=numpy.amin(volt[j,ind2_min:ind2_max])
+        else:
+            peak=numpy.amax(volt[j,ind2_min:ind2_max])
+        iv_peak.append(peak)
 
-    #edited to return time with delay and non normalized voltage
-
-    return v, time1
+    return volt, time, iv_peak, iv
 
     
     
