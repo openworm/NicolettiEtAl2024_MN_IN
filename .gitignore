@@ -16,3 +16,4 @@ x86_64
 /NeuroML/*_nrn.py
 /NeuroML/*.mod
 /AVAR_SIMULATION
+/NeuroML/.ipynb_checkpoints
