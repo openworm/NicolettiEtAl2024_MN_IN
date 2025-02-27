@@ -58,7 +58,6 @@
             <DerivedVariable name="cao_nano" dimension="none" value="(((abs(gsc*(V - eca)*1e-3)/(8*pi*F*d*r))*exp(-r/(sqrt(d/(b*kb)))))*1e6*1e-3) + backgr"/>
             <DerivedVariable name="actegl19" dimension="none"  value="1/(1+exp(-(V-va_egl19+stm19)/ka_egl19))"/>
             <DerivedVariable name="tactegl19" dimension="none"  value="(pdg1+(pdg2*exp(-(V-pdg3+stau19)^2/(pdg4)^2))+(pdg5*exp(-(V-pdg6+stau19)^2/(pdg7)^2)))"/>
-            <DerivedVariable name="m_egl19" dimension="none" value="(actegl19 - m_egl19) / tactegl19"/>
             <DerivedVariable name="kop2" dimension="none" value="wop*exp(-V*wxy)/((kxy/cao_nano)^nxy + 1)"/>
             <DerivedVariable name="kcm2" dimension="none" value="wom*exp(-V*wyx)/((backgr/kyx)^nyx + 1)"/>
             <DerivedVariable name="kom2" dimension="none" value="wom*exp(-V*wyx)/((cao_nano/kyx)^nyx + 1)"/>
@@ -82,8 +81,6 @@
         <Constant name="r" dimension="none" value="13e-9"/>
         <Constant name="b" dimension="none" value="30e-06"/>
         <Constant name="eca" dimension="none" value="60.0"/>
-        <Constant name="va_egl19" dimension="none" value="5.6"/>
-        <Constant name="ka_egl19" dimension="none" value="7.5"/>
         <Constant name="stm19" dimension="none" value="10.0"/>
         <Constant name="pdg1" dimension="none" value="2.3359"/>
         <Constant name="pdg2" dimension="none" value="2.9324"/>
@@ -161,8 +158,6 @@
         <Constant name="r" dimension="none" value="13e-9"/>
         <Constant name="b" dimension="none" value="30e-06"/>
         <Constant name="eca" dimension="none" value="60.0"/>
-        <Constant name="va_egl19" dimension="none" value="5.6"/>
-        <Constant name="ka_egl19" dimension="none" value="7.5"/>
         <Constant name="stm19" dimension="none" value="10.0"/>
         <Constant name="pdg1" dimension="none" value="2.3359"/>
         <Constant name="pdg2" dimension="none" value="2.9324"/>
@@ -233,8 +228,6 @@
         <Constant name="r" dimension="none" value="13e-9"/>
         <Constant name="b" dimension="none" value="30e-06"/>
         <Constant name="eca" dimension="none" value="60.0"/>
-        <Constant name="va_egl19" dimension="none" value="5.6"/>
-        <Constant name="ka_egl19" dimension="none" value="7.5"/>
         <Constant name="stm19" dimension="none" value="10.0"/>
         <Constant name="pdg1" dimension="none" value="2.3359"/>
         <Constant name="pdg2" dimension="none" value="2.9324"/>

@@ -20,13 +20,24 @@
 
     <Simulation id="Sim_IClamp_VB6" length="11000.0ms" step="0.025ms" target="IClamp_VB6" seed="12345">  <!-- Note seed: ensures same random numbers used every run -->
 
-      <!--  <Display id="pop_VB6_0_biophys/membraneProperties/egl19_chans/egl19/m/q" title="Plots of pop_VB6_0_biophys/membraneProperties/egl19_chans/egl19/m/q" timeScale="1ms" xmin="-240.0" xmax="2640.0" ymin="-1" ymax="1">
+
+      <Display id="pop_VB6_0_biophys/membraneProperties/egl19_chans/egl19/m/q" title="Plots of pop_VB6_0_biophys/membraneProperties/egl19_chans/egl19/m/q" timeScale="1ms" xmin="-200.0" xmax="2640.0" ymin="-.1" ymax="1.1">
+            
+            <!-- final m value-->
             <Line id="pop_VB6_0_VB6_biophys_membraneProperties_egl19_chans_VB6_egl19_m_q" quantity="pop_VB6/0/VB6/biophys/membraneProperties/egl19_chans/egl19/m/q" scale="1" color="#0534e4" timeScale="1ms"/>
-            <Line id="pop_VB6_0_VB6_biophys_membraneProperties_slo1egl19_chans_VB6_slo1egl19_m_q" quantity="pop_VB6/0/VB6/biophys/membraneProperties/slo1egl19_chans/slo1egl19/slo1_m_inf_instance/q" scale="1" color="#0534e4" timeScale="1ms"/>
-        </Display> 
+            <Line id="pop_VB6_0_VB6_biophys_membraneProperties_slo1egl19_chans_VB6_slo1egl19_m_egl19" quantity="pop_VB6/0/VB6/biophys/membraneProperties/slo1egl19_chans/slo1egl19/m/steadyState/m_egl19" scale="1" color="#ff3333" timeScale="1ms"/>
+
+            <!-- inf m value-->
+            <Line id="pop_VB6_0_VB6_biophys_membraneProperties_egl19_chans_VB6_egl19_m_q_inf" quantity="pop_VB6/0/VB6/biophys/membraneProperties/egl19_chans/egl19/m/steadyState/x" scale="1" color="#ffffe4" timeScale="1ms"/>
+            <Line id="pop_VB6_0_VB6_biophys_membraneProperties_slo1egl19_chans_VB6_slo1egl19_m_act" quantity="pop_VB6/0/VB6/biophys/membraneProperties/slo1egl19_chans/slo1egl19/m/steadyState/actegl19" scale="1" color="#ff33ff" timeScale="1ms"/>
+
+            <!-- final h value -->
+            <Line id="pop_VB6_0_VB6_biophys_membraneProperties_egl19_chans_VB6_egl19_h_q" quantity="pop_VB6/0/VB6/biophys/membraneProperties/egl19_chans/egl19/h/q" scale="1" color="#05aaaa" timeScale="1ms"/>
+            <Line id="pop_VB6_0_VB6_biophys_membraneProperties_slo1egl19_chans_VB6_slo1egl19_h_x" quantity="pop_VB6/0/VB6/biophys/membraneProperties/slo1egl19_chans/slo1egl19/h/steadyState/actegl19" scale="1" color="#ffff33" timeScale="1ms"/>
+         </Display> 
         
 
-        <Display id="pop_VB6_0_biophys/membraneProperties/egl19_chans/gDensity" title="Plots of pop_VB6_0_biophys/membraneProperties/egl19_chans/gDensity" timeScale="1ms" xmin="-240.0" xmax="2640.0" ymin="-1" ymax="1">
+       <!--   <Display id="pop_VB6_0_biophys/membraneProperties/egl19_chans/gDensity" title="Plots of pop_VB6_0_biophys/membraneProperties/egl19_chans/gDensity" timeScale="1ms" xmin="-240.0" xmax="2640.0" ymin="-1" ymax="1">
             <Line id="pop_VB6_0_VB6_biophys_membraneProperties_egl19_chans_gDensity" quantity="pop_VB6/0/VB6/biophys/membraneProperties/egl19_chans/gDensity" scale="1" color="#98e752" timeScale="1ms"/>
         </Display>
 
@@ -45,11 +56,11 @@
         </Display>
 
 -->
-       <!--
-        <Display id="pop_VB6_0_caConc" title="Plots of pop_VB6_0_caConc" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
+       
+        <Display id="pop_VB6_0_caConc" title="Plots of pop_VB6_0_caConc" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1e-4" ymax="6e-4">
             <Line id="pop_VB6_0_VB6_caConc" quantity="pop_VB6/0/VB6/caConc" scale="1" color="#d54f33" timeScale="1ms"/>
         </Display>
-
+<!--
         <Display id="pop_VB6_10_caConc" title="Plots of pop_VB6_10_caConc" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
             <Line id="pop_VB6_10_VB6_caConc" quantity="pop_VB6/10/VB6/caConc" scale="1" color="#0534e4" timeScale="1ms"/>
         </Display> 
@@ -117,7 +128,7 @@
             <OutputColumn id="pop_VB6_9_VB6_v" quantity="pop_VB6/9/VB6/v"/>
             <OutputColumn id="pop_VB6_10_VB6_v" quantity="pop_VB6/10/VB6/v"/>
         </OutputFile>
-        <!-- 
+        
         <OutputFile id="pop_VB6_0_caConc_dat" fileName="pop_VB6_0.caConc.dat">
             <OutputColumn id="pop_VB6_0_VB6_caConc" quantity="pop_VB6/0/VB6/caConc"/>
         </OutputFile>
@@ -161,7 +172,7 @@
         <OutputFile id="pop_VB6_9_caConc_dat" fileName="pop_VB6_9.caConc.dat">
             <OutputColumn id="pop_VB6_9_VB6_caConc" quantity="pop_VB6/9/VB6/caConc"/>
         </OutputFile>
-    --> 
+    <!-- --> 
     </Simulation>
 
 </Lems>
