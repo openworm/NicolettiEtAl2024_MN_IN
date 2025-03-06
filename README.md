@@ -21,3 +21,5 @@ To reproduce the WT whole-cell behavior:
 2. excute the file "`NeuronName_simulation.py`"
 
 To simulate knock-out responses set to zero the conductance of the corresponding current. 
+
+
