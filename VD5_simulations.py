@@ -24,8 +24,10 @@ ic=numpy.linspace(start=-0.01,stop=0.01,num=9)
 
 surf=351.53e-8
 
-# conductances:slo1egl19,SLO2egl19,slo2iso,egl19,unc2,cca1,irk,SHK1kmix,nca,leak,eleak,c2,cm
+# conductances:slo2egl19,slo2iso,egl19,cca1,irk,shk1mix, nca,eleak,c2,cm
 g0=[1.7,1.7,0.9,0.1,0.7,1.2,0.09,0.2,-75,1,1]#finale 
+
+
 
 
 gstart=gScm2(g0,surf,7)
