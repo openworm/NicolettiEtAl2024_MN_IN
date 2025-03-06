@@ -1,4 +1,4 @@
-# CelegansInterMotorNeuronsModels
+# _C.elegans_ Interneuron/Motorneurons Models
 
 The folder contains the codes for reproducing the figures of the papers:
 Biophysical modeling of the whole-cell dynamics of C. elegans motor and interneurons families
