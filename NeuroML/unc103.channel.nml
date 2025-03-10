@@ -1,0 +1,67 @@
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2.3.1.xsd" id="egl19">
+    <notes>An ion channel from Nicoletti et al. 2024</notes>
+    <ionChannelHH id="unc103" species="k" conductance="10 pS">
+        
+        <gate id="m" instances="1" type="gateHHtauInf">
+            <timeCourse type="unc103_m_tau"/>
+            <steadyState type="unc103_m_inf"/>
+        </gate>
+       
+        <gate id="h" instances="1" type="gateHHtauInf">
+            <timeCourse type="unc103_h_tau"/>
+            <steadyState type="unc103_h_inf"/>
+        </gate>
+    </ionChannelHH>
+
+ 
+    <ComponentType name="unc103_m_inf" extends="baseVoltageDepVariable">
+        <Constant name="VOLT_SCALE" dimension="voltage" value="1 mV"/>
+        <Constant name="va" dimension="none" value="-15.1"/>
+        <Constant name="ka" dimension="none" value="7.85"/>
+        <Dynamics>
+            <DerivedVariable name="V" dimension="none" value="(v) / VOLT_SCALE"/>
+            <DerivedVariable name="x" dimension="none" exposure="x" value="1 / (1 + exp(-(V - va) / ka))"/>
+        </Dynamics>
+    </ComponentType>
+
+   
+    <ComponentType name="unc103_m_tau" extends="baseVoltageDepTime">
+        <Constant name="VOLT_SCALE" dimension="voltage" value="1 mV"/>
+        <Constant name="TIME_SCALE" dimension="time" value="1 ms"/>
+        <Constant name="tm1" dimension="none" value="87.4088"/>
+        <Constant name="tm2" dimension="none" value="-28.3339"/>
+        <Constant name="tm3" dimension="none" value="13.0998"/>
+        <Constant name="tm4" dimension="none" value="0.2562"/>
+        <Dynamics>
+            <DerivedVariable name="V" dimension="none" value="(v) / VOLT_SCALE"/>
+            <DerivedVariable name="t" dimension="time" exposure="t"
+                value="((tm1 / (1 + exp((V - tm2) / tm3))) + tm4) * ((tm1 / (1 + exp(-(V - tm2) / tm3))) + tm4) * TIME_SCALE"/>
+        </Dynamics>
+    </ComponentType>
+
+    
+    <ComponentType name="unc103_h_inf" extends="baseVoltageDepVariable">
+        <Constant name="VOLT_SCALE" dimension="voltage" value="1 mV"/>
+        <Constant name="vi" dimension="none" value="-48"/>
+        <Constant name="ki" dimension="none" value="28"/>
+        <Dynamics>
+            <DerivedVariable name="V" dimension="none" value="(v) / VOLT_SCALE"/>
+            <DerivedVariable name="x" dimension="none" exposure="x" value="1 / (1 + exp((V - vi) / ki))"/>
+        </Dynamics>
+    </ComponentType>
+
+  
+    <ComponentType name="unc103_h_tau" extends="baseVoltageDepTime">
+        <Constant name="VOLT_SCALE" dimension="voltage" value="1 mV"/>
+        <Constant name="TIME_SCALE" dimension="time" value="1 ms"/>
+        <Constant name="th1" dimension="none" value="8.1559"/>
+        <Constant name="th2" dimension="none" value="-25.2890"/>
+        <Constant name="th3" dimension="none" value="29.5074"/>
+        <Constant name="th4" dimension="none" value="0.2300"/>
+        <Dynamics>
+            <DerivedVariable name="V" dimension="none" value="(v) / VOLT_SCALE"/>
+            <DerivedVariable name="t" dimension="time" exposure="t"
+                value="((th1 / (1 + exp((V - th2) / th3))) + th4) * ((th1 / (1 + exp(-(V - th2) / th3))) + th4) * TIME_SCALE"/>
+        </Dynamics>
+    </ComponentType>
+</neuroml>

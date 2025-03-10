@@ -1,0 +1,53 @@
+{
+    "Sim_IClamp_AVAL": {
+        "version": "NeuroMLlite v0.6.0",
+        "network": "IClamp_AVAL.json",
+        "duration": 11000.0,
+        "dt": 0.025,
+        "seed": 12345,
+        "record_traces": {
+            "all": "*"
+        },
+        "record_variables": {
+            "caConc": {
+                "all": "*"
+            },
+            "biophys/membraneProperties/leak_chans/gDensity": {
+                "all": "*"
+            },
+            "biophys/membraneProperties/leak_chans/iDensity": {
+                "all": "*"
+            },
+            "biophys/membraneProperties/irk_chans/gDensity": {
+                "all": "*"
+            },
+            "biophys/membraneProperties/irk_chans/iDensity": {
+                "all": "*"
+            },
+            "biophys/membraneProperties/irk_chans/irk/m/q": {
+                "all": "*"
+            },
+            "biophys/membraneProperties/irk_chans/irk/h/q": {
+                "all": "*"
+            },
+            "biophys/membraneProperties/egl19_chans/gDensity": {
+                "all": "*"
+            },
+            "biophys/membraneProperties/egl19_chans/iDensity": {
+                "all": "*"
+            },
+            "biophys/membraneProperties/egl19_chans/egl19/m/q": {
+                "all": "*"
+            },
+            "biophys/membraneProperties/egl19_chans/egl19/h/q": {
+                "all": "*"
+            },
+            "biophys/membraneProperties/nca_chans/gDensity": {
+                "all": "*"
+            },
+            "biophys/membraneProperties/nca_chans/iDensity": {
+                "all": "*"
+            }
+        }
+    }
+}

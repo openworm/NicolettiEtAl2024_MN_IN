@@ -3,7 +3,7 @@
 # https://doi.org/10.1371/journal.pone.0298105
 
 
-def VB6_simulation_iclamp(gVB6_scaled,s1,s2,ns):
+def VB6_simulation_iclamp(gVB6_scaled,s1,s2,ns, delay=5000, duration=5000,simdur=7000, transient=4900):
     
  
     from neuron import h,gui
@@ -72,18 +72,25 @@ def VB6_simulation_iclamp(gVB6_scaled,s1,s2,ns):
     stim=h.IClamp(soma(0.5))
     dir(stim)
     
-    stim.delay=5000
-    stim.dur=1000
+    stim.delay=delay
+    stim.amp=10
+    stim.dur=duration
     
-    v_vec = h.Vector()   
+    v_vec = h.Vector()  
+    cai_vec=h.Vector()
     t_vec = h.Vector() 
     v_vec.record(soma(0.5)._ref_v)
+    cai_vec.record(soma(0.5)._ref_cai)
     t_vec.record(h._ref_t)
 
-    simdur =7000
+    simdur =simdur
 
     ref_v=[]
+    ref_cai=[]
     ref_t=[]
+
+    print("All parameters used in current clamp:")
+    h.psection(sec=soma)
 
     
     
@@ -103,23 +110,29 @@ def VB6_simulation_iclamp(gVB6_scaled,s1,s2,ns):
          ref_v_vec=numpy.zeros_like(v_vec)
          v_vec.to_python(ref_v_vec)
          ref_v.append(ref_v_vec)
-            
+        
+         ref_cai_vec=numpy.zeros_like(cai_vec)
+         cai_vec.to_python(ref_cai_vec) 
+         ref_cai.append(ref_cai_vec)
 
            
     v=[]
     v=numpy.array(list(ref_v))
+    ca1=numpy.array(list(ref_cai))
     time1=numpy.array(ref_t)
     
 
-    resc_ind=numpy.where(time1[1,:]>=4900)
+    resc_ind=numpy.where(time1[1,:]>=transient)
     resc_min=numpy.amin(resc_ind)
     resc_max=numpy.amax(resc_ind)
     v_normalized=v[:,resc_min:resc_max]
-    time=time1[:,resc_min:resc_max]-4900
+    time=time1[:,resc_min:resc_max]-transient
+    ca=ca1[:,resc_min:resc_max]
+
     
   
   
-    return v_normalized, time 
+    return v_normalized, time, ca, soma, stim
     
         
 

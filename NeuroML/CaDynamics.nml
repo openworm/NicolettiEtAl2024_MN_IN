@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.githubusercontent.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2beta3.xsd" 
+         id="CaDynamics">
+
+    <notes>NeuroML 2 implementation of the Ca Pool mechanism</notes>
+    
+    <concentrationModel id="CaDynamics_VA5" type="cadiff" minCai="0.0001 mM" beta="1 per_ms" depth=".10 um" ion="ca"/>
+
+    <ComponentType name="cadiff" extends="concentrationModel" description="Model of internal [Ca2+] specific to Nicoletti Et Al 2024">
+
+        <Parameter name="beta" dimension="per_time"/>
+        <Parameter name="depth" dimension="length"/>
+        <Parameter name="minCai" dimension="concentration"/>
+       
+        <Constant name="Faraday" dimension="charge_per_mole" value="96485 C_per_mol"/>
+
+        <Constant name="AREA_SCALE" dimension="area" value="1m2"/>
+        <Constant name="LENGTH_SCALE" dimension="length" value="1m"/>
+
+        <Requirement name="iCa" dimension="current"/>
+
+        <Text name="ion"/>
+
+        <Dynamics>
+
+            <StateVariable name="concentration" exposure="concentration" dimension="concentration"/>
+            <StateVariable name="extConcentration" exposure="extConcentration" dimension="concentration"/> 
+
+            <DerivedVariable name="currDensCa" dimension="currentDensity" value="iCa / surfaceArea"/>
+
+              <TimeDerivative variable="concentration" value="(currDensCa/(2*Faraday*depth)) - (concentration * beta)"/> 
+              
+
+            <OnCondition test="concentration .lt. minCai">
+                <StateAssignment variable="concentration" value="minCai"/>
+        
+
+            </OnCondition>
+
+            <OnStart>
+                <StateAssignment variable="concentration" value="initialConcentration"/>
+                <StateAssignment variable="extConcentration" value="initialExtConcentration"/>
+           
+            </OnStart>
+
+        </Dynamics>
+
+    </ComponentType>
+
+
+</neuroml>

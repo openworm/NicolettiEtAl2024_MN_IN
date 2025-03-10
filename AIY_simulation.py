@@ -21,7 +21,7 @@ v=numpy.linspace(start=-120, stop=50, num=18)
 ic=numpy.linspace(start=-15, stop=35, num=11)
 surf=65.89e-8# surface in cm^2 form neuromorpho AIYL
 
-#conductances: leak, slo1iso,kqt1,egl19,slo1egl19,nca,irk,eleak,cm
+#conductances: leak, slo1iso,kqt1,egl19,slo1egl19,nca,shl1,eleak,cm
 g0=[0.14,1,0.2,0.1,0.92,0.06,0.5,-89.57,1.6]
 
 

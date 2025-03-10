@@ -1,0 +1,52 @@
+<Lems>
+
+    <!-- 
+
+        This LEMS file has been automatically generated using PyNeuroML v1.3.14 (libNeuroML v0.6.6)
+
+     -->
+
+    <!-- Specify which component to run -->
+    <Target component="Sim_IClamp_AVAL" reportFile="report.Sim_IClamp_AVAL.txt"/>
+
+    <!-- Include core NeuroML2 ComponentType definitions -->
+    <Include file="Cells.xml"/>
+    <Include file="Networks.xml"/>
+    <Include file="Simulation.xml"/>
+
+    <Include file="PyNN.xml"/>
+    <Include file="IClamp_AVAL.net.nml"/>
+    <Include file="AVAL.cell.nml"/>
+
+    <Simulation id="Sim_IClamp_AVAL" length="11000.0ms" step="0.025ms" target="IClamp_AVAL" seed="12345">  <!-- Note seed: ensures same random numbers used every run -->
+        <Display id="pop_AVAL_v" title="Plots of pop_AVAL_v" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-80" ymax="40">
+            <Line id="pop_AVAL_0_AVAL_v" quantity="pop_AVAL/0/AVAL/v" scale="1mV" color="#d54f33" timeScale="1ms"/>
+            <Line id="pop_AVAL_1_AVAL_v" quantity="pop_AVAL/1/AVAL/v" scale="1mV" color="#0534e4" timeScale="1ms"/>
+            <Line id="pop_AVAL_2_AVAL_v" quantity="pop_AVAL/2/AVAL/v" scale="1mV" color="#98e752" timeScale="1ms"/>
+            <Line id="pop_AVAL_3_AVAL_v" quantity="pop_AVAL/3/AVAL/v" scale="1mV" color="#bca074" timeScale="1ms"/>
+            <Line id="pop_AVAL_4_AVAL_v" quantity="pop_AVAL/4/AVAL/v" scale="1mV" color="#632794" timeScale="1ms"/>
+            <Line id="pop_AVAL_5_AVAL_v" quantity="pop_AVAL/5/AVAL/v" scale="1mV" color="#8a5d88" timeScale="1ms"/>
+            <Line id="pop_AVAL_6_AVAL_v" quantity="pop_AVAL/6/AVAL/v" scale="1mV" color="#df5954" timeScale="1ms"/>
+            <Line id="pop_AVAL_7_AVAL_v" quantity="pop_AVAL/7/AVAL/v" scale="1mV" color="#52c8bf" timeScale="1ms"/>
+            <Line id="pop_AVAL_8_AVAL_v" quantity="pop_AVAL/8/AVAL/v" scale="1mV" color="#bf0239" timeScale="1ms"/>
+            <Line id="pop_AVAL_9_AVAL_v" quantity="pop_AVAL/9/AVAL/v" scale="1mV" color="#3f9fe8" timeScale="1ms"/>
+            <Line id="pop_AVAL_10_AVAL_v" quantity="pop_AVAL/10/AVAL/v" scale="1mV" color="#dda9d2" timeScale="1ms"/>
+        </Display>
+
+        <OutputFile id="Sim_IClamp_AVAL_pop_AVAL_v_dat" fileName="Sim_IClamp_AVAL.pop_AVAL.v.dat">
+            <OutputColumn id="pop_AVAL_0_AVAL_v" quantity="pop_AVAL/0/AVAL/v"/>
+            <OutputColumn id="pop_AVAL_1_AVAL_v" quantity="pop_AVAL/1/AVAL/v"/>
+            <OutputColumn id="pop_AVAL_2_AVAL_v" quantity="pop_AVAL/2/AVAL/v"/>
+            <OutputColumn id="pop_AVAL_3_AVAL_v" quantity="pop_AVAL/3/AVAL/v"/>
+            <OutputColumn id="pop_AVAL_4_AVAL_v" quantity="pop_AVAL/4/AVAL/v"/>
+            <OutputColumn id="pop_AVAL_5_AVAL_v" quantity="pop_AVAL/5/AVAL/v"/>
+            <OutputColumn id="pop_AVAL_6_AVAL_v" quantity="pop_AVAL/6/AVAL/v"/>
+            <OutputColumn id="pop_AVAL_7_AVAL_v" quantity="pop_AVAL/7/AVAL/v"/>
+            <OutputColumn id="pop_AVAL_8_AVAL_v" quantity="pop_AVAL/8/AVAL/v"/>
+            <OutputColumn id="pop_AVAL_9_AVAL_v" quantity="pop_AVAL/9/AVAL/v"/>
+            <OutputColumn id="pop_AVAL_10_AVAL_v" quantity="pop_AVAL/10/AVAL/v"/>
+        </OutputFile>
+
+    </Simulation>
+
+</Lems>

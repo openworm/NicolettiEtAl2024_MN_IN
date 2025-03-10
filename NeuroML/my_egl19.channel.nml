@@ -1,0 +1,90 @@
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2.3.1.xsd" id="my_egl19">
+    <notes>An ion channel from cell AVAL from Nicoletti et al. 2024</notes>
+
+    <ionChannelHH id="my_egl19" species="ca" conductance="10 pS">
+        <!-- Activation Gate -->
+        <gate id="m" instances="1" type="gateHHtauInf">
+            <timeCourse type="my_egl19_m_tau"/>
+            <steadyState type="my_egl19_m_inf"/>
+        </gate>
+        <!-- Inactivation Gate -->
+        <gate id="h" instances="1" type="gateHHtauInf">
+            <timeCourse type="my_egl19_h_tau"/>
+            <steadyState type="my_egl19_h_inf"/>
+        </gate>
+    </ionChannelHH>
+
+    <!-- Activation (m): Steady State -->
+    <ComponentType name="my_egl19_m_inf" extends="baseVoltageDepVariable">
+        <Constant name="VOLT_SCALE" dimension="voltage" value="1 mV"/>
+        <Constant name="va_my_egl19" dimension="none" value="5.6"/>
+        <Constant name="ka_my_egl19" dimension="none" value="7.5"/>
+        <Constant name="shift" dimension="none" value="10"/>
+        <Dynamics>
+            <DerivedVariable name="V" dimension="none" value="(v) / VOLT_SCALE"/>
+            <DerivedVariable name="x" dimension="none" exposure="x" value="1 / (1 + exp(-(V - va_my_egl19 + shift) / ka_my_egl19))"/>
+        </Dynamics>
+    </ComponentType>
+
+    <!-- Activation (m): Time Constant -->
+    <ComponentType name="my_egl19_m_tau" extends="baseVoltageDepTime">
+        <Constant name="VOLT_SCALE" dimension="voltage" value="1 mV"/>
+        <Constant name="TIME_SCALE" dimension="time" value="1 ms"/>
+        <Constant name="pdg1" dimension="none" value="2.3359"/>
+        <Constant name="pdg2" dimension="none" value="2.9324"/>
+        <Constant name="pdg3" dimension="none" value="5.2357"/>
+        <Constant name="pdg4" dimension="none" value="6"/>
+        <Constant name="pdg5" dimension="none" value="1.8739"/>
+        <Constant name="pdg6" dimension="none" value="1.393"/>
+        <Constant name="pdg7" dimension="none" value="30"/>
+        <Constant name="ctm19" dimension="none" value="1"/>
+        <Constant name="shift" dimension="none" value="10"/>
+        <Dynamics>
+            <DerivedVariable name="V" dimension="none" value="(v) / VOLT_SCALE"/>
+            <DerivedVariable name="t" dimension="time" exposure="t"
+                value="(pdg1 + (pdg2 * exp(-(V - pdg3 + shift)^2 / pdg4^2)) + (pdg5 * exp(-(V - pdg6 + shift)^2 / pdg7^2))) * ctm19 * TIME_SCALE"/>
+        </Dynamics>
+    </ComponentType>
+
+    <!-- Inactivation (h): Steady State -->
+    <ComponentType name="my_egl19_h_inf" extends="baseVoltageDepVariable">
+        <Constant name="VOLT_SCALE" dimension="voltage" value="1 mV"/>
+        <Constant name="shift" dimension="none" value="10"/>
+        <Constant name="p1hmy_egl19" dimension="none" value="1.4314"/>
+        <Constant name="p2hmy_egl19" dimension="none" value="24.8573"/>
+        <Constant name="p3hmy_egl19" dimension="none" value="11.9541"/>
+        <Constant name="p4hmy_egl19" dimension="none" value="0.1427"/>
+        <Constant name="p5hmy_egl19" dimension="none" value="5.9589"/>
+        <Constant name="p6hmy_egl19" dimension="none" value="-10.5428"/>
+        <Constant name="p7hmy_egl19" dimension="none" value="8.0552"/>
+        <Constant name="p8hmy_egl19" dimension="none" value="0.6038"/>
+        <Dynamics>
+            <DerivedVariable name="V" dimension="none" value="(v) / VOLT_SCALE"/>
+            <DerivedVariable name="x" dimension="none" exposure="x"
+                value="((p1hmy_egl19 / (1 + exp(-(V - p2hmy_egl19 + shift) / p3hmy_egl19)) + p4hmy_egl19) * (p5hmy_egl19 / (1 + exp((V - p6hmy_egl19 + shift) / p7hmy_egl19)) + p8hmy_egl19))"/>
+        </Dynamics>
+    </ComponentType>
+
+    <!-- Inactivation (h): Time Constant -->
+    <ComponentType name="my_egl19_h_tau" extends="baseVoltageDepTime">
+        <Constant name="VOLT_SCALE" dimension="voltage" value="1 mV"/>
+        <Constant name="TIME_SCALE" dimension="time" value="1 ms"/>
+        <Constant name="pds1" dimension="none" value="0.4"/>
+        <Constant name="pds2" dimension="none" value="0.55"/>
+        <Constant name="pds3" dimension="none" value="81.1179"/>
+        <Constant name="pds4" dimension="none" value="-22.9723"/>
+        <Constant name="pds5" dimension="none" value="5"/>
+        <Constant name="pds6" dimension="none" value="43.0937"/>
+        <Constant name="pds7" dimension="none" value="0.9"/>
+        <Constant name="pds8" dimension="none" value="40.4885"/>
+        <Constant name="pds9" dimension="none" value="28.7251"/>
+        <Constant name="pds10" dimension="none" value="3.7125"/>
+        <Constant name="pds11" dimension="none" value="0"/>
+        <Constant name="shift" dimension="none" value="10"/>
+        <Dynamics>
+            <DerivedVariable name="V" dimension="none" value="(v) / VOLT_SCALE"/>
+            <DerivedVariable name="t" dimension="time" exposure="t"
+                value="pds1 * (((pds2 * pds3) / (1 + exp((V - pds4 + shift) / pds5))) + pds6 + ((pds7 * pds8) / (1 + exp((V - pds9 + shift) / pds10))) + pds11) * TIME_SCALE"/>
+        </Dynamics>
+    </ComponentType>
+</neuroml>

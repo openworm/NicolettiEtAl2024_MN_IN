@@ -3,4 +3,4 @@ system: Test
 experiments:
     ex0:
         expected:
-            spike times: [128.79999996188326, 557.4749999556452]
+            spike times: [0.12879999996188327, 0.5574749999556452]
