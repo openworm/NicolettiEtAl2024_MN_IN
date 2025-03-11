@@ -24,7 +24,7 @@ insert egl19
 { gbar_egl19=0.000190607 }
 
 insert slo1egl19
-{ gbar_slo1egl19=3.81214e-15 }
+{ gbar_slo1egl19=3.81214e-5 }
 
 
 
