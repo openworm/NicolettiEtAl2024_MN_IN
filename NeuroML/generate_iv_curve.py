@@ -5,9 +5,9 @@ from matplotlib import pyplot as plt
 
 nogui = "-nogui" in sys.argv  # Used to supress GUI in tests for Travis-CI
 
-for cell in ['AVAL', 'AVAR']:
+for cell in ["AVAL", "AVAR"]:
     generate_current_vs_frequency_curve(
-        "%s.cell.nml"%cell,
+        "%s.cell.nml" % cell,
         cell,
         start_amp_nA=-0.03,
         end_amp_nA=0.04,
@@ -19,7 +19,7 @@ for cell in ['AVAL', 'AVAR']:
         plot_voltage_traces=not nogui,
         plot_if=not nogui,
         plot_iv=not nogui,
-        save_if_data_to="iv_%s.dat"%cell,
+        save_if_data_to="iv_%s.dat" % cell,
         show_plot_already=False,
     )
 

@@ -35,6 +35,8 @@ jobs:
         omv install jNeuroML
 
         cd NeuroML
+        
+        pip install pyelectro
         python generate_iv_curve.py 
 
 
