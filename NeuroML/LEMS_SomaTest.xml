@@ -18,7 +18,7 @@
     <include href="CaDynamics.nml"/>
 
 
-    <pulseGenerator id="stim" delay="100ms" duration="500ms" amplitude="10pA"/>
+    <pulseGenerator id="stim" delay="500ms" duration="500ms" amplitude="10pA"/>
 
     <cell id="TestCell">
     
@@ -40,7 +40,7 @@
             <membraneProperties>
                 <channelDensity id="leak_chans" ionChannel="leak" condDensity="2.4778896e-05 S_per_cm2" erev="-52mV" ion="non_specific"/>
                <!--<channelDensity id="slo1egl19_chans" ionChannel="slo1egl19" condDensity="3.81213785e-015 S_per_cm2" erev="-80mV"   ion="k"/>-->
-                <channelDensityNernst id="egl19_chans" ionChannel="egl19" condDensity="1.90606892e-15 S_per_cm2" ion="ca"/> 
+                <channelDensityNernst id="egl19_chans" ionChannel="egl19" condDensity="1.90606892e-5 S_per_cm2" ion="ca"/> 
 
     
                 <spikeThresh value="0mV"/>
@@ -101,6 +101,10 @@
         <Display id="pop_caConc" title="Plots of caConc" timeScale="1ms" xmin="-50.0" xmax="750" ymin="0" ymax="6e-4">
             <Line id="pop_ca" quantity="pop0/0/TestCell/caConc" scale="1" color="#ff4f33" timeScale="1ms"/>
         </Display>
+       
+        <Display id="pop_eca" title="Plots of eca" timeScale="1ms" xmin="-50.0" xmax="750" ymin="0" ymax="130">
+            <Line id="pop_ca" quantity="pop0/0/TestCell/biophys/membraneProperties/egl19_chans/erev" scale="1mV" color="#ff4f33" timeScale="1ms"/>
+        </Display>
 
        
         <Display id="pop_v" title="Plots of pop_v" timeScale="1ms"  xmin="-50.0" xmax="750" ymin="-80" ymax="70">
@@ -113,6 +117,10 @@
         
         <OutputFile id="pop_caConc_dat" fileName="Soma.ca.dat">
             <OutputColumn id="pop_caConc" quantity="pop0/0/TestCell/caConc"/>
+        </OutputFile>
+        
+        <OutputFile id="pop_eca_dat" fileName="Soma.eca.dat">
+            <OutputColumn id="pop_eca" quantity="pop0/0/TestCell/biophys/membraneProperties/egl19_chans/erev"/>
         </OutputFile>
 
         <OutputFile id="pop_chans" fileName="Soma.chans.dat">

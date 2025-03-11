@@ -6,6 +6,7 @@ plots = {
     "Membrane potentials": ["Soma.v.dat", "../Soma.si.dat"],
     "Ca conc": ["Soma.ca.dat", "../Soma.ca.dat"],
     "Channel activation": ["Soma.chans.dat", "../Soma.chans.dat"],
+    "Ca rev pot": ["Soma.eca.dat", "../Soma.eca.dat"],
 }
 
 for p in plots:

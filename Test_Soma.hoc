@@ -21,7 +21,7 @@ insert pas
 
 
 insert egl19
-{ gbar_egl19=0.000190607e-10 }
+{ gbar_egl19=0.000190607 }
 
 //insert slo1egl19
 //{ gbar_slo1egl19=3.81214e-05 }
@@ -49,7 +49,7 @@ objref stim2
 
 Soma {
     stim1 = new IClamp(0.5)
-    stim1.del = 100.0
+    stim1.del = 500.0
     stim1.dur = 500.0
     stim1.amp = 0.01
     
@@ -77,9 +77,14 @@ f_time = new File()
 objref Soma_v
 { Soma_v = new Vector() }
 { Soma_v.record(&Soma.v(0.5))} 
+
 objref Soma_ca
 { Soma_ca = new Vector() }
 { Soma_ca.record(&Soma.cai(0.5))} 
+
+objref Soma_eca
+{ Soma_eca = new Vector() }
+{ Soma_eca.record(&Soma.eca(0.5))} 
 
 objref Soma_m_egl19
 { Soma_m_egl19 = new Vector() }
@@ -178,6 +183,15 @@ for i=0, Soma_ca.size()-1 {
    f_Soma_ca.printf("%f\t%f\n", v_time.x[i]/1000, Soma_ca.x[i])
 }
 { f_Soma_ca.close() }
+
+
+objref f_Soma_eca
+f_Soma_eca = new File()
+{ f_Soma_eca.wopen("Soma.eca.dat") }
+for i=0, Soma_eca.size()-1 {
+   f_Soma_eca.printf("%f\t%f\n", v_time.x[i]/1000, Soma_eca.x[i]/1000)
+}
+{ f_Soma_eca.close() }
 
 
 
