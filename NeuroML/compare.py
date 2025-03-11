@@ -25,7 +25,7 @@ for p in plots:
             labels.append("jnml %i" % i if len(d) > 2 else "jnml")
             linewidths.append(3)
 
-    d, i = pynml.reload_standard_dat_file(files[1])
+    d, indices = pynml.reload_standard_dat_file(files[1])
 
     for i in indices:
         if i != "t":

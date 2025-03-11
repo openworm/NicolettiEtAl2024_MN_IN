@@ -216,6 +216,8 @@
             <DerivedVariable name="x" dimension="none" exposure="x" value="(p1hegl19/(exp((-V + p2hegl19 - sth19)/p3hegl19) + 1) + p4hegl19)*(p5hegl19/(exp((V - p6hegl19 + sth19)/p7hegl19) + 1) + p8hegl19)"/>
         </Dynamics>
     </ComponentType>
+
+    
     <ComponentType name="slo1_h_tau" extends="baseVoltageDepTime">
         <Constant name="VOLT_SCALE" dimension="voltage" value="1 mV"/>
         <Constant name="TIME_SCALE" dimension="time" value="1 ms"/>
