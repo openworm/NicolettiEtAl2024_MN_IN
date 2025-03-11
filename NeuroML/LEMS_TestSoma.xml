@@ -82,6 +82,9 @@
             <!-- final m value -->
             <Line id="egl19_m_q" quantity="pop0/0/TestCell/biophys/membraneProperties/egl19_chans/egl19/m/q" scale="1" color="#0534e4" timeScale="1ms"/>
             <Line id="egl19_h_q" quantity="pop0/0/TestCell/biophys/membraneProperties/egl19_chans/egl19/h/q" scale="1" color="#fff4e4" timeScale="1ms"/>
+
+            <!--<Line id="slo1egl19_m_egl19" quantity="pop0/0/TestCell/biophys/membraneProperties/slo1egl19_chans/slo1egl19/m/steadyState/m_egl19" scale="1" color="#ff3333" timeScale="1ms"/>-->
+
             <!--<Line id="slo1egl19_m_egl19" quantity="pop_VB6/0/VB6/biophys/membraneProperties/slo1egl19_chans/slo1egl19/m/steadyState/m_egl19" scale="1" color="#ff3333" timeScale="1ms"/>-->
 </Display> <!-- -->
         
