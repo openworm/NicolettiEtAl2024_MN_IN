@@ -115,6 +115,11 @@
             <OutputColumn id="pop_caConc" quantity="pop0/0/TestCell/caConc"/>
         </OutputFile>
 
+        <OutputFile id="pop_chans" fileName="Soma.chans.dat">
+            <OutputColumn id="0" quantity="pop0/0/TestCell/biophys/membraneProperties/egl19_chans/egl19/m/q"/>
+            <OutputColumn id="1" quantity="pop0/0/TestCell/biophys/membraneProperties/egl19_chans/egl19/h/q"/>
+        </OutputFile>
+
     </Simulation>
 
 </Lems>

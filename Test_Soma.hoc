@@ -81,8 +81,16 @@ objref Soma_ca
 { Soma_ca = new Vector() }
 { Soma_ca.record(&Soma.cai(0.5))} 
 
-objref f_Soma_v
+objref Soma_m_egl19
+{ Soma_m_egl19 = new Vector() }
+{ Soma_m_egl19.record(&Soma.m_egl19(0.5))} 
 
+objref Soma_h_egl19
+{ Soma_h_egl19 = new Vector() }
+{ Soma_h_egl19.record(&Soma.h_egl19(0.5))} 
+
+
+objref f_Soma_v
 
 objref GraphWin_0
 objref GraphWin_1
@@ -170,6 +178,16 @@ for i=0, Soma_ca.size()-1 {
    f_Soma_ca.printf("%f\t%f\n", v_time.x[i]/1000, Soma_ca.x[i])
 }
 { f_Soma_ca.close() }
+
+
+
+objref f_Soma_chans
+f_Soma_chans = new File()
+{ f_Soma_chans.wopen("Soma.chans.dat") }
+for i=0, Soma_m_egl19.size()-1 {
+   f_Soma_chans.printf("%f\t%f\t%f\n", v_time.x[i]/1000, Soma_m_egl19.x[i], Soma_h_egl19.x[i])
+}
+{ f_Soma_chans.close() }
 
 
 

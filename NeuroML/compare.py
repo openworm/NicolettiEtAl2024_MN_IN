@@ -2,30 +2,45 @@ from pyneuroml import pynml
 from pyneuroml.plot.Plot import generate_plot
 from matplotlib import pyplot as plt
 
-plots = {'Membrane potentials':['Soma.v.dat', '../Soma.si.dat'],
-         'Ca conc':['Soma.ca.dat', '../Soma.ca.dat'],
-         }
+plots = {
+    "Membrane potentials": ["Soma.v.dat", "../Soma.si.dat"],
+    "Ca conc": ["Soma.ca.dat", "../Soma.ca.dat"],
+    "Channel activation": ["Soma.chans.dat", "../Soma.chans.dat"],
+}
 
 for p in plots:
     files = plots[p]
 
-    d, i = pynml.reload_standard_dat_file(files[0])
+    times = []
+    xs = []
+    labels = []
+    linewidths = []
 
-    times_jnml = d['t']
-    xs_jnml = d[0]
+    d, indices = pynml.reload_standard_dat_file(files[0])
+    for i in indices:
+        if i != "t":
+            times.append(d["t"])
+            xs.append(d[i])
+            labels.append("jnml %i" % i if len(d) > 2 else "jnml")
+            linewidths.append(3)
 
     d, i = pynml.reload_standard_dat_file(files[1])
 
-    times_nrn = d['t']
-    xs_nrn = d[0]
+    for i in indices:
+        if i != "t":
+            times.append(d["t"])
+            xs.append(d[i])
+            labels.append("nrn %i" % i if len(d) > 2 else "nrn")
+            linewidths.append(1)
 
     generate_plot(
-            [times_nrn,times_jnml],
-            [xs_nrn, xs_jnml],
-            p,
-            labels=["nrn", "jnml"],
-            linewidths=[2, 1], 
-            show_plot_already=False,)
-        
+        times,
+        xs,
+        p,
+        labels=labels,
+        linewidths=linewidths,
+        show_plot_already=False,
+    )
+
 
 plt.show()
