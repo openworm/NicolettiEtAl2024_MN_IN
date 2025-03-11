@@ -49,7 +49,7 @@ objref stim2
 
 Soma {
     stim1 = new IClamp(0.5)
-    stim1.del = 500.0
+    stim1.del = 100.0
     stim1.dur = 500.0
     stim1.amp = 0.01
     
