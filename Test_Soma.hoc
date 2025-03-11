@@ -13,6 +13,7 @@ Soma {pt3dclear() pt3dadd(0.0, 0, 0.0, 12.9228) pt3dadd(0.0, 12.9228, 0.0, 12.92
 define_shape()
 
 forall Ra = 100
+forall cm = 1.5
 
 insert pas 
 { g_pas=2.47789e-05 }
@@ -35,6 +36,7 @@ insert cadiff
 proc initialiseValues0() {
 
     forall  v = -70
+    forall  cai = .0001
 
 }
 
