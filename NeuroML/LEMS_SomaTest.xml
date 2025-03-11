@@ -18,7 +18,7 @@
     <include href="CaDynamics.nml"/>
 
 
-    <pulseGenerator id="stim" delay="100ms" duration="500ms" amplitude="10pA"/>
+    <pulseGenerator id="stim" delay="100ms" duration="500ms" amplitude="5pA"/>
 
     <cell id="TestCell">
     
@@ -39,7 +39,7 @@
         <biophysicalProperties id="biophys">
             <membraneProperties>
                 <channelDensity id="leak_chans" ionChannel="leak" condDensity="2.4778896e-05 S_per_cm2" erev="-52mV" ion="non_specific"/>
-                <!--<channelDensity id="slo1egl19_chans" ionChannel="slo1egl19" condDensity="0 S_per_cm2" erev="-80mV"   ion="k"/>-->
+                <channelDensity id="slo1egl19_chans" ionChannel="slo1egl19" condDensity="0 S_per_cm2" erev="-80mV"   ion="k"/>
                 <channelDensityNernst id="egl19_chans" ionChannel="egl19" condDensity="1.90606892e-4 S_per_cm2" ion="ca"/> 
 
     
@@ -80,32 +80,29 @@
       <Display id="pop_m_h" title="Plots of m" timeScale="1ms" xmin="-50.0" xmax="750"  ymin="-.1" ymax="1.1">
             
             <!-- final m value -->
-            <Line id="egl19_m_q" quantity="pop0/0/TestCell/biophys/membraneProperties/egl19_chans/egl19/m/q" scale="1" color="#0534e4" timeScale="1ms"/>
+          <Line id="egl19_m_q" quantity="pop0/0/TestCell/biophys/membraneProperties/egl19_chans/egl19/m/q" scale="1" color="#0534e4" timeScale="1ms"/>
             <Line id="egl19_h_q" quantity="pop0/0/TestCell/biophys/membraneProperties/egl19_chans/egl19/h/q" scale="1" color="#fff4e4" timeScale="1ms"/>
-<!--
-            <Line id="slo1egl19_m_egl19" quantity="pop0/0/TestCell/biophys/membraneProperties/slo1egl19_chans/slo1egl19/m/steadyState/m_egl19" scale="1" color="#ff3333" timeScale="1ms"/>
 
+            <Line id="slo1egl19_m_egl19" quantity="pop0/0/TestCell/biophys/membraneProperties/slo1egl19_chans/slo1egl19/m/steadyState/m_egl19" scale="1" color="#ff3333" timeScale="1ms"/>
             <Line id="slo1egl19_m" quantity="pop0/0/TestCell/biophys/membraneProperties/slo1egl19_chans/slo1egl19/m/q" scale="1" color="#ff33ff" timeScale="1ms"/>
 
+            <Line id="slo1egl19_kcm2" quantity="pop0/0/TestCell/biophys/membraneProperties/slo1egl19_chans/slo1egl19/m/steadyState/kcm2" scale="1" color="#faaaaf" timeScale="1ms"/>
+            <Line id="slo1egl19_kom2" quantity="pop0/0/TestCell/biophys/membraneProperties/slo1egl19_chans/slo1egl19/m/steadyState/kom2" scale="1" color="#444aaf" timeScale="1ms"/>
+            <Line id="slo1egl19_kop2" quantity="pop0/0/TestCell/biophys/membraneProperties/slo1egl19_chans/slo1egl19/m/steadyState/kop2" scale="1" color="#4999af" timeScale="1ms"/>
+<!--  
+
             <Line id="slo1egl19_m_egl19" quantity="pop_VB6/0/VB6/biophys/membraneProperties/slo1egl19_chans/slo1egl19/m/steadyState/m_egl19" scale="1" color="#ff3333" timeScale="1ms"/>-->
-</Display> <!-- -->
-        
+</Display> 
 
-       <!--   <Display id="pop_VB6_0_biophys/membraneProperties/egl19_chans/gDensity" title="Plots of pop_VB6_0_biophys/membraneProperties/egl19_chans/gDensity" timeScale="1ms" xmin="-240.0" xmax="2640.0" ymin="-1" ymax="1">
-            <Line id="pop_VB6_0_VB6_biophys_membraneProperties_egl19_chans_gDensity" quantity="pop_VB6/0/VB6/biophys/membraneProperties/egl19_chans/gDensity" scale="1" color="#98e752" timeScale="1ms"/>
-        </Display>
-
-        <Display id="pop_VB6_0_biophys/membraneProperties/egl19_chans/iDensity" title="Plots of pop_VB6_0_biophys/membraneProperties/egl19_chans/iDensity" timeScale="1ms" xmin="-240.0" xmax="2640.0" ymin="-1" ymax="1">
-            <Line id="pop_VB6_0_VB6_biophys_membraneProperties_egl19_chans_iDensity" quantity="pop_VB6/0/VB6/biophys/membraneProperties/egl19_chans/iDensity" scale="1" color="#bca074" timeScale="1ms"/>
-        </Display>
--->
-       
         <Display id="pop_caConc" title="Plots of caConc" timeScale="1ms" xmin="-50.0" xmax="750" ymin="0" ymax="6e-4">
             <Line id="pop_ca" quantity="pop0/0/TestCell/caConc" scale="1" color="#ff4f33" timeScale="1ms"/>
+            <Line id="caconc_eca" quantity="pop0/0/TestCell/biophys/membraneProperties/slo1egl19_chans/slo1egl19/m/steadyState/caConc" scale="1" color="#faaaaf" timeScale="1ms"/>
+
         </Display>
        
         <Display id="pop_eca" title="Plots of eca" timeScale="1ms" xmin="-50.0" xmax="750" ymin="0" ymax="130">
             <Line id="pop_ca" quantity="pop0/0/TestCell/biophys/membraneProperties/egl19_chans/erev" scale="1mV" color="#ff4f33" timeScale="1ms"/>
+            <Line id="slo1egl19_eca" quantity="pop0/0/TestCell/biophys/membraneProperties/slo1egl19_chans/slo1egl19/m/steadyState/eca" scale="1" color="#faaaaf" timeScale="1ms"/>
         </Display>
 
        
@@ -128,8 +125,14 @@
         <OutputFile id="pop_chans" fileName="Soma.chans.dat">
             <OutputColumn id="0" quantity="pop0/0/TestCell/biophys/membraneProperties/egl19_chans/egl19/m/q"/>
             <OutputColumn id="1" quantity="pop0/0/TestCell/biophys/membraneProperties/egl19_chans/egl19/h/q"/>
-            <!--<OutputColumn id="1" quantity="pop0/0/TestCell/biophys/membraneProperties/slo1egl19_chans/slo1egl19/m/steadyState/m_egl19"/>
-            <OutputColumn id="1" quantity="pop0/0/TestCell/biophys/membraneProperties/slo1egl19_chans/slo1egl19/m/q"/>-->
+            <OutputColumn id="2" quantity="pop0/0/TestCell/biophys/membraneProperties/slo1egl19_chans/slo1egl19/m/steadyState/m_egl19"/>
+            <OutputColumn id="3" quantity="pop0/0/TestCell/biophys/membraneProperties/slo1egl19_chans/slo1egl19/m/q"/>
+        </OutputFile>
+        
+        <OutputFile id="pop_vars" fileName="Soma.vars.dat">
+            <OutputColumn id="0" quantity="pop0/0/TestCell/biophys/membraneProperties/slo1egl19_chans/slo1egl19/m/steadyState/kcm2"/>
+            <OutputColumn id="1" quantity="pop0/0/TestCell/biophys/membraneProperties/slo1egl19_chans/slo1egl19/m/steadyState/kom2"/>
+            <OutputColumn id="2" quantity="pop0/0/TestCell/biophys/membraneProperties/slo1egl19_chans/slo1egl19/m/steadyState/kop2"/>
         </OutputFile>
 
     </Simulation>

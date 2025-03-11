@@ -7,6 +7,7 @@ plots = {
     "Ca conc": ["Soma.ca.dat", "../Soma.ca.dat"],
     "Channel activation": ["Soma.chans.dat", "../Soma.chans.dat"],
     "Ca rev pot": ["Soma.eca.dat", "../Soma.eca.dat"],
+    "Channel vars": ["Soma.vars.dat", "../Soma.vars.dat"],
 }
 
 for p in plots:
