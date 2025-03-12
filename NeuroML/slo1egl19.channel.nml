@@ -116,17 +116,6 @@
         <Constant name="stm19" dimension="none" value="10.0"/>
         <Constant name="sth19" dimension="none" value="10.0"/>
         <Constant name="stau19" dimension="none" value="10.0"/>
-        <Constant name="pds1" dimension="none" value="0.4"/>
-        <Constant name="pds2" dimension="none" value="0.55"/>
-        <Constant name="pds3" dimension="none" value="81.1179"/>
-        <Constant name="pds4" dimension="none" value="-22.9723"/>
-        <Constant name="pds5" dimension="none" value="5.0"/>
-        <Constant name="pds6" dimension="none" value="43.0937"/>
-        <Constant name="pds7" dimension="none" value="0.9"/>
-        <Constant name="pds8" dimension="none" value="40.4885"/>
-        <Constant name="pds9" dimension="none" value="28.7251"/>
-        <Constant name="pds10" dimension="none" value="3.7125"/>
-        <Constant name="pds11" dimension="none" value="0.0"/>
         <Constant name="shiftdps" dimension="none" value="10.0"/>
         <Constant name="d" dimension="none" value="250e-12"/>
         <Constant name="pi" dimension="none" value="3.14"/>
@@ -135,14 +124,6 @@
         <Constant name="gsc" dimension="none" value="40e-12"/>
         <Constant name="va_egl19" dimension="none" value="5.6"/>
         <Constant name="ka_egl19" dimension="none" value="7.5"/>
-        <Constant name="p1hegl19" dimension="none" value="1.4314"/>
-        <Constant name="p2hegl19" dimension="none" value="24.8573"/>
-        <Constant name="p3hegl19" dimension="none" value="11.9541"/>
-        <Constant name="p4hegl19" dimension="none" value="0.1427"/>
-        <Constant name="p5hegl19" dimension="none" value="5.9589"/>
-        <Constant name="p6hegl19" dimension="none" value="-10.5428"/>
-        <Constant name="p7hegl19" dimension="none" value="8.0552"/>
-        <Constant name="p8hegl19" dimension="none" value="0.6038"/>
         <Dynamics>
             <DerivedVariable name="V" dimension="none" value="(v) / VOLT_SCALE"/>   
 
@@ -183,28 +164,9 @@
         <Constant name="pdg6" dimension="none" value="1.3930"/>
         <Constant name="pdg7" dimension="none" value="30.0"/>
         <Constant name="stau19" dimension="none" value="10.0"/>
-        <Constant name="wop" dimension="none" value="0.156217"/>
-        <Constant name="wxy" dimension="none" value="-0.027527"/>
-        <Constant name="kxy" dimension="none" value="55.726186"/>
-        <Constant name="nxy" dimension="none" value="1.299198"/>
-        <Constant name="nyx" dimension="none" value="0.000100"/>
-        <Constant name="kyx" dimension="none" value="34.338784"/>
-        <Constant name="wom" dimension="none" value="3.152961"/>
-        <Constant name="wyx" dimension="none" value="0.012643"/>
         <Constant name="stm19" dimension="none" value="10.0"/>
         <Constant name="sth19" dimension="none" value="10.0"/>
         <Constant name="stau19" dimension="none" value="10.0"/>
-        <Constant name="pds1" dimension="none" value="0.4"/>
-        <Constant name="pds2" dimension="none" value="0.55"/>
-        <Constant name="pds3" dimension="none" value="81.1179"/>
-        <Constant name="pds4" dimension="none" value="-22.9723"/>
-        <Constant name="pds5" dimension="none" value="5.0"/>
-        <Constant name="pds6" dimension="none" value="43.0937"/>
-        <Constant name="pds7" dimension="none" value="0.9"/>
-        <Constant name="pds8" dimension="none" value="40.4885"/>
-        <Constant name="pds9" dimension="none" value="28.7251"/>
-        <Constant name="pds10" dimension="none" value="3.7125"/>
-        <Constant name="pds11" dimension="none" value="0.0"/>
         <Constant name="shiftdps" dimension="none" value="10.0"/>
         <Constant name="d" dimension="none" value="250e-12"/>
         <Constant name="pi" dimension="none" value="3.14"/>
@@ -253,14 +215,6 @@
         <Constant name="pdg6" dimension="none" value="1.3930"/>
         <Constant name="pdg7" dimension="none" value="30.0"/>
         <Constant name="stau19" dimension="none" value="10.0"/>
-        <Constant name="wop" dimension="none" value="0.156217"/>
-        <Constant name="wxy" dimension="none" value="-0.027527"/>
-        <Constant name="kxy" dimension="none" value="55.726186"/>
-        <Constant name="nxy" dimension="none" value="1.299198"/>
-        <Constant name="nyx" dimension="none" value="0.000100"/>
-        <Constant name="kyx" dimension="none" value="34.338784"/>
-        <Constant name="wom" dimension="none" value="3.152961"/>
-        <Constant name="wyx" dimension="none" value="0.012643"/>
         <Constant name="stm19" dimension="none" value="10.0"/>
         <Constant name="sth19" dimension="none" value="10.0"/>
         <Constant name="stau19" dimension="none" value="10.0"/>
@@ -283,14 +237,6 @@
         <Constant name="gsc" dimension="none" value="40e-12"/>
         <Constant name="va_egl19" dimension="none" value="5.6"/>
         <Constant name="ka_egl19" dimension="none" value="7.5"/>
-        <Constant name="p1hegl19" dimension="none" value="1.4314"/>
-        <Constant name="p2hegl19" dimension="none" value="24.8573"/>
-        <Constant name="p3hegl19" dimension="none" value="11.9541"/>
-        <Constant name="p4hegl19" dimension="none" value="0.1427"/>
-        <Constant name="p5hegl19" dimension="none" value="5.9589"/>
-        <Constant name="p6hegl19" dimension="none" value="-10.5428"/>
-        <Constant name="p7hegl19" dimension="none" value="8.0552"/>
-        <Constant name="p8hegl19" dimension="none" value="0.6038"/>
 
         <Dynamics>
             <DerivedVariable name="cac_nano" dimension="none" value="0.0001"/>
