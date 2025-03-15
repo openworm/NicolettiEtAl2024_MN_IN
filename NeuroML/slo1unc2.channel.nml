@@ -3,15 +3,19 @@
     <ionChannelHH id="slo1unc2" species="k" conductance="10pS">
       
         <gate id="m" instances="1" type="gateHHtauInf">
-            <timeCourse type="slo1_m_tau"/>
-            <steadyState type="slo1_m_inf"/>
+            <timeCourse type="slo1unc2_m_tau"/>
+            <steadyState type="slo1unc2_m_inf"/>
+        </gate>
+        <gate id="h" instances="1" type="gateHHtauInf">
+            <timeCourse type="slo1unc2_h_tau"/>
+            <steadyState type="slo1unc2_h_inf"/>
         </gate>
 
     </ionChannelHH>
-    <ComponentType name="slo1_m_inf" extends="baseVoltageDepVariable">
+    <ComponentType name="slo1unc2_m_inf" extends="baseVoltageConcDepVariable">
         <Constant name="VOLT_SCALE" dimension="voltage" value="1 mV"/>
         <Constant name="TIME_SCALE" dimension="time" value="1 ms"/>
-        <Constant name="bkg" dimension="none" value="0.05"/>
+        <Constant name="backgr" dimension="none" value="0.05"/>
         <Constant name="gbar" dimension="none" value="0.11"/>
         <Constant name="wom" dimension="none" value="3.152961"/>
         <Constant name="wyx" dimension="none" value="0.012643"/>
@@ -53,9 +57,13 @@
         <Constant name="fp3" dimension="none" value="1"/>
         <Constant name="fp4" dimension="none" value="1"/>
         <Constant name="fp5" dimension="none" value="1"/>
-        <Constant name="eca" dimension="none" value="60.0"/>
-        <Constant name="F" dimension="none" value="96485.0"/>
 
+        <Constant name="R" dimension="idealGasConstantDims" value="8.3144621 J_per_K_per_mol"/>
+        <Constant name="F" dimension="charge_per_mole" value="96485.3 C_per_mol"/>
+        <Constant name="zCa" dimension="none" value="2"/>
+        <Constant name="caConcExt" dimension="concentration" value="2 mM"/>
+        <Requirement name="temperature" dimension="temperature" description="The temperature to use in the calculation of _erev. Note this is generally exposed by a _networkWithTemperature_."/>
+        
         
         <Dynamics>
             <StateVariable name="munc2_unc2" dimension="none"/>
@@ -64,11 +72,12 @@
           
             <DerivedVariable name="tm_unc2" dimension="none" 
                 value ="(p1tmunc2/(exp(-(V-p2tmunc2+30)/(p3tmunc2))+exp((V-p2tmunc2+30)/(p4tmunc2)))+p5tmunc2)*3"/>
-            <DerivedVariable name="cao_nano" dimension="none" value="(((abs(gsc*(V - eca))/(8*pi*F*d*r))*exp(-r/(sqrt(d/(b*kb)))))*1e6*1e-3) + bkg"/>
+            <DerivedVariable name="eca" dimension="none" value="(R * temperature / (zCa * F)) * log(caConcExt / caConc)/VOLT_SCALE"/>        
+            <DerivedVariable name="cao_nano" dimension="none" value="(((abs(gsc*(V - eca)*1e-3)/(8*pi*F*d*r))*exp(-r/(sqrt(d/(b*kb)))))*1e6*1e-3) + backgr"/>
             <DerivedVariable name = "kop" dimension="none" value="wop*exp(-wxy*V)*(1/(1+((kxy/cao_nano)^nxy)))"/>
             <DerivedVariable name = "alpha1" dimension="none" value="minf_unc2/tm_unc2"/>
             <DerivedVariable name = "beta1" dimension="none" value="(1/tm_unc2)-alpha1"/>
-            <DerivedVariable name = "kcm" dimension="none" value="wom*exp(-wyx*V)*(1/(1+((bkg/kyx)^nyx)))"/>
+            <DerivedVariable name = "kcm" dimension="none" value="wom*exp(-wyx*V)*(1/(1+((backgr/kyx)^nyx)))"/>
             <DerivedVariable name = "kom" dimension="none" value="wom*exp(-wyx*V)*(1/(1+((cao_nano/kyx)^nyx)))"/>
             <DerivedVariable name="x" dimension="none" exposure="x"
                 value="(munc2_unc2*kop*(alpha1+beta1+kcm))/((kop+kom)*(kcm+alpha1)+(beta1*kcm))"/>
@@ -78,10 +87,10 @@
            
         </Dynamics>
     </ComponentType>
-    <ComponentType name="slo1_m_tau" extends="baseVoltageDepTime">
+    <ComponentType name="slo1unc2_m_tau" extends="baseVoltageConcDepTime">
         <Constant name="VOLT_SCALE" dimension="voltage" value="1 mV"/>
         <Constant name="TIME_SCALE" dimension="time" value="1 ms"/>
-        <Constant name="bkg" dimension="none" value="0.05"/>
+        <Constant name="backgr" dimension="none" value="0.05"/>
         <Constant name="gbar" dimension="none" value="0.11"/>
         <Constant name="wom" dimension="none" value="3.152961"/>
         <Constant name="wyx" dimension="none" value="0.012643"/>
@@ -123,22 +132,136 @@
         <Constant name="fp3" dimension="none" value="1"/>
         <Constant name="fp4" dimension="none" value="1"/>
         <Constant name="fp5" dimension="none" value="1"/>
-        <Constant name="eca" dimension="none" value="60.0"/>
-        <Constant name="F" dimension="none" value="96485.0"/>
 
+        <Constant name="R" dimension="idealGasConstantDims" value="8.3144621 J_per_K_per_mol"/>
+        <Constant name="F" dimension="charge_per_mole" value="96485.3 C_per_mol"/>
+        <Constant name="zCa" dimension="none" value="2"/>
+        <Constant name="caConcExt" dimension="concentration" value="2 mM"/>
+        <Requirement name="temperature" dimension="temperature" description="The temperature to use in the calculation of _erev. Note this is generally exposed by a _networkWithTemperature_."/>
+        
         <Dynamics>
             <DerivedVariable name="V" dimension="none" value="(v) / VOLT_SCALE"/>
-             <DerivedVariable name="cao_nano" dimension="none" value="(((abs(gsc*(V - eca))/(8*pi*F*d*r))*exp(-r/(sqrt(d/(b*kb)))))*1e6*1e-3) + bkg"/>
-           
+            <DerivedVariable name="eca" dimension="none" value="(R * temperature / (zCa * F)) * log(caConcExt / caConc)/VOLT_SCALE"/>        
+            <DerivedVariable name="cao_nano" dimension="none" value="(((abs(gsc*(V - eca)*1e-3)/(8*pi*F*d*r))*exp(-r/(sqrt(d/(b*kb)))))*1e6*1e-3) + backgr"/>
             <DerivedVariable name = "minf_unc2" dimension="none" value="1 / (1 + exp(-(V - va_unc2 + 25) / ka_unc2))"/>
             <DerivedVariable name="tm_unc2" dimension="none" 
                 value ="(p1tmunc2/(exp(-(V-p2tmunc2+shiftmunc2)/(p3tmunc2))+exp((V-p2tmunc2+shiftmunc2)/(p4tmunc2)))+p5tmunc2)*constmunc2"/>
             <DerivedVariable name = "kop" dimension="none" value="wop*exp(-wxy*V)*(1/(1+((kxy/cao_nano)^nxy)))"/>
             <DerivedVariable name = "alpha1" dimension="none" value="minf_unc2/tm_unc2"/>
             <DerivedVariable name = "beta1" dimension="none" value="(1/tm_unc2)-alpha1"/>
-            <DerivedVariable name = "kcm" dimension="none" value="wom*exp(-wyx*V)*(1/(1+((bkg/kyx)^nyx)))"/>
+            <DerivedVariable name = "kcm" dimension="none" value="wom*exp(-wyx*V)*(1/(1+((backgr/kyx)^nyx)))"/>
             <DerivedVariable name = "kom" dimension="none" value="wom*exp(-wyx*V)*(1/(1+((cao_nano/kyx)^nyx)))"/>
             <DerivedVariable name="t" dimension="time" exposure="t" value="((alpha1+beta1+kcm)/((kop)+kom)*(kcm+alpha1)+(beta1*kcm))* TIME_SCALE"/>
+        </Dynamics>
+    </ComponentType>
+
+
+
+
+   <ComponentType name="slo1unc2_h_inf" extends="baseVoltageDepVariable">
+        <Constant name="VOLT_SCALE" dimension="voltage" value="1 mV"/>
+        <Constant name="TIME_SCALE" dimension="time" value="1 ms"/>
+        <Constant name="gslo2" dimension="none" value="0.1"/>
+        <Constant name="backgr" dimension="none" value="0.05"/>
+        <Constant name="r" dimension="none" value="1.3e-09"/>
+        <Constant name="b" dimension="none" value="3e-05"/>
+        <Constant name="wom" dimension="none" value="3.152961"/>
+        <Constant name="wyx" dimension="none" value="0.012643"/>
+        <Constant name="kyx" dimension="none" value="34.338784"/>
+        <Constant name="nyx" dimension="none" value="0.000100"/>
+        <Constant name="wop" dimension="none" value="0.156217"/>
+        <Constant name="wxy" dimension="none" value="-0.027527"/>
+        <Constant name="kxy" dimension="none" value="55.726186"/>
+        <Constant name="nxy" dimension="none" value="1.299198"/>
+        <Constant name="sth2" dimension="none" value="25.0"/>
+        <Constant name="p1tmunc2" dimension="none" value="1.4969"/>
+        <Constant name="p2tmunc2" dimension="none" value="-8.1761"/>
+        <Constant name="p3tmunc2" dimension="none" value="9.0753"/>
+        <Constant name="p4tmunc2" dimension="none" value="15.3456"/>
+        <Constant name="p5tmunc2" dimension="none" value="0.1029"/>
+        <Constant name="shiftmunc2" dimension="none" value="30.0"/>
+        <Constant name="constmunc2" dimension="none" value="3.0"/>
+        <Constant name="pi" dimension="none" value="3.14159265359"/>
+        <Constant name="d" dimension="none" value="2.5e-10"/>
+        <Constant name="F" dimension="none" value="96485.0"/>
+        <Constant name="kb" dimension="none" value="500000000.0"/>
+        <Constant name="gsc" dimension="none" value="4e-11"/>
+        <Constant name="eca" dimension="none" value="60.0"/>
+        <Constant name="stm2" dimension="none" value="25.0"/>
+        <Constant name="va_unc2" dimension="none" value="-12.17"/>
+        <Constant name="ka_unc2" dimension="none" value="3.97"/>
+        <Constant name="gunc2" dimension="none" value="1.0"/>
+        <Constant name="vi_unc2" dimension="none" value="-52.47"/>
+        <Constant name="ki_unc2" dimension="none" value="5.6"/>
+        <Constant name="p1thunc2" dimension="none" value="83.8037"/>
+        <Constant name="p2thunc2" dimension="none" value="52.8997"/>
+        <Constant name="p3thunc2" dimension="none" value="3.4557"/>
+        <Constant name="p4thunc2" dimension="none" value="72.0995"/>
+        <Constant name="p5thunc2" dimension="none" value="23.9009"/>
+        <Constant name="p6thunc2" dimension="none" value="3.5903"/>
+        <Constant name="consthunc2" dimension="none" value="1.7"/>
+        <Constant name="shifthunc2" dimension="none" value="30.0"/>
+        <Dynamics>
+            <DerivedVariable name="V" dimension="none" value="(v) / VOLT_SCALE"/>
+            <DerivedVariable name="cac_nano" dimension="none" value="backgr"/>
+            <DerivedVariable name="cao_nano" dimension="none" value="backgr + 1.0*(1/(8*pi*F*d*r))*exp((-r)/(sqrt(d/((b*kb)))))*abs(gsc*(V - eca))"/>
+            <DerivedVariable name="tm_unc2" dimension="none" value="constmunc2*(p1tmunc2/(exp((-V + p2tmunc2 - shiftmunc2)/p3tmunc2) + exp((V - p2tmunc2 + shiftmunc2)/p4tmunc2)) + p5tmunc2)"/>
+            <DerivedVariable name="minf_unc2" dimension="none" value="1/(exp((-V - stm2 + va_unc2)/ka_unc2) + 1)"/>
+            <DerivedVariable name="alpha" dimension="none" value="minf_unc2/tm_unc2"/>
+            <DerivedVariable name="x" dimension="none" exposure="x" value="1/(exp((V + sth2 - vi_unc2)/ki_unc2) + 1)"/>
+        </Dynamics>
+    </ComponentType>
+    <ComponentType name="slo1unc2_h_tau" extends="baseVoltageDepTime">
+        <Constant name="VOLT_SCALE" dimension="voltage" value="1 mV"/>
+        <Constant name="TIME_SCALE" dimension="time" value="1 ms"/>
+        <Constant name="gslo2" dimension="none" value="0.1"/>
+        <Constant name="backgr" dimension="none" value="0.05"/>
+        <Constant name="r" dimension="none" value="1.3e-09"/>
+        <Constant name="b" dimension="none" value="3e-05"/>
+        <Constant name="wom1" dimension="none" value="0.896395"/>
+        <Constant name="wyx1" dimension="none" value="0.019405"/>
+        <Constant name="kyx1" dimension="none" value="3294.553404"/>
+        <Constant name="nyx1" dimension="none" value="1e-05"/>
+        <Constant name="wop1" dimension="none" value="0.026719"/>
+        <Constant name="wxy1" dimension="none" value="-0.024123"/>
+        <Constant name="kxy1" dimension="none" value="93.449423"/>
+        <Constant name="nxy1" dimension="none" value="1.835067"/>
+        <Constant name="sth2" dimension="none" value="25.0"/>
+        <Constant name="p1tmunc2" dimension="none" value="1.4969"/>
+        <Constant name="p2tmunc2" dimension="none" value="-8.1761"/>
+        <Constant name="p3tmunc2" dimension="none" value="9.0753"/>
+        <Constant name="p4tmunc2" dimension="none" value="15.3456"/>
+        <Constant name="p5tmunc2" dimension="none" value="0.1029"/>
+        <Constant name="shiftmunc2" dimension="none" value="30.0"/>
+        <Constant name="constmunc2" dimension="none" value="3.0"/>
+        <Constant name="pi" dimension="none" value="3.14159265359"/>
+        <Constant name="d" dimension="none" value="2.5e-10"/>
+        <Constant name="F" dimension="none" value="96485.0"/>
+        <Constant name="kb" dimension="none" value="500000000.0"/>
+        <Constant name="gsc" dimension="none" value="4e-11"/>
+        <Constant name="eca" dimension="none" value="60.0"/>
+        <Constant name="stm2" dimension="none" value="25.0"/>
+        <Constant name="va_unc2" dimension="none" value="-12.17"/>
+        <Constant name="ka_unc2" dimension="none" value="3.97"/>
+        <Constant name="gunc2" dimension="none" value="1.0"/>
+        <Constant name="vi_unc2" dimension="none" value="-52.47"/>
+        <Constant name="ki_unc2" dimension="none" value="5.6"/>
+        <Constant name="p1thunc2" dimension="none" value="83.8037"/>
+        <Constant name="p2thunc2" dimension="none" value="52.8997"/>
+        <Constant name="p3thunc2" dimension="none" value="3.4557"/>
+        <Constant name="p4thunc2" dimension="none" value="72.0995"/>
+        <Constant name="p5thunc2" dimension="none" value="23.9009"/>
+        <Constant name="p6thunc2" dimension="none" value="3.5903"/>
+        <Constant name="consthunc2" dimension="none" value="1.7"/>
+        <Constant name="shifthunc2" dimension="none" value="30.0"/>
+        <Dynamics>
+            <DerivedVariable name="cac_nano" dimension="none" value="backgr"/>
+            <DerivedVariable name="cao_nano" dimension="none" value="backgr + 1.0*(1/(8*pi*F*d*r))*exp((-r)/(sqrt(d/((b*kb)))))*abs(gsc*(V - eca))"/>
+            <DerivedVariable name="tm_unc2" dimension="none" value="constmunc2*(p1tmunc2/(exp((-V + p2tmunc2 - shiftmunc2)/p3tmunc2) + exp((V - p2tmunc2 + shiftmunc2)/p4tmunc2)) + p5tmunc2)"/>
+            <DerivedVariable name="minf_unc2" dimension="none" value="1/(exp((-V - stm2 + va_unc2)/ka_unc2) + 1)"/>
+            <DerivedVariable name="alpha" dimension="none" value="minf_unc2/tm_unc2"/>
+            <DerivedVariable name="V" dimension="none" value="(v) / VOLT_SCALE"/>
+            <DerivedVariable name="t" dimension="time" exposure="t" value="(consthunc2*(p1thunc2/(exp((V - p2thunc2 + shifthunc2)/p3thunc2) + 1) + p4thunc2/(exp((-V + p5thunc2 - shifthunc2)/p6thunc2) + 1)))* TIME_SCALE"/>
         </Dynamics>
     </ComponentType>
 </neuroml>

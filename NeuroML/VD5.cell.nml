@@ -1,0 +1,51 @@
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2.3.1.xsd" id="VD5">
+    <notes>A cell from Nicoletti et al. 2024</notes>
+    <include href="egl19.channel.nml"/>  
+    <include href="leak.channel.nml"/>
+    <include href="slo2egl19.channel.nml"/>  
+    <include href="slo2iso.channel.nml"/>
+    <include href="cca1.channel.nml"/>
+    <include href="irk.channel.nml"/>
+    <include href="shk1.channel.nml"/>
+    <include href="nca.channel.nml"/>
+    <include href="CaDynamics.nml"/> 
+    <cell id="VD5">
+        <notes>VD5 cell from Nicoletti et al. 2024</notes>
+        <morphology id="morphology">
+            <segment id="0" name="soma">
+                <proximal x="0.0" y="0.0" z="0.0" diameter="10.578065715913658"/>
+                <distal x="0.0" y="10.578065715913658" z="0.0" diameter="10.578065715913658"/>
+            </segment>
+            <segmentGroup id="soma_group" neuroLexId="GO:0043025">
+                <notes>Default soma segment group for the cell</notes>
+                <member segment="0"/>
+            </segmentGroup>
+            <segmentGroup id="all">
+                <notes>Default segment group for all segments in the cell</notes>
+                <member segment="0"/>
+            </segmentGroup>
+        </morphology>
+        <biophysicalProperties id="biophys">
+            <membraneProperties>
+                <channelDensity id="leak_chans" ionChannel="leak" condDensity="5.68941484e-05 S_per_cm2" erev="-75mV" ion="non_specific"/>
+                <channelDensity id="slo2egl19_chans" ionChannel="slo2egl19" condDensity="4.83600262e-04 S_per_cm2" erev="-80mV"   ion="k"/> 
+                <channelDensity id="slo2iso_chans" ionChannel="slo2iso" condDensity="4.83600262e-04 S_per_cm2" erev="-80mV"  ion="k"/> 
+                <channelDensityNernst id="egl19_chans" ionChannel="egl19" condDensity="2.56023668e-04 S_per_cm2" ion="ca"/>  
+                <channelDensity id="cca1_chans" ionChannel="cca1" condDensity="2.84470742e-05 S_per_cm2" erev="60mV" ion="ca"/> 
+                <channelDensity id="irk_chans" ionChannel="irk" condDensity="1.99129520e-04 S_per_cm2" erev="-80mV"  ion="k"/>  
+                <channelDensity id="shk1_chans" ionChannel="shk1" condDensity="3.41364891e-04 S_per_cm2" erev="-80mV"  ion="k"/> 
+                <channelDensity id="nca_chans" ionChannel="nca" condDensity="2.56023668e-05 S_per_cm2" erev="30mV"  ion="non_specific"/>  
+           
+   
+                <spikeThresh value="0mV"/>
+                <specificCapacitance value="1.0 uF_per_cm2"/>
+                <initMembPotential value="-45mV"/>
+            </membraneProperties>
+            <intracellularProperties>
+                <species id="ca" concentrationModel="CaDynamics_VA5" ion="ca" initialConcentration=".0001 mM" initialExtConcentration="2 mM"/> 
+                <resistivity value="0.1 kohm_cm"/>
+            </intracellularProperties>
+        </biophysicalProperties>
+    </cell>
+
+</neuroml>

@@ -3,7 +3,7 @@
 
     <ionChannelHH id="shl1" species="k" conductance="10pS">
        
-        <gate id="m" instances="3" type="gateHHtauInf">
+        <gate id="m" instances="1" type="gateHHtauInf">
             <timeCourse type="shal_m_tau"/>
             <steadyState type="shal_m_inf"/>
         </gate>
@@ -25,7 +25,7 @@
         <Constant name="kashal" dimension="none" value="16.250"/>
         <Dynamics>
             <DerivedVariable name="V" dimension="none" value="(v) / VOLT_SCALE"/>
-            <DerivedVariable name="x" dimension="none" exposure="x" value="1/(1+exp(-(v-vashal+shalsfhit)/kashal))"/>
+            <DerivedVariable name="x" dimension="none" exposure="x" value="1/(1+exp(-(V-vashal+shalsfhit)/kashal))"/>
         </Dynamics>
     </ComponentType>
     <ComponentType name="shal_m_tau" extends="baseVoltageDepTime">

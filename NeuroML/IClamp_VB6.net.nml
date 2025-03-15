@@ -17,7 +17,7 @@
     <network id="IClamp_VB6" type="networkWithTemperature" temperature="6.3degC">
         <notes>A network model: IClamp_VB6</notes>
         <property tag="recommended_dt_ms" value="0.025"/>
-        <property tag="recommended_duration_ms" value="11000.0"/>
+        <property tag="recommended_duration_ms" value="2000.0"/>
         <population id="pop_VB6" component="VB6" size="11" type="populationList">
             <property tag="color" value="0 0.5 1"/>
             <property tag="region" value="Worm"/>

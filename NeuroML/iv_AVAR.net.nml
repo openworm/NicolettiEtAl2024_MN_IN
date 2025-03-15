@@ -1,0 +1,34 @@
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2.3.1.xsd" id="network_of_AVAR">
+    <include href="AVAR.cell.nml"/>
+    <pulseGenerator id="input_min0_03nA" delay="100ms" duration="1100ms" amplitude="-0.03nA"/>
+    <pulseGenerator id="input_min0_019999999999999997nA" delay="100ms" duration="1100ms" amplitude="-0.019999999999999997nA"/>
+    <pulseGenerator id="input_min0_009999999999999997nA" delay="100ms" duration="1100ms" amplitude="-0.009999999999999997nA"/>
+    <pulseGenerator id="input_3_469446951953614emin18nA" delay="100ms" duration="1100ms" amplitude="3.469446951953614e-18nA"/>
+    <pulseGenerator id="input_0_010000000000000004nA" delay="100ms" duration="1100ms" amplitude="0.010000000000000004nA"/>
+    <pulseGenerator id="input_0_020000000000000004nA" delay="100ms" duration="1100ms" amplitude="0.020000000000000004nA"/>
+    <pulseGenerator id="input_0_030000000000000006nA" delay="100ms" duration="1100ms" amplitude="0.030000000000000006nA"/>
+    <network id="network_of_AVAR" type="networkWithTemperature" temperature="32degC">
+        <population id="population_of_AVAR" component="AVAR" size="7"/>
+        <inputList id="input_min0_03nA" population="population_of_AVAR" component="input_min0_03nA">
+            <input id="0" target="../population_of_AVAR[0]" destination="synapses"/>
+        </inputList>
+        <inputList id="input_min0_019999999999999997nA" population="population_of_AVAR" component="input_min0_019999999999999997nA">
+            <input id="0" target="../population_of_AVAR[1]" destination="synapses"/>
+        </inputList>
+        <inputList id="input_min0_009999999999999997nA" population="population_of_AVAR" component="input_min0_009999999999999997nA">
+            <input id="0" target="../population_of_AVAR[2]" destination="synapses"/>
+        </inputList>
+        <inputList id="input_3_469446951953614emin18nA" population="population_of_AVAR" component="input_3_469446951953614emin18nA">
+            <input id="0" target="../population_of_AVAR[3]" destination="synapses"/>
+        </inputList>
+        <inputList id="input_0_010000000000000004nA" population="population_of_AVAR" component="input_0_010000000000000004nA">
+            <input id="0" target="../population_of_AVAR[4]" destination="synapses"/>
+        </inputList>
+        <inputList id="input_0_020000000000000004nA" population="population_of_AVAR" component="input_0_020000000000000004nA">
+            <input id="0" target="../population_of_AVAR[5]" destination="synapses"/>
+        </inputList>
+        <inputList id="input_0_030000000000000006nA" population="population_of_AVAR" component="input_0_030000000000000006nA">
+            <input id="0" target="../population_of_AVAR[6]" destination="synapses"/>
+        </inputList>
+    </network>
+</neuroml>

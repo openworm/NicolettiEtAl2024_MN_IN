@@ -1,0 +1,178 @@
+<Lems>
+
+    <!-- 
+
+        This LEMS file has been automatically generated using PyNeuroML v1.3.14 (libNeuroML v0.6.5)
+
+     -->
+
+    <!-- Specify which component to run -->
+    <Target component="Sim_IClamp_VD5" reportFile="report.Sim_IClamp_VD5.txt"/>
+
+    <!-- Include core NeuroML2 ComponentType definitions -->
+    <Include file="Cells.xml"/>
+    <Include file="Networks.xml"/>
+    <Include file="Simulation.xml"/>
+
+    <Include file="PyNN.xml"/>
+    <Include file="IClamp_VD5.net.nml"/>
+    <Include file="VD5.cell.nml"/>
+
+    <Simulation id="Sim_IClamp_VD5" length="2000.0ms" step="0.025ms" target="IClamp_VD5" seed="12345">  <!-- Note seed: ensures same random numbers used every run -->
+
+        
+    <!--  <Display id="pop_VD5_0_biophys/membraneProperties/egl19_chans/egl19/m/q" title="Plots of pop_VD5_0_biophys/membraneProperties/egl19_chans/egl19/m/q" timeScale="1ms" xmin="-200.0" xmax="2640.0" ymin="-.1" ymax="1.1">
+            
+             final m value
+            <Line id="pop_VD5_0_VD5_biophys_membraneProperties_egl19_chans_VD5_egl19_m_q" quantity="pop_VD5/0/VD5/biophys/membraneProperties/egl19_chans/egl19/m/q" scale="1" color="#0534e4" timeScale="1ms"/>
+            <Line id="pop_VD5_0_VD5_biophys_membraneProperties_slo1egl19_chans_VD5_slo1egl19_m_egl19" quantity="pop_VD5/0/VD5/biophys/membraneProperties/slo1egl19_chans/slo1egl19/m/steadyState/m_egl19" scale="1" color="#ff3333" timeScale="1ms"/>
+
+             inf m value
+            <Line id="pop_VD5_0_VD5_biophys_membraneProperties_egl19_chans_VD5_egl19_m_q_inf" quantity="pop_VD5/0/VD5/biophys/membraneProperties/egl19_chans/egl19/m/steadyState/x" scale="1" color="#ffffe4" timeScale="1ms"/>
+            <Line id="pop_VD5_0_VD5_biophys_membraneProperties_slo1egl19_chans_VD5_slo1egl19_m_act" quantity="pop_VD5/0/VD5/biophys/membraneProperties/slo1egl19_chans/slo1egl19/m/steadyState/actegl19" scale="1" color="#ff33ff" timeScale="1ms"/>
+
+             final h value 
+            <Line id="pop_VD5_0_VD5_biophys_membraneProperties_egl19_chans_VD5_egl19_h_q" quantity="pop_VD5/0/VD5/biophys/membraneProperties/egl19_chans/egl19/h/q" scale="1" color="#05aaaa" timeScale="1ms"/>
+            <Line id="pop_VD5_0_VD5_biophys_membraneProperties_slo1egl19_chans_VD5_slo1egl19_h_x" quantity="pop_VD5/0/VD5/biophys/membraneProperties/slo1egl19_chans/slo1egl19/h/steadyState/actegl19" scale="1" color="#ffff33" timeScale="1ms"/>
+         </Display>  
+    -->
+        
+
+       <!--   <Display id="pop_VD5_0_biophys/membraneProperties/egl19_chans/gDensity" title="Plots of pop_VD5_0_biophys/membraneProperties/egl19_chans/gDensity" timeScale="1ms" xmin="-240.0" xmax="2640.0" ymin="-1" ymax="1">
+            <Line id="pop_VD5_0_VD5_biophys_membraneProperties_egl19_chans_gDensity" quantity="pop_VD5/0/VD5/biophys/membraneProperties/egl19_chans/gDensity" scale="1" color="#98e752" timeScale="1ms"/>
+        </Display>
+
+        <Display id="pop_VD5_0_biophys/membraneProperties/egl19_chans/iDensity" title="Plots of pop_VD5_0_biophys/membraneProperties/egl19_chans/iDensity" timeScale="1ms" xmin="-240.0" xmax="2640.0" ymin="-1" ymax="1">
+            <Line id="pop_VD5_0_VD5_biophys_membraneProperties_egl19_chans_iDensity" quantity="pop_VD5/0/VD5/biophys/membraneProperties/egl19_chans/iDensity" scale="1" color="#bca074" timeScale="1ms"/>
+        </Display>
+
+
+
+        <Display id="pop_VD5_0_biophys/membraneProperties/slo1egl19_chans/gDensity" title="Plots of pop_VD5_0_biophys/membraneProperties/slo1egl19_chans/gDensity" timeScale="1ms" xmin="-240.0" xmax="2640.0" ymin="-1" ymax="1">
+            <Line id="pop_VD5_0_VD5_biophys_membraneProperties_slo1egl19_chans_gDensity" quantity="pop_VD5/0/VD5/biophys/membraneProperties/slo1egl19_chans/gDensity" scale="1" color="#98e752" timeScale="1ms"/>
+        </Display>
+
+        <Display id="pop_VD5_0_biophys/membraneProperties/slo1egl19_chans/iDensity" title="Plots of pop_VD5_0_biophys/membraneProperties/slo1egl19_chans/iDensity" timeScale="1ms" xmin="-240.0" xmax="2640.0" ymin="-1" ymax="1">
+            <Line id="pop_VD5_0_VD5_biophys_membraneProperties_slo1egl19_chans_iDensity" quantity="pop_VD5/0/VD5/biophys/membraneProperties/slo1egl19_chans/iDensity" scale="1" color="#bca074" timeScale="1ms"/>
+        </Display>
+
+-->
+       <!--
+        <Display id="pop_VD5_0_caConc" title="Plots of pop_VD5_0_caConc" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1e-4" ymax="6e-4">
+            <Line id="pop_VD5_0_VD5_caConc" quantity="pop_VD5/0/VD5/caConc" scale="1" color="#d54f33" timeScale="1ms"/>
+        </Display>
+        
+        <Display id="pop_VD5_10_caConc" title="Plots of pop_VD5_10_caConc" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
+            <Line id="pop_VD5_10_VD5_caConc" quantity="pop_VD5/10/VD5/caConc" scale="1" color="#0534e4" timeScale="1ms"/>
+        </Display> 
+
+        <Display id="pop_VD5_1_caConc" title="Plots of pop_VD5_1_caConc" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
+            <Line id="pop_VD5_1_VD5_caConc" quantity="pop_VD5/1/VD5/caConc" scale="1" color="#98e752" timeScale="1ms"/>
+        </Display>
+
+        <Display id="pop_VD5_2_caConc" title="Plots of pop_VD5_2_caConc" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
+            <Line id="pop_VD5_2_VD5_caConc" quantity="pop_VD5/2/VD5/caConc" scale="1" color="#bca074" timeScale="1ms"/>
+        </Display>
+
+        <Display id="pop_VD5_3_caConc" title="Plots of pop_VD5_3_caConc" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
+            <Line id="pop_VD5_3_VD5_caConc" quantity="pop_VD5/3/VD5/caConc" scale="1" color="#632794" timeScale="1ms"/>
+        </Display>
+
+       <Display id="pop_VD5_4_caConc" title="Plots of pop_VD5_4_caConc" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
+            <Line id="pop_VD5_4_VD5_caConc" quantity="pop_VD5/4/VD5/caConc" scale="1" color="#8a5d88" timeScale="1ms"/>
+        </Display>
+
+        <Display id="pop_VD5_5_caConc" title="Plots of pop_VD5_5_caConc" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
+            <Line id="pop_VD5_5_VD5_caConc" quantity="pop_VD5/5/VD5/caConc" scale="1" color="#df5954" timeScale="1ms"/>
+        </Display>
+
+        <Display id="pop_VD5_6_caConc" title="Plots of pop_VD5_6_caConc" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
+            <Line id="pop_VD5_6_VD5_caConc" quantity="pop_VD5/6/VD5/caConc" scale="1" color="#52c8bf" timeScale="1ms"/>
+        </Display>
+
+        <Display id="pop_VD5_7_caConc" title="Plots of pop_VD5_7_caConc" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
+            <Line id="pop_VD5_7_VD5_caConc" quantity="pop_VD5/7/VD5/caConc" scale="1" color="#bf0239" timeScale="1ms"/>
+        </Display>
+
+        <Display id="pop_VD5_8_caConc" title="Plots of pop_VD5_8_caConc" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
+            <Line id="pop_VD5_8_VD5_caConc" quantity="pop_VD5/8/VD5/caConc" scale="1" color="#3f9fe8" timeScale="1ms"/>
+        </Display>
+
+        <Display id="pop_VD5_9_caConc" title="Plots of pop_VD5_9_caConc" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-1" ymax="1">
+            <Line id="pop_VD5_9_VD5_caConc" quantity="pop_VD5/9/VD5/caConc" scale="1" color="#dda9d2" timeScale="1ms"/>
+        </Display> 
+        -->
+        <Display id="pop_VD5_v" title="Plots of pop_VD5_v" timeScale="1ms" xmin="-1100.0" xmax="12100.000000000002" ymin="-80" ymax="40">
+            <Line id="pop_VD5_0_VD5_v" quantity="pop_VD5/0/VD5/v" scale="1mV" color="#85ad96" timeScale="1ms"/>
+            <Line id="pop_VD5_1_VD5_v" quantity="pop_VD5/1/VD5/v" scale="1mV" color="#59438f" timeScale="1ms"/>
+            <Line id="pop_VD5_2_VD5_v" quantity="pop_VD5/2/VD5/v" scale="1mV" color="#5fa56f" timeScale="1ms"/>
+            <Line id="pop_VD5_3_VD5_v" quantity="pop_VD5/3/VD5/v" scale="1mV" color="#b5b5a2" timeScale="1ms"/>
+            <Line id="pop_VD5_4_VD5_v" quantity="pop_VD5/4/VD5/v" scale="1mV" color="#2ebe19" timeScale="1ms"/>
+            <Line id="pop_VD5_5_VD5_v" quantity="pop_VD5/5/VD5/v" scale="1mV" color="#d30150" timeScale="1ms"/>
+            <Line id="pop_VD5_6_VD5_v" quantity="pop_VD5/6/VD5/v" scale="1mV" color="#55490a" timeScale="1ms"/>
+            <Line id="pop_VD5_7_VD5_v" quantity="pop_VD5/7/VD5/v" scale="1mV" color="#4bd9d0" timeScale="1ms"/>
+            <Line id="pop_VD5_8_VD5_v" quantity="pop_VD5/8/VD5/v" scale="1mV" color="#69535e" timeScale="1ms"/>
+            <Line id="pop_VD5_9_VD5_v" quantity="pop_VD5/9/VD5/v" scale="1mV" color="#27dae9" timeScale="1ms"/>
+            <Line id="pop_VD5_10_VD5_v" quantity="pop_VD5/10/VD5/v" scale="1mV" color="#6143ed" timeScale="1ms"/>
+        </Display>
+
+        <OutputFile id="Sim_IClamp_VD5_pop_VD5_v_dat" fileName="Sim_IClamp_VD5.pop_VD5.v.dat">
+            <OutputColumn id="pop_VD5_0_VD5_v" quantity="pop_VD5/0/VD5/v"/>
+            <OutputColumn id="pop_VD5_1_VD5_v" quantity="pop_VD5/1/VD5/v"/>
+            <OutputColumn id="pop_VD5_2_VD5_v" quantity="pop_VD5/2/VD5/v"/>
+            <OutputColumn id="pop_VD5_3_VD5_v" quantity="pop_VD5/3/VD5/v"/>
+            <OutputColumn id="pop_VD5_4_VD5_v" quantity="pop_VD5/4/VD5/v"/>
+            <OutputColumn id="pop_VD5_5_VD5_v" quantity="pop_VD5/5/VD5/v"/>
+            <OutputColumn id="pop_VD5_6_VD5_v" quantity="pop_VD5/6/VD5/v"/>
+            <OutputColumn id="pop_VD5_7_VD5_v" quantity="pop_VD5/7/VD5/v"/>
+            <OutputColumn id="pop_VD5_8_VD5_v" quantity="pop_VD5/8/VD5/v"/>
+            <OutputColumn id="pop_VD5_9_VD5_v" quantity="pop_VD5/9/VD5/v"/>
+            <OutputColumn id="pop_VD5_10_VD5_v" quantity="pop_VD5/10/VD5/v"/>
+        </OutputFile>
+        <!--
+        <OutputFile id="pop_VD5_0_caConc_dat" fileName="pop_VD5_0.caConc.dat">
+            <OutputColumn id="pop_VD5_0_VD5_caConc" quantity="pop_VD5/0/VD5/caConc"/>
+        </OutputFile>
+
+        <OutputFile id="pop_VD5_1_caConc_dat" fileName="pop_VD5_1.caConc.dat">
+            <OutputColumn id="pop_VD5_1_VD5_caConc" quantity="pop_VD5/1/VD5/caConc"/>
+        </OutputFile>
+
+        <OutputFile id="pop_VD5_10_caConc_dat" fileName="pop_VD5_10.caConc.dat">
+            <OutputColumn id="pop_VD5_10_VD5_caConc" quantity="pop_VD5/10/VD5/caConc"/>
+        </OutputFile>
+
+        <OutputFile id="pop_VD5_2_caConc_dat" fileName="pop_VD5_2.caConc.dat">
+            <OutputColumn id="pop_VD5_2_VD5_caConc" quantity="pop_VD5/2/VD5/caConc"/>
+        </OutputFile>
+
+        <OutputFile id="pop_VD5_3_caConc_dat" fileName="pop_VD5_3.caConc.dat">
+            <OutputColumn id="pop_VD5_3_VD5_caConc" quantity="pop_VD5/3/VD5/caConc"/>
+        </OutputFile>
+
+        <OutputFile id="pop_VD5_4_caConc_dat" fileName="pop_VD5_4.caConc.dat">
+            <OutputColumn id="pop_VD5_4_VD5_caConc" quantity="pop_VD5/4/VD5/caConc"/>
+        </OutputFile>
+
+        <OutputFile id="pop_VD5_5_caConc_dat" fileName="pop_VD5_5.caConc.dat">
+            <OutputColumn id="pop_VD5_5_VD5_caConc" quantity="pop_VD5/5/VD5/caConc"/>
+        </OutputFile>
+
+        <OutputFile id="pop_VD5_6_caConc_dat" fileName="pop_VD5_6.caConc.dat">
+            <OutputColumn id="pop_VD5_6_VD5_caConc" quantity="pop_VD5/6/VD5/caConc"/>
+        </OutputFile>
+
+        <OutputFile id="pop_VD5_7_caConc_dat" fileName="pop_VD5_7.caConc.dat">
+            <OutputColumn id="pop_VD5_7_VD5_caConc" quantity="pop_VD5/7/VD5/caConc"/>
+        </OutputFile>
+
+        <OutputFile id="pop_VD5_8_caConc_dat" fileName="pop_VD5_8.caConc.dat">
+            <OutputColumn id="pop_VD5_8_VD5_caConc" quantity="pop_VD5/8/VD5/caConc"/>
+        </OutputFile>
+
+        <OutputFile id="pop_VD5_9_caConc_dat" fileName="pop_VD5_9.caConc.dat">
+            <OutputColumn id="pop_VD5_9_VD5_caConc" quantity="pop_VD5/9/VD5/caConc"/>
+        </OutputFile> -->    <!-- --> 
+    </Simulation>
+
+</Lems>
