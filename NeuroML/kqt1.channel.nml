@@ -65,7 +65,7 @@
         <Dynamics>
             <DerivedVariable name="V" dimension="none" value="(v) / VOLT_SCALE"/>
             <DerivedVariable name="t" dimension="time" exposure="t"
-            value="(p1tskqt1 + (p2tskqt1 / (1 + (((V - p3tskqt1) / p4tskqt1) * ((V - p3tskqt1) / p4tskqt1))))) * TIME_SCALE"/>
+            value="(p1tskqt1+(p2tskqt1/(1+((V-p3tskqt1)/p4tskqt1)^2))) * TIME_SCALE"/>
         </Dynamics>
     </ComponentType>
 </neuroml>

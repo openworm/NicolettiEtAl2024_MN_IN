@@ -3,13 +3,13 @@
     <ionChannelHH id="slo2iso" species="k" conductance="10 pS">
         
         <gate id="m" instances="1" type="gateHHtauInf">
-            <timeCourse type="slo2_m_tau"/>
-            <steadyState type="slo2_m_inf"/>
+            <timeCourse type="slo2iso_m_tau"/>
+            <steadyState type="slo2iso_m_inf"/>
         </gate>
  
     </ionChannelHH>
 
-    <ComponentType name="slo2_m_inf" extends="baseVoltageDepVariable">
+    <ComponentType name="slo2iso_m_inf" extends="baseVoltageDepVariable">
         <Constant name="VOLT_SCALE" dimension="voltage" value="1 mV"/>
         <Constant name="c2" dimension="none" value="1.0"/>
         <Constant name="wom1" dimension="none" value="0.896395"/>
@@ -34,7 +34,7 @@
         </Dynamics>
     </ComponentType>
 
-    <ComponentType name="slo2_m_tau" extends="baseVoltageDepTime">
+    <ComponentType name="slo2iso_m_tau" extends="baseVoltageDepTime">
         <Constant name="VOLT_SCALE" dimension="voltage" value="1 mV"/>
         <Constant name="TIME_SCALE" dimension="time" value="1 ms"/>
         <Constant name="wxy1" dimension="none" value="-0.024123"/>

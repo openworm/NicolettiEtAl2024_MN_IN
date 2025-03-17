@@ -8,6 +8,10 @@
     
     <concentrationModel id="CaDynamics_VA5" type="cadiff" minCai="0.0001 mM" beta="1 per_ms" depth=".10 um" ion="ca"/>
 
+    <concentrationModel id="CaDynamics_AIY" type="cadiff_constant" minCai="5e-5 mM" beta="1 per_ms" depth=".10 um" ion="ca"/>
+    
+
+
     <ComponentType name="cadiff" extends="concentrationModel" description="Model of internal [Ca2+] specific to Nicoletti Et Al 2024">
 
         <Parameter name="beta" dimension="per_time"/>
@@ -46,6 +50,22 @@
             </OnStart>
 
         </Dynamics>
+
+    </ComponentType>
+
+    <ComponentType name="cadiff_constant" extends="concentrationModel" description="Constant [Ca2+] for AIY cell">
+
+            <Parameter name="minCai" dimension="concentration"/>
+            <Text name="ion"/>
+
+            <Dynamics>
+                <StateVariable name="concentration" exposure="concentration" dimension="concentration"/>
+                <StateVariable name="extConcentration" exposure="extConcentration" dimension="concentration"/>
+            <OnStart>
+                <StateAssignment variable="concentration" value="minCai"/>  
+                <StateAssignment variable="extConcentration" value="initialExtConcentration"/>
+            </OnStart>
+            </Dynamics>
 
     </ComponentType>
 

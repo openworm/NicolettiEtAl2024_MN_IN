@@ -2,7 +2,7 @@
 # M. Nicoletti et al. PloS ONE, 19(3): e0298105.
 # https://doi.org/10.1371/journal.pone.0298105
 
-def AIY_simulation_iclamp(gAIY_scaled,s1,s2,ns):
+def AIY_simulation_iclamp(gAIY_scaled,s1,s2,ns, delay = 1000, duration = 5000, simdur = 7000, transient = 4900, V_init = -45):
     
  
     from neuron import h,gui
@@ -26,9 +26,6 @@ def AIY_simulation_iclamp(gAIY_scaled,s1,s2,ns):
     h.psection(sec=soma)
     
     soma.insert('egl19')
-    
-
-    
     soma.insert('slo1egl19')
     
     soma.insert('nca')
@@ -59,18 +56,21 @@ def AIY_simulation_iclamp(gAIY_scaled,s1,s2,ns):
     stim=h.IClamp(soma(0.5))
     dir(stim)
     
-    stim.delay=1000
+    stim.delay=delay
     stim.amp=10
-    stim.dur=5000
+    stim.dur=duration
     
     v_vec = h.Vector()   
+    cai_vec = h.Vector()
     t_vec = h.Vector()        # Time stamp vector
     v_vec.record(soma(0.5)._ref_v)
+    cai_vec.record(soma(0.5)._ref_cai)
     t_vec.record(h._ref_t)
 
-    simdur =11000
+    simdur =simdur
 
     ref_v=[]
+    ref_cai = []
     ref_t=[]
 
     print("All parameters used in current clamp:")
@@ -93,37 +93,43 @@ def AIY_simulation_iclamp(gAIY_scaled,s1,s2,ns):
          ref_v_vec=numpy.zeros_like(v_vec)
          v_vec.to_python(ref_v_vec)
          ref_v.append(ref_v_vec)
+
+         ref_cai_vec=numpy.zeros_like(cai_vec)
+         cai_vec.to_python(ref_cai_vec) 
+         ref_cai.append(ref_cai_vec)
             
             
     v=[]
     v=numpy.array(list(ref_v))
+    ca1=numpy.array(list(ref_cai))
     time1=numpy.array(ref_t)
     
    
     
-    ## SS VOLTAGE-CURRENT RELATION
-    ind=numpy.where(numpy.logical_and(time1[0]>=5990, time1[0]<=6000))
-    ind_max=numpy.amax(ind)
-    ind_min=numpy.amin(ind)
-    vi=numpy.mean(v[:,ind_min:ind_max],axis=1)
+    # ## SS VOLTAGE-CURRENT RELATION
+    # ind=numpy.where(numpy.logical_and(time1[0]>=transient, time1[0]<=transient))
+    # ind_max=numpy.amax(ind)
+    # ind_min=numpy.amin(ind)
+    # vi=numpy.mean(v[:,ind_min:ind_max],axis=1)
 	
-	 # PEAK VOLTAGE-CURRENT RELATION
-    ind2=numpy.where(numpy.logical_and(time1[0]>=1000, time1[0]<=1300))
-    ind2_max=numpy.amax(ind2)
-    ind2_min=numpy.amin(ind2)
-    vi_peak=numpy.amax(v[:,ind2_min:ind2_max])
-    vi_peak=[]
+	#  # PEAK VOLTAGE-CURRENT RELATION
+    # ind2=numpy.where(numpy.logical_and(time1[0]>=1000, time1[0]<=transient))
+    # ind2_max=numpy.amax(ind2)
+    # ind2_min=numpy.amin(ind2)
+    # vi_peak=numpy.amax(v[:,ind2_min:ind2_max])
+    # vi_peak=[]
+
     
 
     
-    for j in range(ns):
-        if j<=2:
-            peak=numpy.amin(v[j,ind2_min:ind2_max])
-        else:
-            peak=numpy.amax(v[j,ind2_min:ind2_max])
-        vi_peak.append(peak)
+    # for j in range(ns):
+    #     if j<=2:
+    #         peak=numpy.amin(v[j,ind2_min:ind2_max])
+    #     else:
+    #         peak=numpy.amax(v[j,ind2_min:ind2_max])
+    #     vi_peak.append(peak)
 
-    return v, time1, vi_peak, vi    
+    return v, time1, ca1 
     
     
     
