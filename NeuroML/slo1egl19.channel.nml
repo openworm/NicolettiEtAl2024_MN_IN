@@ -60,7 +60,7 @@
             <DerivedVariable name="actegl19" dimension="none"  value="1/(1+exp(-(V-va_egl19+stm19)/ka_egl19))"/>
             <DerivedVariable name="tactegl19" dimension="none"  value="(pdg1+(pdg2*exp(-(V-pdg3+stau19)^2/(pdg4)^2))+(pdg5*exp(-(V-pdg6+stau19)^2/(pdg7)^2)))"/>
             <DerivedVariable name="kop2" dimension="none" value="wop*exp(-V*wxy)/((kxy/cao_nano)^nxy + 1)"/>
-            <DerivedVariable name="kcm2" dimension="none" value="wom*exp(-V*wyx)/((fondo/kyx)^nyx + 1)"/>
+            <DerivedVariable name="kcm2" dimension="none" value="wom*exp(-V*wyx)/((backgr/kyx)^nyx + 1)"/>
             <DerivedVariable name="kom2" dimension="none" value="wom*exp(-V*wyx)/((cao_nano/kyx)^nyx + 1)"/>
             <DerivedVariable name="alpha1" dimension="none" value="actegl19/tactegl19"/> 
             <DerivedVariable name="beta1" dimension="none" value="-alpha1 + 1/tactegl19"/>

@@ -3,9 +3,9 @@
     Generated network: IClamp_VD5
     Generation seed: 1234</notes>
     <include href="VD5.cell.nml"/>
-    <pulseGenerator id="iclamp_stim_-30" delay="100ms" duration="1000ms" amplitude="-30pA"/>
-    <pulseGenerator id="iclamp_stim_-20" delay="100ms" duration="1000ms" amplitude="-20pA"/>
-    <pulseGenerator id="iclamp_stim_-10" delay="100ms" duration="1000ms" amplitude="-10pA"/>
+    <pulseGenerator id="iclamp_stim_m30" delay="100ms" duration="1000ms" amplitude="-30pA"/>
+    <pulseGenerator id="iclamp_stim_m20" delay="100ms" duration="1000ms" amplitude="-20pA"/>
+    <pulseGenerator id="iclamp_stim_m10" delay="100ms" duration="1000ms" amplitude="-10pA"/>
     <pulseGenerator id="iclamp_stim_0" delay="100ms" duration="1000ms" amplitude="0pA"/>
     <pulseGenerator id="iclamp_stim_10" delay="100ms" duration="1000ms" amplitude="10pA"/>
     <pulseGenerator id="iclamp_stim_20" delay="100ms" duration="1000ms" amplitude="20pA"/>
@@ -52,13 +52,13 @@
                 <location x="481.036371366518438" y="35.523914744298338" z="249.152121361208998"/>
             </instance> 
         </population>
-       <inputList id="input_iclamp_stim_-30" population="pop_VD5" component="iclamp_stim_-30">
+       <inputList id="input_iclamp_stim_m30" population="pop_VD5" component="iclamp_stim_m30">
             <input id="0" target="../pop_VD5/0/VD5" destination="synapses"/>
         </inputList>
-        <inputList id="input_iclamp_stim_-20" population="pop_VD5" component="iclamp_stim_-20">
+        <inputList id="input_iclamp_stim_m20" population="pop_VD5" component="iclamp_stim_m20">
             <input id="0" target="../pop_VD5/1/VD5" destination="synapses"/>
         </inputList>
-        <inputList id="input_iclamp_stim_-10" population="pop_VD5" component="iclamp_stim_-10">
+        <inputList id="input_iclamp_stim_m10" population="pop_VD5" component="iclamp_stim_m10">
             <input id="0" target="../pop_VD5/2/VD5" destination="synapses"/>
         </inputList>
         <inputList id="input_iclamp_stim_0" population="pop_VD5" component="iclamp_stim_0">
