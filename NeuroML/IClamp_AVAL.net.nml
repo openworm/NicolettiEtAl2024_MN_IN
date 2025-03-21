@@ -3,22 +3,18 @@
     Generated network: IClamp_AVAL
     Generation seed: 1234</notes>
     <include href="AVAL.cell.nml"/>
-    <pulseGenerator id="iclamp_stim_15" delay="1000ms" duration="5000ms" amplitude="15pA"/>
-    <pulseGenerator id="iclamp_stim_17" delay="1000ms" duration="5000ms" amplitude="17pA"/>
-    <pulseGenerator id="iclamp_stim_19" delay="1000ms" duration="5000ms" amplitude="19pA"/>
-    <pulseGenerator id="iclamp_stim_21" delay="1000ms" duration="5000ms" amplitude="21pA"/>
-    <pulseGenerator id="iclamp_stim_23" delay="1000ms" duration="5000ms" amplitude="23pA"/>
-    <pulseGenerator id="iclamp_stim_25" delay="1000ms" duration="5000ms" amplitude="25pA"/>
-    <pulseGenerator id="iclamp_stim_27" delay="1000ms" duration="5000ms" amplitude="27pA"/>
-    <pulseGenerator id="iclamp_stim_29" delay="1000ms" duration="5000ms" amplitude="29pA"/>
-    <pulseGenerator id="iclamp_stim_31" delay="1000ms" duration="5000ms" amplitude="31pA"/>
-    <pulseGenerator id="iclamp_stim_33" delay="1000ms" duration="5000ms" amplitude="33pA"/>
-    <pulseGenerator id="iclamp_stim_35" delay="1000ms" duration="5000ms" amplitude="35pA"/>
+    <pulseGenerator id="iclamp_stim_min30" delay="100ms" duration="1000ms" amplitude="-30pA"/>
+    <pulseGenerator id="iclamp_stim_min20" delay="100ms" duration="1000ms" amplitude="-20pA"/>
+    <pulseGenerator id="iclamp_stim_min10" delay="100ms" duration="1000ms" amplitude="-10pA"/>
+    <pulseGenerator id="iclamp_stim_0" delay="100ms" duration="1000ms" amplitude="0pA"/>
+    <pulseGenerator id="iclamp_stim_10" delay="100ms" duration="1000ms" amplitude="10pA"/>
+    <pulseGenerator id="iclamp_stim_20" delay="100ms" duration="1000ms" amplitude="20pA"/>
+    <pulseGenerator id="iclamp_stim_30" delay="100ms" duration="1000ms" amplitude="30pA"/>
     <network id="IClamp_AVAL" type="networkWithTemperature" temperature="6.3degC">
         <notes>A network model: IClamp_AVAL</notes>
         <property tag="recommended_dt_ms" value="0.025"/>
-        <property tag="recommended_duration_ms" value="11000.0"/>
-        <population id="pop_AVAL" component="AVAL" size="11" type="populationList">
+        <property tag="recommended_duration_ms" value="1500.0"/>
+        <population id="pop_AVAL" component="AVAL" size="7" type="populationList">
             <property tag="color" value="0.5 1 1"/>
             <property tag="region" value="Worm"/>
             <instance id="0">
@@ -42,51 +38,27 @@
             <instance id="6">
                 <location x="14.618780486909122" y="48.675154060475833" z="964.901560916215658"/>
             </instance>
-            <instance id="7">
-                <location x="64.562280977186077" y="54.108818555113025" z="465.898559008309576"/>
-            </instance>
-            <instance id="8">
-                <location x="601.463449561051448" y="8.892882999066231" z="579.002686187366521"/>
-            </instance>
-            <instance id="9">
-                <location x="269.585503819448263" y="55.643256055621556" z="644.634234178282668"/>
-            </instance>
-            <instance id="10">
-                <location x="481.036371366518438" y="35.523914744298338" z="249.152121361208998"/>
-            </instance>
         </population>
-        <inputList id="input_iclamp_stim_15" population="pop_AVAL" component="iclamp_stim_15">
+        <inputList id="input_iclamp_stim_min30" population="pop_AVAL" component="iclamp_stim_min30">
             <input id="0" target="../pop_AVAL/0/AVAL" destination="synapses"/>
         </inputList>
-        <inputList id="input_iclamp_stim_17" population="pop_AVAL" component="iclamp_stim_17">
+        <inputList id="input_iclamp_stim_min20" population="pop_AVAL" component="iclamp_stim_min20">
             <input id="0" target="../pop_AVAL/1/AVAL" destination="synapses"/>
         </inputList>
-        <inputList id="input_iclamp_stim_19" population="pop_AVAL" component="iclamp_stim_19">
+        <inputList id="input_iclamp_stim_min10" population="pop_AVAL" component="iclamp_stim_min10">
             <input id="0" target="../pop_AVAL/2/AVAL" destination="synapses"/>
         </inputList>
-        <inputList id="input_iclamp_stim_21" population="pop_AVAL" component="iclamp_stim_21">
+        <inputList id="input_iclamp_stim_0" population="pop_AVAL" component="iclamp_stim_0">
             <input id="0" target="../pop_AVAL/3/AVAL" destination="synapses"/>
         </inputList>
-        <inputList id="input_iclamp_stim_23" population="pop_AVAL" component="iclamp_stim_23">
+        <inputList id="input_iclamp_stim_10" population="pop_AVAL" component="iclamp_stim_10">
             <input id="0" target="../pop_AVAL/4/AVAL" destination="synapses"/>
         </inputList>
-        <inputList id="input_iclamp_stim_25" population="pop_AVAL" component="iclamp_stim_25">
+        <inputList id="input_iclamp_stim_20" population="pop_AVAL" component="iclamp_stim_20">
             <input id="0" target="../pop_AVAL/5/AVAL" destination="synapses"/>
         </inputList>
-        <inputList id="input_iclamp_stim_27" population="pop_AVAL" component="iclamp_stim_27">
+        <inputList id="input_iclamp_stim_30" population="pop_AVAL" component="iclamp_stim_30">
             <input id="0" target="../pop_AVAL/6/AVAL" destination="synapses"/>
-        </inputList>
-        <inputList id="input_iclamp_stim_29" population="pop_AVAL" component="iclamp_stim_29">
-            <input id="0" target="../pop_AVAL/7/AVAL" destination="synapses"/>
-        </inputList>
-        <inputList id="input_iclamp_stim_31" population="pop_AVAL" component="iclamp_stim_31">
-            <input id="0" target="../pop_AVAL/8/AVAL" destination="synapses"/>
-        </inputList>
-        <inputList id="input_iclamp_stim_33" population="pop_AVAL" component="iclamp_stim_33">
-            <input id="0" target="../pop_AVAL/9/AVAL" destination="synapses"/>
-        </inputList>
-        <inputList id="input_iclamp_stim_35" population="pop_AVAL" component="iclamp_stim_35">
-            <input id="0" target="../pop_AVAL/10/AVAL" destination="synapses"/>
         </inputList>
     </network>
 </neuroml>

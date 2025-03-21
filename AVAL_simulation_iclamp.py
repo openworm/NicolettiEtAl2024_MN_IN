@@ -2,7 +2,7 @@
 # M. Nicoletti et al. PloS ONE, 19(3): e0298105.
 # https://doi.org/10.1371/journal.pone.0298105
 
-def AVA_simulation_iclamp(gAVA_scaled,s1,s2,ns, delay=1023, duration=1000, simdur =2500):
+def AVA_simulation_iclamp(gAVA_scaled,s1,s2,ns, delay=1023, duration=1000, simdur =2500, transient=1000):
     
     from neuron import h,gui
     import numpy
@@ -69,7 +69,7 @@ def AVA_simulation_iclamp(gAVA_scaled,s1,s2,ns, delay=1023, duration=1000, simdu
     
     
     for i in numpy.linspace(start=s1, stop=s2, num=ns):
-        
+         print('Running with current %snA'%i)
          stim.amp=i
          h.tstop=simdur
          h.dt=0.025
@@ -93,11 +93,11 @@ def AVA_simulation_iclamp(gAVA_scaled,s1,s2,ns, delay=1023, duration=1000, simdu
     time1=numpy.array(ref_t)
     
 
-    resc_ind=numpy.where(time1[1,:]>=1000)
+    resc_ind=numpy.where(time1[1,:]>=transient)
     resc_min=numpy.amin(resc_ind)
     resc_max=numpy.amax(resc_ind)
     v_normalized=v[:,resc_min:resc_max]
-    time=time1[:,resc_min:resc_max]-1000
+    time=time1[:,resc_min:resc_max]-transient
     
     
     ## SS V-I curve
