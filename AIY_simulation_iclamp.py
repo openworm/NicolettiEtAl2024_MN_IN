@@ -2,7 +2,7 @@
 # M. Nicoletti et al. PloS ONE, 19(3): e0298105.
 # https://doi.org/10.1371/journal.pone.0298105
 
-def AIY_simulation_iclamp(gAIY_scaled,s1,s2,ns, delay = 1000, duration = 5000, simdur = 7000, transient = 4900, V_init = -45, dt=0.4): # dt set at 0.4ms in original (a bit small)...
+def AIY_simulation_iclamp(gAIY_scaled,s1,s2,ns, delay = 1000, duration = 5000, simdur = 7000, transient = 4900, dt=0.4): # dt set at 0.4ms in original (a bit small)...
     
  
     from neuron import h,gui

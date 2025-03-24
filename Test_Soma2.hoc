@@ -32,7 +32,7 @@ if (ismembrane("na_ion")) { ena = 50 }
 
 proc initialiseValues0() {
 
-    forall  v = -70
+    forall  v = -55.25
     //forall  cai = .0001
 
 }
