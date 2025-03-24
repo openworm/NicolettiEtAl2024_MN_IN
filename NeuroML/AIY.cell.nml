@@ -26,20 +26,13 @@
         </morphology>
         <biophysicalProperties id="biophys">
             <membraneProperties>
-                <channelDensity id="leak_chans" ionChannel="leak" condDensity="2.12475338e-04 S_per_cm2" erev="-89.57mV" ion="non_specific"/>
-            <!--    <channelDensity id="slo1egl19_chans" ionChannel="slo1egl19" condDensity="1.39626650e-03 S_per_cm2" erev="-80mV"  ion="k"/> -->
-                <channelDensity id="kqt1_chans" ionChannel="kqt1" condDensity="3.03536197e-04 S_per_cm2" erev="-80mV"  ion="k"/> 
-            <!--    <channelDensity id="slo1iso_chans" ionChannel="slo1iso" condDensity="1.51768098e-04 S_per_cm2" erev="-80mV"  ion="k"/>  -->
-            <!--    <channelDensity id="shl1_chans" ionChannel="shl1" condDensity="7.58840492e-04 S_per_cm2" erev="-80mV"  ion="k"/>  -->
-            <!--    <channelDensity id="nca_chans" ionChannel="nca" condDensity="9.10608590e-05 S_per_cm2" erev="30mV"  ion="non_specific"/>  -->
-            <!--    <channelDensityNernst id="egl19_chans" ionChannel="egl19" condDensity="1.51768098e-04 S_per_cm2"  ion="ca"/>   -->
-               
+                <channelDensity id="leak_chans" ionChannel="leak" condDensity="0.00021247533768401888 S_per_cm2" erev="-89.57mV" ion="non_specific"/>
+                <channelDensity id="kqt1_chans" ionChannel="kqt1" condDensity="0.000303536 S_per_cm2" erev="-80mV" ion="k"/>
                 <spikeThresh value="0mV"/>
                 <specificCapacitance value="1.6 uF_per_cm2"/>
-                <initMembPotential value="-55.2mV"/>
+                <initMembPotential value="-70mV"/>
             </membraneProperties>
             <intracellularProperties>
-                <species id="ca" concentrationModel="CaDynamics_AIY" ion="ca" initialConcentration=".00005 mM" initialExtConcentration="2 mM"/> 
                 <resistivity value="0.1 kohm_cm"/>
             </intracellularProperties>
         </biophysicalProperties>

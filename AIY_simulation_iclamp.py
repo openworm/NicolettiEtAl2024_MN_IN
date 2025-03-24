@@ -2,7 +2,7 @@
 # M. Nicoletti et al. PloS ONE, 19(3): e0298105.
 # https://doi.org/10.1371/journal.pone.0298105
 
-def AIY_simulation_iclamp(gAIY_scaled,s1,s2,ns, delay = 1000, duration = 5000, simdur = 7000, transient = 4900, V_init = -45):
+def AIY_simulation_iclamp(gAIY_scaled,s1,s2,ns, delay = 1000, duration = 5000, simdur = 7000, transient = 4900, V_init = -45, dt=0.4): # dt set at 0.4ms in original (a bit small)...
     
  
     from neuron import h,gui
@@ -81,7 +81,7 @@ def AIY_simulation_iclamp(gAIY_scaled,s1,s2,ns, delay = 1000, duration = 5000, s
         
          stim.amp=i
          h.tstop=simdur
-         h.dt=0.4
+         h.dt=dt
          h.finitialize(-60)
          h.run()
             
@@ -106,30 +106,30 @@ def AIY_simulation_iclamp(gAIY_scaled,s1,s2,ns, delay = 1000, duration = 5000, s
     
    
     
-    # ## SS VOLTAGE-CURRENT RELATION
-    # ind=numpy.where(numpy.logical_and(time1[0]>=transient, time1[0]<=transient))
-    # ind_max=numpy.amax(ind)
-    # ind_min=numpy.amin(ind)
-    # vi=numpy.mean(v[:,ind_min:ind_max],axis=1)
+    ## SS VOLTAGE-CURRENT RELATION
+    ind=numpy.where(numpy.logical_and(time1[0]>=5990, time1[0]<=6000))
+    ind_max=numpy.amax(ind)
+    ind_min=numpy.amin(ind)
+    vi=numpy.mean(v[:,ind_min:ind_max],axis=1)
 	
-	#  # PEAK VOLTAGE-CURRENT RELATION
-    # ind2=numpy.where(numpy.logical_and(time1[0]>=1000, time1[0]<=transient))
-    # ind2_max=numpy.amax(ind2)
-    # ind2_min=numpy.amin(ind2)
-    # vi_peak=numpy.amax(v[:,ind2_min:ind2_max])
-    # vi_peak=[]
+	 # PEAK VOLTAGE-CURRENT RELATION
+    ind2=numpy.where(numpy.logical_and(time1[0]>=1000, time1[0]<=1300))
+    ind2_max=numpy.amax(ind2)
+    ind2_min=numpy.amin(ind2)
+    vi_peak=numpy.amax(v[:,ind2_min:ind2_max])
+    vi_peak=[]
 
     
 
     
-    # for j in range(ns):
-    #     if j<=2:
-    #         peak=numpy.amin(v[j,ind2_min:ind2_max])
-    #     else:
-    #         peak=numpy.amax(v[j,ind2_min:ind2_max])
-    #     vi_peak.append(peak)
+    for j in range(ns):
+         if j<=2:
+             peak=numpy.amin(v[j,ind2_min:ind2_max])
+         else:
+             peak=numpy.amax(v[j,ind2_min:ind2_max])
+         vi_peak.append(peak)
 
-    return v, time1, ca1 
+    return v, time1, vi_peak, vi, ca1 
     
     
     
