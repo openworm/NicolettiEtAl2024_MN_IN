@@ -1,0 +1,134 @@
+<Lems>
+
+
+    <!-- Specify which component to run -->
+    <Target component="Sim_IClamp" reportFile="report.Soma.__SIMULATOR__.txt"/>
+
+    <!-- Include core NeuroML2 ComponentType definitions -->
+    <Include file="Cells.xml"/>
+    <Include file="Networks.xml"/>
+    <Include file="Simulation.xml"/>
+
+    <Include file="PyNN.xml"/>
+
+    <include href="leak.channel.nml"/>
+    <include href="kqt1.channel.nml"/>  
+    <include href="CaDynamics.nml"/>
+
+
+    <pulseGenerator id="stim" delay="100ms" duration="500ms" amplitude="5pA"/>
+
+    <cell id="TestCell">
+    
+        <morphology id="morphology">
+            <segment id="0" name="soma">
+                <proximal x="0.0" y="0.0" z="0.0" diameter="12.922774419120067"/>
+                <distal x="0.0" y="12.922774419120067" z="0.0" diameter="12.922774419120067"/>
+            </segment>
+            <segmentGroup id="soma_group" neuroLexId="GO:0043025">
+                <notes>Default soma segment group for the cell</notes>
+                <member segment="0"/>
+            </segmentGroup>
+            <segmentGroup id="all">
+                <notes>Default segment group for all segments in the cell</notes>
+                <member segment="0"/>
+            </segmentGroup>
+        </morphology>
+        <biophysicalProperties id="biophys">
+            <membraneProperties>
+                <channelDensity id="leak_chans" ionChannel="leak" condDensity="0.00021247533768401888 S_per_cm2" erev="-89.57mV" ion="non_specific"/>
+                <channelDensity id="kqt1_chans" ionChannel="kqt1" condDensity="0.000303536 S_per_cm2" erev="-80mV" ion="k"/>
+
+    
+                <spikeThresh value="0mV"/>
+                <specificCapacitance value="1.5 uF_per_cm2"/>
+                <initMembPotential value="-70mV"/>
+            </membraneProperties>
+            <intracellularProperties>
+                <species id="ca" concentrationModel="CaDynamics_VA5" ion="ca" initialConcentration=".0001 mM" initialExtConcentration="2 mM"/>
+                <resistivity value="0.1 kohm_cm"/>
+            </intracellularProperties>
+        </biophysicalProperties>
+    </cell>
+    
+    <network id="TestNet" type="networkWithTemperature" temperature="6.3degC">
+    
+        <property tag="recommended_dt_ms" value="0.025"/>
+        <property tag="recommended_duration_ms" value="11000.0"/>
+
+        <population id="pop0" component="TestCell" size="1" type="populationList">
+            <property tag="color" value="0 0.5 1"/>
+            <property tag="region" value="Worm"/>
+            <instance id="0">
+                <location x="966.453535692138757" y="44.073259917535268" z="7.491470058587191"/>
+            </instance>
+            
+        </population>
+
+        <inputList id="input0" population="pop0" component="stim">
+            <input id="0" target="../pop0/0/TestCell" destination="synapses"/>
+        </inputList>
+        
+    </network>
+
+    <Simulation id="Sim_IClamp" length="700.0ms" step="0.01ms" target="TestNet" seed="12345">  <!-- Note seed: ensures same random numbers used every run -->
+
+<!--
+      <Display id="pop_m_h" title="Plots of m" timeScale="1ms" xmin="-50.0" xmax="750"  ymin="-.1" ymax="1.1">
+            
+          <Line id="egl19_m_q" quantity="pop0/0/TestCell/biophys/membraneProperties/egl19_chans/egl19/m/q" scale="1" color="#0534e4" timeScale="1ms"/>
+            <Line id="egl19_h_q" quantity="pop0/0/TestCell/biophys/membraneProperties/egl19_chans/egl19/h/q" scale="1" color="#fff4e4" timeScale="1ms"/>
+
+            <Line id="slo1egl19_m_egl19" quantity="pop0/0/TestCell/biophys/membraneProperties/slo1egl19_chans/slo1egl19/m/steadyState/m_egl19" scale="1" color="#ff3333" timeScale="1ms"/>
+            <Line id="slo1egl19_m" quantity="pop0/0/TestCell/biophys/membraneProperties/slo1egl19_chans/slo1egl19/m/q" scale="1" color="#ff33ff" timeScale="1ms"/>
+
+            <Line id="slo1egl19_kcm2" quantity="pop0/0/TestCell/biophys/membraneProperties/slo1egl19_chans/slo1egl19/m/steadyState/kcm2" scale="1" color="#faaaaf" timeScale="1ms"/>
+            <Line id="slo1egl19_kom2" quantity="pop0/0/TestCell/biophys/membraneProperties/slo1egl19_chans/slo1egl19/m/steadyState/kom2" scale="1" color="#444aaf" timeScale="1ms"/>
+            <Line id="slo1egl19_kop2" quantity="pop0/0/TestCell/biophys/membraneProperties/slo1egl19_chans/slo1egl19/m/steadyState/kop2" scale="1" color="#4999af" timeScale="1ms"/>
+
+      </Display> 
+
+        <Display id="pop_caConc" title="Plots of caConc" timeScale="1ms" xmin="-50.0" xmax="750" ymin="0" ymax="6e-4">
+            <Line id="pop_ca" quantity="pop0/0/TestCell/caConc" scale="1" color="#ff4f33" timeScale="1ms"/>
+            <Line id="caconc_eca" quantity="pop0/0/TestCell/biophys/membraneProperties/slo1egl19_chans/slo1egl19/m/steadyState/caConc" scale="1" color="#faaaaf" timeScale="1ms"/>
+
+        </Display>
+       
+        <Display id="pop_eca" title="Plots of eca" timeScale="1ms" xmin="-50.0" xmax="750" ymin="0" ymax="130">
+            <Line id="pop_ca" quantity="pop0/0/TestCell/biophys/membraneProperties/egl19_chans/erev" scale="1mV" color="#ff4f33" timeScale="1ms"/>
+            <Line id="slo1egl19_eca" quantity="pop0/0/TestCell/biophys/membraneProperties/slo1egl19_chans/slo1egl19/m/steadyState/eca" scale="1" color="#faaaaf" timeScale="1ms"/>
+        </Display>
+-->
+       
+        <Display id="pop_v" title="Plots of pop_v" timeScale="1ms"  xmin="-50.0" xmax="750" ymin="-92" ymax="0">
+            <Line id="v" quantity="pop0/0/TestCell/v" scale="1mV" color="#85ff96" timeScale="1ms"/>
+        </Display>
+
+        <OutputFile id="Sim_v_dat" fileName="Soma.v.dat">
+            <OutputColumn id="pop_v" quantity="pop0/0/TestCell/v"/>
+        </OutputFile>
+    <!--     
+        <OutputFile id="pop_caConc_dat" fileName="Soma.ca.dat">
+            <OutputColumn id="pop_caConc" quantity="pop0/0/TestCell/caConc"/>
+        </OutputFile>
+        
+        <OutputFile id="pop_eca_dat" fileName="Soma.eca.dat">
+            <OutputColumn id="pop_eca" quantity="pop0/0/TestCell/biophys/membraneProperties/egl19_chans/erev"/>
+        </OutputFile>
+
+        <OutputFile id="pop_chans" fileName="Soma.chans.dat">
+            <OutputColumn id="0" quantity="pop0/0/TestCell/biophys/membraneProperties/egl19_chans/egl19/m/q"/>
+            <OutputColumn id="1" quantity="pop0/0/TestCell/biophys/membraneProperties/egl19_chans/egl19/h/q"/>
+            <OutputColumn id="2" quantity="pop0/0/TestCell/biophys/membraneProperties/slo1egl19_chans/slo1egl19/m/steadyState/m_egl19"/>
+            <OutputColumn id="3" quantity="pop0/0/TestCell/biophys/membraneProperties/slo1egl19_chans/slo1egl19/m/q"/>
+        </OutputFile>
+        
+        <OutputFile id="pop_vars" fileName="Soma.vars.dat">
+            <OutputColumn id="0" quantity="pop0/0/TestCell/biophys/membraneProperties/slo1egl19_chans/slo1egl19/m/steadyState/kcm2"/>
+            <OutputColumn id="1" quantity="pop0/0/TestCell/biophys/membraneProperties/slo1egl19_chans/slo1egl19/m/steadyState/kom2"/>
+            <OutputColumn id="2" quantity="pop0/0/TestCell/biophys/membraneProperties/slo1egl19_chans/slo1egl19/m/steadyState/kop2"/>
+        </OutputFile>
+-->
+    </Simulation>
+
+</Lems>
