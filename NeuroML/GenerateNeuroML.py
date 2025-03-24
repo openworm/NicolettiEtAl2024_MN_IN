@@ -5,7 +5,7 @@ from pyneuroml import pynml
 from neuroml import IncludeType
 import math
 
-CELLS_WITH_CA_DYNAMICS = ["VA5"]
+CELLS_WITH_CA_DYNAMICS = ["VA5", "AIY"]
 CA_MECHANISMS = ["cadiff"]
 
 
@@ -76,7 +76,11 @@ def generate_nmllite(
 
     net.parameters = {}
 
-    amps = [15 + 2 * i for i in range(11)] if not 'current_amps' in stim_parameters else stim_parameters['current_amps']
+    amps = (
+        [15 + 2 * i for i in range(11)]
+        if not "current_amps" in stim_parameters
+        else stim_parameters["current_amps"]
+    )
     net.populations[0].size = len(amps)
     net.input_sources = []
     net.inputs = []
@@ -89,8 +93,12 @@ def generate_nmllite(
             neuroml2_input="PulseGenerator",
             parameters={
                 "amplitude": "%spA" % i,
-                "delay": "1000ms" if not 'current_delay' in stim_parameters else '%sms'%stim_parameters["current_delay"],
-                "duration": "5000ms" if not 'current_dur' in stim_parameters else '%sms'%stim_parameters["current_dur"],
+                "delay": "1000ms"
+                if not "current_delay" in stim_parameters
+                else "%sms" % stim_parameters["current_delay"],
+                "duration": "5000ms"
+                if not "current_dur" in stim_parameters
+                else "%sms" % stim_parameters["current_dur"],
             },
         )
         net.input_sources.append(ins)
@@ -153,7 +161,14 @@ def generate_nmllite(
 
 
 def create_cell(
-    cell_id, duration, channels_to_include, conductances, cell_params, color, vinit=-40, stim_parameters={}
+    cell_id,
+    duration,
+    channels_to_include,
+    conductances,
+    cell_params,
+    color,
+    vinit=-40,
+    stim_parameters={},
 ):
     # Create the nml file and add the ion channels
     cell_doc = NeuroMLDocument(id=cell_id, notes="A cell from Nicoletti et al. 2024")
@@ -204,7 +219,7 @@ def create_cell(
             if channel_id in ["egl19"]:
                 erev = 60
                 ion = "ca"
-            if channel_id in ["irk"]:
+            if channel_id in ["irk","kqt1",'shl1','slo1egl19','slo1iso']:
                 erev = -80
                 ion = "k"
             if channel_id in ["nca"]:
@@ -280,7 +295,7 @@ def create_cell(
 
 if __name__ == "__main__":
     all = {}
-    '''
+    
     all["AIY"] = {"color": "1 0.5 0"}
     # surface in cm^2 form neuromorpho AIYL
     all["AIY"]["cell_params"] = {"surf": 65.89e-8}
@@ -295,10 +310,20 @@ if __name__ == "__main__":
         "eleak",
         "cm",
     ]
-    all["AIY"]["g0"] = [0.14, 0, 0, 0.1, 0, 0, 0, -89.57, 1.6]
-    all["AIY"]["g0"] = [0.14, 0, 0, 0, 0, 0, 0, -89.57, 1.6]
-    all["AIY"]["vinit"] = -55.2
+    all["AIY"]["g0"] =  [0.14, 0, 0.2, 0, 0, 0, 0, -89.57, 1.6]
+    all["AIY"]["g0"] =  [0.14, 0.1, 0.2, 0.1, 0.92, 0.06, 0.5, -89.57, 1.6]
+    #all["AIY"]["g0"] = [0.14, 0, 0, 0.1, 0, 0, 0, -89.57, 1.6]
+    all["AIY"]["vinit"] = -65
+    all["AIY"]["duration"] = 7000
+    all["AIY"]["stim_parameters"] = {}
+    all["AIY"]["stim_parameters"]["current_amps"] = [-15 + i * 5 for i in range(11)]
+    all["AIY"]["stim_parameters"]["current_delay"] = 1000
+    all["AIY"]["stim_parameters"]["current_dur"] = 5000
 
+
+
+
+    """
     all["VA5"] = {"color": "0 0.5 1"}
     # surface in cm^2 form neuromorpho VA5L
     all["VA5"]["cell_params"] = {"surf": 389.3e-8}
@@ -316,7 +341,19 @@ if __name__ == "__main__":
     all["VA5"]["g0"] = [0, 0, 0.15, 0, 0, 0, 0.1, -70, 1.5]
     all["VA5"]["vinit"] = -75.72
 
-    '''
+    
+
+    all["AVAR"] = {"color": "0.5 1 1"}
+    # surface in cm^2 form neuromorpho AVAR
+    all["AVAR"]["cell_params"] = {"surf": 1121.79e-8}
+    all["AVAR"]["conductances"] = ["egl19", "leak", "irk", "nca", "eleak", "cm"]
+    all["AVAR"]["g0"] = [0.104385, 0.150164, 0.1, 0, -39, 0.859551]
+    all["AVAR"]["vinit"] = -39.37
+    all["AVAR"]["duration"] = 1500
+    all["AVAR"]["stim_parameters"] = {}
+    all["AVAR"]["stim_parameters"]["current_amps"] = [-30 + i * 10 for i in range(7)]
+    all["AVAR"]["stim_parameters"]["current_delay"] = 100
+    all["AVAR"]["stim_parameters"]["current_dur"] = 1000"""
 
     all["AVAL"] = {"color": "0.5 1 1"}
     # surface in cm^2 form neuromorpho AVAL
@@ -325,10 +362,10 @@ if __name__ == "__main__":
     all["AVAL"]["g0"] = [0.104385, 0.150164, 0.1, 0, -39, 0.859551]
     all["AVAL"]["vinit"] = -39.37
     all["AVAL"]["duration"] = 1500
-    all["AVAL"]['stim_parameters'] ={}
-    all["AVAL"]['stim_parameters']["current_amps"] = [-30+i*10 for i in range(7)]
-    all["AVAL"]['stim_parameters']["current_delay"] = 100
-    all["AVAL"]['stim_parameters']["current_dur"] = 1000
+    all["AVAL"]["stim_parameters"] = {}
+    all["AVAL"]["stim_parameters"]["current_amps"] = [-30 + i * 10 for i in range(7)]
+    all["AVAL"]["stim_parameters"]["current_delay"] = 100
+    all["AVAL"]["stim_parameters"]["current_dur"] = 1000
 
     for cell in all:
         cell_params = all[cell]["cell_params"]
@@ -346,11 +383,11 @@ if __name__ == "__main__":
 
         create_cell(
             cell_id=cell,
-            duration=11000 if 'duration' not in all[cell] else all[cell]["duration"],
+            duration=11000 if "duration" not in all[cell] else all[cell]["duration"],
             channels_to_include=chans,
             conductances=conductances,
             cell_params=cell_params,
-            stim_parameters=all[cell]['stim_parameters'],
+            stim_parameters=all[cell]["stim_parameters"] if "stim_parameters" in all[cell] else [],
             color=all[cell]["color"],
             vinit=all[cell]["vinit"],
         )

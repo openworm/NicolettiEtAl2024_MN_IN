@@ -3,21 +3,21 @@
     Generated network: IClamp_AIY
     Generation seed: 1234</notes>
     <include href="AIY.cell.nml"/>
+    <pulseGenerator id="iclamp_stim_min15" delay="1000ms" duration="5000ms" amplitude="-15pA"/>
+    <pulseGenerator id="iclamp_stim_min10" delay="1000ms" duration="5000ms" amplitude="-10pA"/>
+    <pulseGenerator id="iclamp_stim_min5" delay="1000ms" duration="5000ms" amplitude="-5pA"/>
+    <pulseGenerator id="iclamp_stim_0" delay="1000ms" duration="5000ms" amplitude="0pA"/>
+    <pulseGenerator id="iclamp_stim_5" delay="1000ms" duration="5000ms" amplitude="5pA"/>
+    <pulseGenerator id="iclamp_stim_10" delay="1000ms" duration="5000ms" amplitude="10pA"/>
     <pulseGenerator id="iclamp_stim_15" delay="1000ms" duration="5000ms" amplitude="15pA"/>
-    <pulseGenerator id="iclamp_stim_17" delay="1000ms" duration="5000ms" amplitude="17pA"/>
-    <pulseGenerator id="iclamp_stim_19" delay="1000ms" duration="5000ms" amplitude="19pA"/>
-    <pulseGenerator id="iclamp_stim_21" delay="1000ms" duration="5000ms" amplitude="21pA"/>
-    <pulseGenerator id="iclamp_stim_23" delay="1000ms" duration="5000ms" amplitude="23pA"/>
+    <pulseGenerator id="iclamp_stim_20" delay="1000ms" duration="5000ms" amplitude="20pA"/>
     <pulseGenerator id="iclamp_stim_25" delay="1000ms" duration="5000ms" amplitude="25pA"/>
-    <pulseGenerator id="iclamp_stim_27" delay="1000ms" duration="5000ms" amplitude="27pA"/>
-    <pulseGenerator id="iclamp_stim_29" delay="1000ms" duration="5000ms" amplitude="29pA"/>
-    <pulseGenerator id="iclamp_stim_31" delay="1000ms" duration="5000ms" amplitude="31pA"/>
-    <pulseGenerator id="iclamp_stim_33" delay="1000ms" duration="5000ms" amplitude="33pA"/>
+    <pulseGenerator id="iclamp_stim_30" delay="1000ms" duration="5000ms" amplitude="30pA"/>
     <pulseGenerator id="iclamp_stim_35" delay="1000ms" duration="5000ms" amplitude="35pA"/>
     <network id="IClamp_AIY" type="networkWithTemperature" temperature="6.3degC">
         <notes>A network model: IClamp_AIY</notes>
         <property tag="recommended_dt_ms" value="0.025"/>
-        <property tag="recommended_duration_ms" value="11000.0"/>
+        <property tag="recommended_duration_ms" value="7000.0"/>
         <population id="pop_AIY" component="AIY" size="11" type="populationList">
             <property tag="color" value="1 0.5 0"/>
             <property tag="region" value="Worm"/>
@@ -55,34 +55,34 @@
                 <location x="481.036371366518438" y="35.523914744298338" z="249.152121361208998"/>
             </instance>
         </population>
-        <inputList id="input_iclamp_stim_15" population="pop_AIY" component="iclamp_stim_15">
+        <inputList id="input_iclamp_stim_min15" population="pop_AIY" component="iclamp_stim_min15">
             <input id="0" target="../pop_AIY/0/AIY" destination="synapses"/>
         </inputList>
-        <inputList id="input_iclamp_stim_17" population="pop_AIY" component="iclamp_stim_17">
+        <inputList id="input_iclamp_stim_min10" population="pop_AIY" component="iclamp_stim_min10">
             <input id="0" target="../pop_AIY/1/AIY" destination="synapses"/>
         </inputList>
-        <inputList id="input_iclamp_stim_19" population="pop_AIY" component="iclamp_stim_19">
+        <inputList id="input_iclamp_stim_min5" population="pop_AIY" component="iclamp_stim_min5">
             <input id="0" target="../pop_AIY/2/AIY" destination="synapses"/>
         </inputList>
-        <inputList id="input_iclamp_stim_21" population="pop_AIY" component="iclamp_stim_21">
+        <inputList id="input_iclamp_stim_0" population="pop_AIY" component="iclamp_stim_0">
             <input id="0" target="../pop_AIY/3/AIY" destination="synapses"/>
         </inputList>
-        <inputList id="input_iclamp_stim_23" population="pop_AIY" component="iclamp_stim_23">
+        <inputList id="input_iclamp_stim_5" population="pop_AIY" component="iclamp_stim_5">
             <input id="0" target="../pop_AIY/4/AIY" destination="synapses"/>
         </inputList>
-        <inputList id="input_iclamp_stim_25" population="pop_AIY" component="iclamp_stim_25">
+        <inputList id="input_iclamp_stim_10" population="pop_AIY" component="iclamp_stim_10">
             <input id="0" target="../pop_AIY/5/AIY" destination="synapses"/>
         </inputList>
-        <inputList id="input_iclamp_stim_27" population="pop_AIY" component="iclamp_stim_27">
+        <inputList id="input_iclamp_stim_15" population="pop_AIY" component="iclamp_stim_15">
             <input id="0" target="../pop_AIY/6/AIY" destination="synapses"/>
         </inputList>
-        <inputList id="input_iclamp_stim_29" population="pop_AIY" component="iclamp_stim_29">
+        <inputList id="input_iclamp_stim_20" population="pop_AIY" component="iclamp_stim_20">
             <input id="0" target="../pop_AIY/7/AIY" destination="synapses"/>
         </inputList>
-        <inputList id="input_iclamp_stim_31" population="pop_AIY" component="iclamp_stim_31">
+        <inputList id="input_iclamp_stim_25" population="pop_AIY" component="iclamp_stim_25">
             <input id="0" target="../pop_AIY/8/AIY" destination="synapses"/>
         </inputList>
-        <inputList id="input_iclamp_stim_33" population="pop_AIY" component="iclamp_stim_33">
+        <inputList id="input_iclamp_stim_30" population="pop_AIY" component="iclamp_stim_30">
             <input id="0" target="../pop_AIY/9/AIY" destination="synapses"/>
         </inputList>
         <inputList id="input_iclamp_stim_35" population="pop_AIY" component="iclamp_stim_35">
