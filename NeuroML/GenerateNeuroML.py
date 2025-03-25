@@ -219,7 +219,15 @@ def create_cell(
             if channel_id in ["egl19"]:
                 erev = 60
                 ion = "ca"
-            if channel_id in ["irk", "kqt1", "shl1", "slo1egl19", "slo1iso"]:
+            if channel_id in [
+                "irk",
+                "kqt1",
+                "shl1",
+                "slo1egl19",
+                "slo2egl19",
+                "slo1iso",
+                "slo2iso" "shk1",
+            ]:
                 erev = -80
                 ion = "k"
             if channel_id in ["nca"]:
@@ -320,7 +328,7 @@ if __name__ == "__main__":
     all["AIY"]["stim_parameters"]["current_delay"] = 1000
     all["AIY"]["stim_parameters"]["current_dur"] = 5000
 
-    
+    all = {}
     all["VA5"] = {"color": "0 0.5 1"}
     # surface in cm^2 form neuromorpho VA5L
     all["VA5"]["cell_params"] = {"surf": 389.3e-8}
@@ -336,9 +344,14 @@ if __name__ == "__main__":
         "cm",
     ]
     all["VA5"]["g0"] = [0, 0, 0.15, 0, 0, 0, 0.1, -70, 1.5]
-    all["VA5"]["vinit"] = -75.72
+    all["VA5"]["g0"] = [3, 3, 0.15, 1, 0.1, 0.01, 0.1, -70, 1.5]
+    all["VA5"]["vinit"] = -65
+    all["VA5"]["duration"] = 1900
+    all["VA5"]["stim_parameters"] = {}
+    all["VA5"]["stim_parameters"]["current_amps"] = [-30 + i * 10 for i in range(7)]
+    all["VA5"]["stim_parameters"]["current_delay"] = 500
+    all["VA5"]["stim_parameters"]["current_dur"] = 1000
 
-    
     """
     all["AVAR"] = {"color": "0.5 1 1"}
     # surface in cm^2 form neuromorpho AVAR
