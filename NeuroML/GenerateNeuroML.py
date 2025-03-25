@@ -219,7 +219,7 @@ def create_cell(
             if channel_id in ["egl19"]:
                 erev = 60
                 ion = "ca"
-            if channel_id in ["irk","kqt1",'shl1','slo1egl19','slo1iso']:
+            if channel_id in ["irk", "kqt1", "shl1", "slo1egl19", "slo1iso"]:
                 erev = -80
                 ion = "k"
             if channel_id in ["nca"]:
@@ -295,7 +295,7 @@ def create_cell(
 
 if __name__ == "__main__":
     all = {}
-    
+
     all["AIY"] = {"color": "1 0.5 0"}
     # surface in cm^2 form neuromorpho AIYL
     all["AIY"]["cell_params"] = {"surf": 65.89e-8}
@@ -310,9 +310,9 @@ if __name__ == "__main__":
         "eleak",
         "cm",
     ]
-    all["AIY"]["g0"] =  [0.14, 0, 0.2, 0, 0, 0, 0, -89.57, 1.6]
-    all["AIY"]["g0"] =  [0.14, 0.1, 0.2, 0.1, 0.92, 0.06, 0.5, -89.57, 1.6]
-    #all["AIY"]["g0"] = [0.14, 0, 0, 0.1, 0, 0, 0, -89.57, 1.6]
+    all["AIY"]["g0"] = [0.14, 0, 0.2, 0, 0, 0, 0, -89.57, 1.6]
+    all["AIY"]["g0"] = [0.14, 0.1, 0.2, 0.1, 0.92, 0.06, 0.5, -89.57, 1.6]
+    # all["AIY"]["g0"] = [0.14, 0, 0, 0.1, 0, 0, 0, -89.57, 1.6]
     all["AIY"]["vinit"] = -65
     all["AIY"]["duration"] = 7000
     all["AIY"]["stim_parameters"] = {}
@@ -320,10 +320,7 @@ if __name__ == "__main__":
     all["AIY"]["stim_parameters"]["current_delay"] = 1000
     all["AIY"]["stim_parameters"]["current_dur"] = 5000
 
-
-
-
-    """
+    
     all["VA5"] = {"color": "0 0.5 1"}
     # surface in cm^2 form neuromorpho VA5L
     all["VA5"]["cell_params"] = {"surf": 389.3e-8}
@@ -342,7 +339,7 @@ if __name__ == "__main__":
     all["VA5"]["vinit"] = -75.72
 
     
-
+    """
     all["AVAR"] = {"color": "0.5 1 1"}
     # surface in cm^2 form neuromorpho AVAR
     all["AVAR"]["cell_params"] = {"surf": 1121.79e-8}
@@ -387,7 +384,9 @@ if __name__ == "__main__":
             channels_to_include=chans,
             conductances=conductances,
             cell_params=cell_params,
-            stim_parameters=all[cell]["stim_parameters"] if "stim_parameters" in all[cell] else [],
+            stim_parameters=all[cell]["stim_parameters"]
+            if "stim_parameters" in all[cell]
+            else [],
             color=all[cell]["color"],
             vinit=all[cell]["vinit"],
         )
