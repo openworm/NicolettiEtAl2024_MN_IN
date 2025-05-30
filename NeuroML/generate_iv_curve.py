@@ -4,9 +4,11 @@ from pyneuroml.analysis import generate_current_vs_frequency_curve
 
 from matplotlib import pyplot as plt
 from pyelectro.analysis import max_min
+
 nogui = "-nogui" in sys.argv  # Used to supress GUI in tests for Travis-CI
 print(dir(pyneuroml.analysis))
-for cell in ["AVAL", "AVAR", "RMD", "AWC"]:
+
+for cell in ["AVAL", "AVAR"]:
     generate_current_vs_frequency_curve(
         "%s.cell.nml" % cell,
         cell,
@@ -22,7 +24,6 @@ for cell in ["AVAL", "AVAR", "RMD", "AWC"]:
         plot_iv=not nogui,
         save_if_data_to="iv_%s.dat" % cell,
         show_plot_already=False,
-
     )
 
 if not nogui:

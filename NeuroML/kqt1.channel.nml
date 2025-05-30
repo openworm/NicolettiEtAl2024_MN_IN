@@ -1,7 +1,6 @@
 <neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2.3.1.xsd" id="kqt1">
     <notes>An ion channel from cell AIY from Nicoletti et al. 2024</notes>
 
-
     <ionChannelHH id="kqt1" species="k" conductance="10 pS">
         <gate id="m" instances="1" type="gateHHtauInf">
             <timeCourse type="kqt1_m_tau"/>
@@ -10,7 +9,6 @@
         <gate id="s" instances="1" type="gateHHtauInf">
             <timeCourse type="kqt1_s_tau"/>
             <steadyState type="kqt1_s_inf"/>
-            
         </gate>
     </ionChannelHH>
 
@@ -23,7 +21,6 @@
             <DerivedVariable name="x" dimension="none" exposure="x" value="1 / (1 + exp(-(V - va) / ka))"/>
         </Dynamics>
     </ComponentType>
-
 
     <ComponentType name="kqt1_m_tau" extends="baseVoltageDepTime">
         <Constant name="VOLT_SCALE" dimension="voltage" value="1 mV"/>
@@ -38,7 +35,6 @@
                 value="(p2tmkqt1 / (1 + exp((p3tmkqt1 - V) / p4tmkqt1)) + p1tmkqt1) * TIME_SCALE"/>
         </Dynamics>
     </ComponentType>
-
 
     <ComponentType name="kqt1_s_inf" extends="baseVoltageDepVariable">
         <Constant name="VOLT_SCALE" dimension="voltage" value="1 mV"/>
@@ -68,4 +64,5 @@
             value="(p1tskqt1+(p2tskqt1/(1+((V-p3tskqt1)/p4tskqt1)^2))) * TIME_SCALE"/>
         </Dynamics>
     </ComponentType>
+
 </neuroml>

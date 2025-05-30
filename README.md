@@ -21,3 +21,9 @@ To reproduce the WT whole-cell behavior:
 2. excute the file "`NeuronName_simulation.py`"
 
 To simulate knock-out responses set to zero the conductance of the corresponding current. 
+
+# NeuroML versions of models
+
+These cell models are currently being converted to NeuroML (by [Danial Kusmanov](https://github.com/dakoshtut)). See https://github.com/openworm/NicolettiEtAl2024_MN_IN/tree/main/NeuroML. 
+
+

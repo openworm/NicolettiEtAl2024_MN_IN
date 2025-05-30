@@ -2,7 +2,7 @@
     "Sim_IClamp_AVAL": {
         "version": "NeuroMLlite v0.6.1",
         "network": "IClamp_AVAL.json",
-        "duration": 11000.0,
+        "duration": 1500.0,
         "dt": 0.025,
         "seed": 12345,
         "record_traces": {
